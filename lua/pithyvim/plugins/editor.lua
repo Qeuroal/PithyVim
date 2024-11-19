@@ -381,9 +381,9 @@ return {
     "NvChad/nvim-colorizer.lua",
     main = "colorizer",
     event = "LazyFile",
-    opts = require("plugin.config.colorizer").opts(),
+    opts = require("pithyvim.plugins.config.colorizer").opts(),
     config = function (_, opts)
-      require("pithyvim.plugins.config.colorizer").setup(opts)
+      require("colorizer").setup(opts)
       vim.cmd "ColorizerToggle"
     end
   },
