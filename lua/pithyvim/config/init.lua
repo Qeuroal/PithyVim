@@ -21,7 +21,6 @@ local defaults = {
     end
     local setup = schemeOpt.setup
     local moduleName = schemeOpt["moduleName"] or scheme
-    print(moduleName)
     local name = schemeOpt["name"] or scheme
     if (setup) then
       require(moduleName).setup(setup)
