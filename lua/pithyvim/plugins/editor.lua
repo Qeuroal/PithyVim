@@ -368,6 +368,26 @@ return {
     },
   },
 
+  -- tmux
+  {
+    "alexghergh/nvim-tmux-navigation",
+    config = function()
+      require("pithyvim.plugins.config.nvim_tmux_navigation").setup()
+    end,
+  },
+
+  -- 高亮 RGB 颜色
+  {
+    "NvChad/nvim-colorizer.lua",
+    main = "colorizer",
+    event = "LazyFile",
+    opts = require("pithyvim.plugins.config.colorizer").opts(),
+    config = function (_, opts)
+      require("colorizer").setup(opts)
+      vim.cmd "ColorizerToggle"
+    end
+  },
+
   {
     import = "pithyvim.plugins.extras.editor.fzf",
     enabled = function()
