@@ -265,4 +265,31 @@ function M.memoize(fn)
   end
 end
 
+--- Checks whether a given path exists and is a directory
+--@param path (string) path to check
+--@returns (bool)
+function M.is_directory(path)
+  local stat = vim.loop.fs_stat(path)
+  return stat and stat.type == "directory" or false
+end
+
+local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
+
+---Join path segments that were passed as input
+---@return string
+function M.join_paths(...)
+  local result = table.concat({ ... }, path_sep)
+  return result
+end
+
+---Get the full path to `$PITHYVIM_CACHE_DIR`
+---@return string|nil
+function _G.get_cache_dir()
+  local pithyvim_cache_dir = os.getenv "PITHYVIM_CACHE_DIR"
+  if not pithyvim_cache_dir then
+    pithyvim_cache_dir =  vim.call("stdpath", "cache")
+  end
+  return pithyvim_cache_dir
+end
+
 return M

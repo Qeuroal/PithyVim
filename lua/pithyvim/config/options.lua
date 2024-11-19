@@ -39,6 +39,15 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
+-- encoding
+vim.g.encoding = "UTF-8"
+
+
+local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
+if not PithyVim.is_directory(undodir) then
+  vim.fn.mkdir(undodir, "p")
+end
+local space = "·"
 local opt = vim.opt
 
 opt.backup = false             -- creates a backup file
@@ -47,7 +56,8 @@ opt.hidden = true              -- required to keep multiple buffers and open mul
 opt.swapfile = false           -- creates a swapfile
 opt.undodir = undodir          -- set an undo directory
 opt.title = true               -- set the title of window to the value of the titlestring
--- opt.titlestring = "%<%F%=%l/%L - nvim"   -- what the title of the window will be set to
+opt.titlestring = "%<%F%=%l/%L - nvim"   -- what the title of the window will be set to
+opt.fileencoding = "utf-8"     -- the encoding written to a file
 opt.writebackup = false        -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 opt.numberwidth = 4            -- set number column width to 2 {default 4}
 opt.hlsearch = true            -- highlight all matches on previous search pattern
@@ -113,10 +123,13 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = true -- Disable line wrap
-opt.listchars = {
+opt.listchars:append {
+	tab = "│─",
+	multispace = space,
+	lead = space,
+	trail = space,
+	nbsp = space,
   eol = '⤶',
-  space = '_',
-  trail = '✚',
   extends = '◀',
   precedes = '▶',
 }
