@@ -369,10 +369,36 @@ return {
   },
 
   -- tmux
+  -- {
+  --   "alexghergh/nvim-tmux-navigation",
+  --   config = function()
+  --     require("pithyvim.plugins.config.nvim_tmux_navigation").setup()
+  --   end,
+  -- },
   {
     "alexghergh/nvim-tmux-navigation",
     config = function()
-      require("pithyvim.plugins.config.nvim_tmux_navigation").setup()
+      local nvim_tmux_nav = require("nvim-tmux-navigation")
+
+      nvim_tmux_nav.setup({
+        disable_when_zoomed = true, -- defaults to false
+      })
+
+      return {
+        keys = {
+          { "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft, desc = "NvimTmuxNavigateLeft", mode = "n" },
+          { "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown, desc = "NvimTmuxNavigateDown", mode = "n" },
+          { "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp, desc = "NvimTmuxNavigateUp", mode = "n" },
+          { "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight, desc = "NvimTmuxNavigateRight", mode = "n" },
+          {
+            "<C-\\>",
+            nvim_tmux_nav.NvimTmuxNavigateLastActive,
+            desc = "NvimTmuxNavigateLastActive",
+            mode = "n",
+          },
+          { "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext, desc = "NvimTmuxNavigateNext", mode = "n" },
+        },
+      }
     end,
   },
 
