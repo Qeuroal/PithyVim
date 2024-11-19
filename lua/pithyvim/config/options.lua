@@ -43,7 +43,6 @@ local opt = vim.opt
 
 opt.backup = false             -- creates a backup file
 opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
--- opt.fileencoding = "utf-8"     -- the encoding written to a file
 opt.hidden = true              -- required to keep multiple buffers and open multiple buffers
 opt.swapfile = false           -- creates a swapfile
 opt.undodir = undodir          -- set an undo directory
