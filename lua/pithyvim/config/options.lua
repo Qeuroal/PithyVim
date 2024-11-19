@@ -39,6 +39,15 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
+-- encoding
+vim.g.encoding = "UTF-8"
+
+
+local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
+if not PithyVim.is_directory(undodir) then
+  vim.fn.mkdir(undodir, "p")
+end
+local space = "·"
 local opt = vim.opt
 
 opt.backup = false             -- creates a backup file
@@ -114,10 +123,13 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = true -- Disable line wrap
-opt.listchars = {
+opt.listchars:append {
+	tab = "│─",
+	multispace = space,
+	lead = space,
+	trail = space,
+	nbsp = space,
   eol = '⤶',
-  space = '_',
-  trail = '✚',
   extends = '◀',
   precedes = '▶',
 }
