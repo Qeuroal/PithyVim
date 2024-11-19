@@ -21,7 +21,7 @@ return {
         highlight_inactive_windows = true,
       }
     }
-  }
+  },
 
   -- tokyonight
   {
