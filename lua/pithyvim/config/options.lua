@@ -47,7 +47,8 @@ opt.hidden = true              -- required to keep multiple buffers and open mul
 opt.swapfile = false           -- creates a swapfile
 opt.undodir = undodir          -- set an undo directory
 opt.title = true               -- set the title of window to the value of the titlestring
--- opt.titlestring = "%<%F%=%l/%L - nvim"   -- what the title of the window will be set to
+opt.titlestring = "%<%F%=%l/%L - nvim"   -- what the title of the window will be set to
+opt.fileencoding = "utf-8"     -- the encoding written to a file
 opt.writebackup = false        -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 opt.numberwidth = 4            -- set number column width to 2 {default 4}
 opt.hlsearch = true            -- highlight all matches on previous search pattern
