@@ -289,7 +289,6 @@ function _G.get_cache_dir()
   if not pithyvim_cache_dir then
     pithyvim_cache_dir =  vim.call("stdpath", "cache")
   end
-  print(pithyvim_cache_dir)
   return pithyvim_cache_dir
 end
 
