@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- PithyVim auto format
-vim.g.autoformat = true
+vim.g.autoformat = false
 
 -- PithyVim picker to use.
 -- Can be one of: telescope, fzf

@@ -8,10 +8,26 @@ PithyVim.config = M
 
 ---@class PithyVimOptions
 local defaults = {
+  -- default color config
+  colorSetting = require("pithyvim.config.colorscheme"),
   -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
   ---@type string|fun()
   colorscheme = function()
-    require("tokyonight").load()
+    local scheme = M.colorSetting["default"]
+    local schemeOpt = M.colorSetting.schemes[scheme]
+    if (type(schemeOpt) ~= "table") then
+      PithyVim.warn("the default don't exist!!!")
+      require("habamax").load()
+    end
+    local setup = schemeOpt.setup
+    local moduleName = schemeOpt["moduleName"] or scheme
+    local name = schemeOpt["name"] or scheme
+    if (setup) then
+      require(moduleName).setup(setup)
+      vim.cmd.colorscheme(name)
+    else
+      require(moduleName).load()
+    end
   end,
   -- load the default settings
   defaults = {
