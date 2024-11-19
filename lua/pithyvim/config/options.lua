@@ -43,7 +43,6 @@ local opt = vim.opt
 
 opt.backup = false             -- creates a backup file
 opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
-opt.fileencoding = "utf-8"     -- the encoding written to a file
 opt.hidden = true              -- required to keep multiple buffers and open multiple buffers
 opt.swapfile = false           -- creates a swapfile
 opt.undodir = undodir          -- set an undo directory
@@ -80,7 +79,7 @@ opt.inccommand = "nosplit" -- preview incremental substitute
 opt.jumpoptions = "view"
 opt.laststatus = 3 -- global statusline
 opt.linebreak = true -- Wrap lines at convenient points
-opt.list = true -- Show some invisible characters (tabs...
+opt.list = false -- Show some invisible characters (tabs...
 opt.mouse = ""                 -- allow the mouse to be used in neovim
 opt.guicursor = "a:block"      -- set block for any mode
 opt.number = true -- Print line number
