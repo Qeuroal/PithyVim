@@ -311,6 +311,7 @@ return {
     opts = {
       dashboard = {
         preset = {
+          -- https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Pithyvim
           header = [[
   ██████╗ ██╗████████╗██╗  ██╗██╗   ██╗██╗   ██╗██╗███╗   ███╗
   ██╔══██╗██║╚══██╔══╝██║  ██║╚██╗ ██╔╝██║   ██║██║████╗ ████║
