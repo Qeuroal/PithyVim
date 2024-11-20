@@ -219,6 +219,7 @@ return {
             },
             n = {
               ["q"] = actions.close,
+              ["<C-c>"] = actions.close,
             },
           },
         },
