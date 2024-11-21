@@ -318,6 +318,7 @@ return {
           win = { position = "right" },
         },
       },
+      auto_preview = false,
     },
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
