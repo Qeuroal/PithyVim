@@ -147,4 +147,7 @@ end
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+-- disable diagnostic, enter "<leader>ud" to toggle the option
+pcall(vim.diagnostic.disable)
+
 
