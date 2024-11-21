@@ -148,6 +148,7 @@ end
 vim.g.markdown_recommended_style = 0
 
 -- disable diagnostic, enter "<leader>ud" to toggle the option
+-- default enable: pcall (vim.diagnostic.enable)
 pcall(vim.diagnostic.disable)
 
 
