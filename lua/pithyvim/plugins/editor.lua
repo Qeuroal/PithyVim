@@ -67,6 +67,7 @@ return {
         use_libuv_file_watcher = true,
       },
       window = {
+        width = 32,
         mappings = {
           ["l"] = "open",
           ["h"] = "close_node",
@@ -86,6 +87,12 @@ return {
             desc = "Open with System Application",
           },
           ["P"] = { "toggle_preview", config = { use_float = false } },
+        },
+        fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+          ["<down>"] = "move_cursor_down",
+          ["<C-j>"] = "move_cursor_down",
+          ["<up>"] = "move_cursor_up",
+          ["<C-k>"] = "move_cursor_up",
         },
       },
       default_component_configs = {
@@ -311,6 +318,7 @@ return {
           win = { position = "right" },
         },
       },
+      auto_preview = false,
     },
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },

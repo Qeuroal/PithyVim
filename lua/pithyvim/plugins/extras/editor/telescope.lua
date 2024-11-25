@@ -215,9 +215,11 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
+              ["<C-c>"] = actions.close,
             },
             n = {
               ["q"] = actions.close,
+              ["<C-c>"] = actions.close,
             },
           },
         },
