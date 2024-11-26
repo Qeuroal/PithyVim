@@ -22,7 +22,7 @@ end
 
 return {
   { "folke/lazy.nvim", version = "*" },
-  { "qeuroal/PithyVim", priority = 10000, lazy = false, opts = {}, cond = true, version = "*" },
+  { "qeuroal/PithyVim", branch = "dev", priority = 10000, lazy = false, opts = {}, cond = true, version = "*" },
   {
     "folke/snacks.nvim",
     priority = 1000,
