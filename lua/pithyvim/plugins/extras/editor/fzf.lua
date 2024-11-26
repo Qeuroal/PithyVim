@@ -219,8 +219,8 @@ return {
       -- find
       { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", PithyVim.pick.config_files(), desc = "Find Config File" },
-      { "<leader>ff", PithyVim.pick("files"), desc = "Find Files (Root Dir)" },
-      { "<leader>fF", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>fF", PithyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader>ff", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", PithyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
