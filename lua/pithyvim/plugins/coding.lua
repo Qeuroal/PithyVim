@@ -35,6 +35,8 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-n>"] = cmp.mapping.abort(),
+          ['<C-p>'] = cmp.mapping.abort(),
           ["<C-o>"] = cmp.mapping.complete(),
           ["<CR>"] = PithyVim.cmp.confirm({ select = auto_select }),
           ["<C-y>"] = PithyVim.cmp.confirm({ select = true }),
