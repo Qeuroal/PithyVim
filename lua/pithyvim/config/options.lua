@@ -62,22 +62,22 @@ opt.writebackup = false        -- if a file is being edited by another program (
 opt.numberwidth = 4            -- set number column width to 2 {default 4}
 opt.hlsearch = true            -- highlight all matches on previous search pattern
 
-opt.autowrite = true -- Enable auto write
+opt.autowrite = true            -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"     -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true -- Enable highlighting of the current line
-opt.expandtab = true -- Use spaces instead of tabs
+opt.conceallevel = 2            -- Hide * markup for bold and italic, but not markers with substitutions
+opt.confirm = true              -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true           -- Enable highlighting of the current line
+opt.expandtab = true            -- Use spaces instead of tabs
 opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+    foldopen = "",
+    foldclose = "",
+    fold = " ",
+    foldsep = " ",
+    diff = "╱",
+    eob = " ",
 }
 opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'pithyvim.util'.format.formatexpr()"
@@ -113,7 +113,16 @@ opt.splitbelow = true               -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true               -- Put new windows right of current
 opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+opt.autoindent = true               -- 设置自动缩进
+opt.cindent = true                  -- 设置使用C/C++语言的自动缩进方式
+-- opt.cinoptions=":0,g0,N-s,(0,w1"    -- 设置C/C++语言的具体缩进方式
+                                    -- :0 表示 switch 下面的 case 语句不进行额外缩进
+                                    -- g0 代表作用域声明(public:、private: 等)不额外缩进
+                                    -- (0 和 w1 配合代表没结束的圆括号里的内容折行时不额外缩进
 opt.tabstop = 4                     -- Number of spaces tabs count for
+opt.softtabstop = 4                 -- 设置4个空格为制表符, 即"软"制表符宽度.
+                                    -- softtabstop看成"虚拟"的tapstop, 一旦设置了这个选项为非零值，再键入<Tab>和<BS>(退格键)
+                                    -- 你就感觉像设置了这个宽度的 tabstop 一样, " 实际插入的仍受expandtab和tabstop两个选项控制
 opt.termguicolors = true            -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300   -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
@@ -124,31 +133,34 @@ opt.wildmode = "longest:full,full"  -- Command-line completion mode
 opt.winminwidth = 5                 -- Minimum window width
 opt.wrap = true                     -- Disable line wrap
 opt.listchars:append {
-	tab = "│─",
-	multispace = space,
-	lead = space,
-	trail = space,
-	nbsp = space,
-  eol = '⤶',
-  extends = '◀',
-  precedes = '▶',
+    tab = "│─",
+    multispace = space,
+    lead = space,
+    trail = space,
+    nbsp = space,
+    eol = '⤶',
+    extends = '◀',
+    precedes = '▶',
 }
-
+-- opt.whichwrap = opt.whichwrap + "<,>,h,l"    -- 设置光标键跨行
 if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'pithyvim.util'.ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
+    opt.smoothscroll = true
+    opt.foldexpr = "v:lua.require'pithyvim.util'.ui.foldexpr()"
+    opt.foldmethod = "expr"
+    opt.foldtext = ""
 else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
+    opt.foldmethod = "indent"
+    opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
 end
+-- opt.backspace = 2                     -- 使用回车键正常处理indent,eol,start等
+opt.sidescroll = 10                   -- 设置向右滚动字符数
+-- opt.nofoldenable = true                    -- 禁用折叠代码
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
 -- disable diagnostic, enter "<leader>ud" to toggle the option
 -- default enable: pcall (vim.diagnostic.enable)
-pcall(vim.diagnostic.disable)
+pcall(vim.diagnostic.enable, false)
 
 
