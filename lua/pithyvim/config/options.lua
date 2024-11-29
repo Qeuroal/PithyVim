@@ -113,7 +113,17 @@ opt.splitbelow = true               -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true               -- Put new windows right of current
 opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+opt.autoindent = true               -- 设置自动缩进
+opt.cindent = true                  -- 设置使用C/C++语言的自动缩进方式
+opt.cinoptions=":0,g0,N-s,(0,w1"    -- 设置C/C++语言的具体缩进方式
+                                    -- :0 表示 switch 下面的 case 语句不进行额外缩进
+                                    -- g0 代表作用域声明(public:、private: 等)不额外缩进
+                                    -- (0 和 w1 配合代表没结束的圆括号里的内容折行时不额外缩进
+opt.smartindent = true              -- 智能的选择对其方式
 opt.tabstop = 4                     -- Number of spaces tabs count for
+opt.softtabstop = 4                 -- 设置4个空格为制表符, 即"软"制表符宽度.
+                                    -- softtabstop看成"虚拟"的tapstop, 一旦设置了这个选项为非零值，再键入<Tab>和<BS>(退格键)
+                                    -- 你就感觉像设置了这个宽度的 tabstop 一样, " 实际插入的仍受expandtab和tabstop两个选项控制
 opt.termguicolors = true            -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300   -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
@@ -133,7 +143,7 @@ opt.listchars:append {
     extends = '◀',
     precedes = '▶',
 }
-
+-- opt.whichwrap = opt.whichwrap + "<,>,h,l"    -- 设置光标键跨行
 if vim.fn.has("nvim-0.10") == 1 then
     opt.smoothscroll = true
     opt.foldexpr = "v:lua.require'pithyvim.util'.ui.foldexpr()"
@@ -143,6 +153,9 @@ else
     opt.foldmethod = "indent"
     opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
 end
+-- opt.backspace = 2                     -- 使用回车键正常处理indent,eol,start等
+opt.sidescroll = 10                   -- 设置向右滚动字符数
+-- opt.nofoldenable = true                    -- 禁用折叠代码
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
