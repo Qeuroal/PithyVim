@@ -62,22 +62,22 @@ opt.writebackup = false        -- if a file is being edited by another program (
 opt.numberwidth = 4            -- set number column width to 2 {default 4}
 opt.hlsearch = true            -- highlight all matches on previous search pattern
 
-opt.autowrite = true -- Enable auto write
+opt.autowrite = true            -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"     -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true -- Enable highlighting of the current line
-opt.expandtab = true -- Use spaces instead of tabs
+opt.conceallevel = 2            -- Hide * markup for bold and italic, but not markers with substitutions
+opt.confirm = true              -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true           -- Enable highlighting of the current line
+opt.expandtab = true            -- Use spaces instead of tabs
 opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+    foldopen = "",
+    foldclose = "",
+    fold = " ",
+    foldsep = " ",
+    diff = "╱",
+    eob = " ",
 }
 opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'pithyvim.util'.format.formatexpr()"
@@ -124,24 +124,24 @@ opt.wildmode = "longest:full,full"  -- Command-line completion mode
 opt.winminwidth = 5                 -- Minimum window width
 opt.wrap = true                     -- Disable line wrap
 opt.listchars:append {
-	tab = "│─",
-	multispace = space,
-	lead = space,
-	trail = space,
-	nbsp = space,
-  eol = '⤶',
-  extends = '◀',
-  precedes = '▶',
+    tab = "│─",
+    multispace = space,
+    lead = space,
+    trail = space,
+    nbsp = space,
+    eol = '⤶',
+    extends = '◀',
+    precedes = '▶',
 }
 
 if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'pithyvim.util'.ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
+    opt.smoothscroll = true
+    opt.foldexpr = "v:lua.require'pithyvim.util'.ui.foldexpr()"
+    opt.foldmethod = "expr"
+    opt.foldtext = ""
 else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
+    opt.foldmethod = "indent"
+    opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
 end
 
 -- Fix markdown indentation settings
