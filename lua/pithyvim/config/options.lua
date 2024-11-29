@@ -119,7 +119,6 @@ opt.cinoptions=":0,g0,N-s,(0,w1"    -- 设置C/C++语言的具体缩进方式
                                     -- :0 表示 switch 下面的 case 语句不进行额外缩进
                                     -- g0 代表作用域声明(public:、private: 等)不额外缩进
                                     -- (0 和 w1 配合代表没结束的圆括号里的内容折行时不额外缩进
-opt.smartindent = true              -- 智能的选择对其方式
 opt.tabstop = 4                     -- Number of spaces tabs count for
 opt.softtabstop = 4                 -- 设置4个空格为制表符, 即"软"制表符宽度.
                                     -- softtabstop看成"虚拟"的tapstop, 一旦设置了这个选项为非零值，再键入<Tab>和<BS>(退格键)
@@ -162,6 +161,6 @@ vim.g.markdown_recommended_style = 0
 
 -- disable diagnostic, enter "<leader>ud" to toggle the option
 -- default enable: pcall (vim.diagnostic.enable)
-pcall(vim.diagnostic.disable)
+pcall(vim.diagnostic.enable, false)
 
 
