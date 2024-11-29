@@ -115,7 +115,7 @@ opt.splitright = true               -- Put new windows right of current
 opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 opt.autoindent = true               -- 设置自动缩进
 opt.cindent = true                  -- 设置使用C/C++语言的自动缩进方式
-opt.cinoptions=":0,g0,N-s,(0,w1"    -- 设置C/C++语言的具体缩进方式
+-- opt.cinoptions=":0,g0,N-s,(0,w1"    -- 设置C/C++语言的具体缩进方式
                                     -- :0 表示 switch 下面的 case 语句不进行额外缩进
                                     -- g0 代表作用域声明(public:、private: 等)不额外缩进
                                     -- (0 和 w1 配合代表没结束的圆括号里的内容折行时不额外缩进
