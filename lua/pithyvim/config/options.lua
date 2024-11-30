@@ -153,7 +153,7 @@ else
     opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
 end
 opt.foldmarker = "{{{>, <}}}"
-opt.foldlevel = 0                       -- 0: 键入 zm 可以折叠
+opt.foldlevel = 99                      -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
                                         -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
 opt.foldenable = false                  -- 默认不折叠
 
