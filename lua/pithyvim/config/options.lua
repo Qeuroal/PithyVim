@@ -79,7 +79,6 @@ opt.fillchars = {
     diff = "╱",
     eob = " ",
 }
-opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'pithyvim.util'.format.formatexpr()"
 opt.formatoptions = "jcroqlnt"      -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
@@ -105,6 +104,7 @@ opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false                -- Dont show mode since we have a statusline
 opt.showcmd = true                  -- 显示按键
 opt.sidescrolloff = 0               -- Columns of context
+opt.sidescroll = 10                 -- 设置向右滚动字符数
 opt.signcolumn = "yes"              -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true                -- Don't ignore case with capitals
 opt.smartindent = true              -- Insert indents automatically
@@ -152,9 +152,11 @@ else
     opt.foldmethod = "indent"
     opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
 end
--- opt.backspace = 2                     -- 使用回车键正常处理indent,eol,start等
-opt.sidescroll = 10                   -- 设置向右滚动字符数
--- opt.nofoldenable = true                    -- 禁用折叠代码
+opt.foldmarker = "{{{>, <}}}"
+opt.foldlevel = 0                       -- 0: 键入 zm 可以折叠
+                                        -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
+opt.foldenable = false                  -- 默认不折叠
+
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
