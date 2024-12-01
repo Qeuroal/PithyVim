@@ -109,6 +109,18 @@ return {
           },
         },
       },
+      event_handlers = {
+        {
+          event = "file_open_requested",
+          handler = function()
+            -- auto close
+            -- vim.cmd("Neotree close")
+            -- OR
+            require("neo-tree.command").execute({ action = "close" })
+            -- require("neo-tree.command").execute({ action = "open" })
+          end
+        },
+      },
     },
     config = function(_, opts)
       local function on_move(data)
