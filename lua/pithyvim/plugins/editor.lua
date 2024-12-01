@@ -116,8 +116,8 @@ return {
             -- auto close
             -- vim.cmd("Neotree close")
             -- OR
-            require("neo-tree.command").execute({ action = "close" })
-            -- require("neo-tree.command").execute({ action = "open" })
+            require("neo-tree.command").execute({ action = "open" })
+            -- require("neo-tree.command").execute({ action = "close" })
           end
         },
       },
