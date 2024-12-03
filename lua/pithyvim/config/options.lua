@@ -165,4 +165,8 @@ vim.g.markdown_recommended_style = 0
 -- default enable: pcall (vim.diagnostic.enable)
 pcall(vim.diagnostic.enable, false)
 
+-- diffopt
+vim.o.diffopt = vim.o.diffopt .. ",followwrap"
+vim.o.diffopt = vim.o.diffopt .. ",context:3"
+
 
