@@ -6,8 +6,9 @@ return {
       ["moduleName"] = "onedarkpro",
       ["setup"] = {
         highlights = {
-          Comment = { underline = true, extend = true },
+          Comment = { underline = false, italic=true, extend=true }, -- extend 用于保证注释颜色为深灰色
           Directory = { bold = true },
+          ErrorMsg = { italic = true, bold = true },
           ["CursorLine"] = {
             -- bg = "#31353f",  -- 正常的
             bg = "#3b3b49",
@@ -17,7 +18,11 @@ return {
           cursorline = true,
           transparency = false,
           highlight_inactive_windows = true,
-        }
+          lualine_transparency = false, -- Center bar transparency?
+        },
+        plugins = {
+          indentline = true,
+        },
       },
     },
   },
