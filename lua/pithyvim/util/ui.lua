@@ -72,4 +72,18 @@ function M.maximize()
   })
 end
 
+-- fold
+function M.toggleFoldmethod()
+    -- 获取当前的 foldmethod
+    local current_method = vim.o.foldmethod -- 检查当前的 foldmethod 并切换
+    if current_method == 'expr' then
+        vim.o.foldmethod = 'marker'
+    elseif current_method == 'marker' then
+        vim.o.foldmethod = 'expr'
+    else
+        -- 如果既不是 'expr' 也不是 'marker'，则设置为 'expr'
+        vim.o.foldmethod = 'expr'
+    end
+end
+
 return M
