@@ -6,7 +6,7 @@ return {
       ["moduleName"] = "onedarkpro",
       ["setup"] = {
         highlights = {
-          Comment = { underline = false, italic=true, extend=true }, -- extend 用于保证注释颜色为深灰色
+          Comment = { underline = false, italic = true, extend = true }, -- extend 用于保证注释颜色为深灰色
           Directory = { bold = true },
           ErrorMsg = { italic = true, bold = true },
           ["CursorLine"] = {
