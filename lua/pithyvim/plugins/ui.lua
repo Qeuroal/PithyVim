@@ -335,4 +335,18 @@ return {
       },
     },
   },
+
+  {
+    "mbbill/undotree",
+    lazy = true,
+    config = function()
+      vim.g.undotree_WindowLayout = 2 -- or 4
+      vim.g.undotree_TreeNodeShape = "-"
+      vim.g.undotree_CustomUndotreeCmd  = 'botright vertical 30 new'
+      vim.g.undotree_CustomDiffpanelCmd = 'botright 10 new'
+    end,
+    keys = {
+      { "<leader>uu", "<Cmd>UndotreeToggle<CR>", desc = "undo tree toggle", silent = true, noremap = true },
+    },
+  },
 }
