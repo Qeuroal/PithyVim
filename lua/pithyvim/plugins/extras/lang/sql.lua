@@ -48,6 +48,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = sql_ft,
         callback = function()
+          if PithyVim.has("nvim-cmp") then
           local cmp = require("cmp")
 
           -- global sources
@@ -61,6 +62,7 @@ return {
 
           -- update sources for the current buffer
           cmp.setup.buffer({ sources = sources })
+          end
         end,
       })
     end,

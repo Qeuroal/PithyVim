@@ -40,6 +40,20 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
+    opts = function()
+      -- Simple configuration to attach to remote java debug process
+      -- Taken directly from https://github.com/mfussenegger/nvim-dap/wiki/Java
+      local dap = require("dap")
+      dap.configurations.java = {
+        {
+          type = "java",
+          request = "attach",
+          name = "Debug (Attach) - Remote",
+          hostName = "127.0.0.1",
+          port = 5005,
+        },
+      }
+    end,
     dependencies = {
       {
         "williamboman/mason.nvim",
@@ -197,8 +211,8 @@ return {
                 { "<leader>cx", group = "extract" },
                 { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
                 { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
-                { "gs", require("jdtls").super_implementation, desc = "Goto Super" },
-                { "gS", require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
+                { "<leader>cgs", require("jdtls").super_implementation, desc = "Goto Super" },
+                { "<leader>cgS", require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
                 { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
               },
             })
