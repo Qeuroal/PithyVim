@@ -190,10 +190,10 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- cursor
-map("i", "<C-k>", "<Up>", { desc = "cursor_up", noremap = true, silent = true} )
-map("i", "<C-j>", "<Down>", { desc = "cursor_down", noremap = true, silent = true} )
-map("i", "<C-h>", "<Left>", { desc = "cursor_left", noremap = true, silent = true} )
-map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true} )
+-- map("i", "<C-k>", "<Up>", { desc = "cursor_up", noremap = true, silent = true } )
+map("i", "<C-j>", "<esc>A<cr>", { desc = "cursor_down", noremap = true, silent = true } )
+map("i", "<C-h>", "<Left>", { desc = "cursor_left", noremap = true, silent = true } )
+map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true } )
 
 -- native snippets. only needed on < 0.11, as 0.11 creates these by default
 if vim.fn.has("nvim-0.11") == 0 then
