@@ -130,7 +130,8 @@ Snacks.toggle.option("wrap", {name = "Wrap"}):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number"}):map("<leader>uL")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.option("conceallevel", {off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2}):map("<leader>uc")
+Snacks.toggle.option("conceallevel", {off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level"}):map("<leader>uc")
+Snacks.toggle.option("showtabline", {off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline"}):map("<leader>uA")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background"}):map("<leader>ub")
 if vim.lsp.inlay_hint then
@@ -141,12 +142,16 @@ end
 if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gg", function() Snacks.lazygit( { cwd = PithyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
   map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
-  map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
-  map("n", "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
   map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
   map("n", "<leader>gl", function() Snacks.lazygit.log({ cwd = PithyVim.root.git() }) end, { desc = "Lazygit Log" })
   map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
 end
+
+map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
+map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+map({"n", "x" }, "<leader>gY", function()
+  Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
+end, { desc = "Git Browse (copy)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
@@ -185,10 +190,10 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- cursor
-map("i", "<C-k>", "<Up>", { desc = "cursor_up", noremap = true, silent = true} )
-map("i", "<C-j>", "<Down>", { desc = "cursor_down", noremap = true, silent = true} )
-map("i", "<C-h>", "<Left>", { desc = "cursor_left", noremap = true, silent = true} )
-map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true} )
+-- map("i", "<C-k>", "<Up>", { desc = "cursor_up", noremap = true, silent = true } )
+map("i", "<C-j>", "<esc>A<cr>", { desc = "cursor_down", noremap = true, silent = true } )
+map("i", "<C-h>", "<Left>", { desc = "cursor_left", noremap = true, silent = true } )
+map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true } )
 
 -- native snippets. only needed on < 0.11, as 0.11 creates these by default
 if vim.fn.has("nvim-0.11") == 0 then

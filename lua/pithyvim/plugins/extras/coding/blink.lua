@@ -21,40 +21,51 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
-      -- { "saghen/blink.compat", opts = {} },
+      {
+        "saghen/blink.compat",
+        optional = true, -- make optional so it's only enabled if any extras need it
+        opts = {},
+        version = not vim.g.pithyvim_blink_main and "*",
+      },
     },
     event = "InsertEnter",
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      highlight = {
+      appearance = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
         -- will be removed in a future release, assuming themes add support
         use_nvim_cmp_as_default = false,
-      },
       -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
-      windows = {
-        autocomplete = {
-          -- draw = "reversed",
-          winblend = vim.o.pumblend,
+      },
+      completion = {
+        accept = {
+          -- experimental auto-brackets support
+          auto_brackets = {
+            enabled = true,
+          },
+        },
+        menu = {
+          draw = {
+            treesitter = true,
+          },
         },
         documentation = {
           auto_show = true,
+          auto_show_delay_ms = 200,
         },
         ghost_text = {
           enabled = vim.g.ai_cmp,
         },
       },
 
-      -- experimental auto-brackets support
-      accept = { auto_brackets = { enabled = true } },
 
       -- experimental signature help support
-      -- trigger = { signature_help = { enabled = true } }
+      -- signature = { enabled = true },
       sources = {
         -- adding any nvim-cmp sources here will enable them
         -- with blink.compat
@@ -87,6 +98,24 @@ return {
           table.insert(enabled, source)
         end
       end
+      -- check if we need to override symbol kinds
+      for _, provider in pairs(opts.sources.providers or {}) do
+        ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
+        if provider.kind then
+          require("blink.cmp.types").CompletionItemKind[provider.kind] = provider.kind
+          ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
+          local transform_items = provider.transform_items
+          ---@param ctx blink.cmp.Context
+          ---@param items blink.cmp.CompletionItem[]
+          provider.transform_items = function(ctx, items)
+            items = transform_items and transform_items(ctx, items) or items
+            for _, item in ipairs(items) do
+              item.kind = provider.kind or item.kind
+            end
+            return items
+          end
+        end
+      end
       require("blink.cmp").setup(opts)
     end,
   },
@@ -95,7 +124,8 @@ return {
   {
     "saghen/blink.cmp",
     opts = function(_, opts)
-      opts.kind_icons = PithyVim.config.icons.kinds
+      opts.appearance = opts.appearance or {}
+      opts.appearance.kind_icons = PithyVim.config.icons.kinds
     end,
   },
 

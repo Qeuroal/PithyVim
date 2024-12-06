@@ -1,15 +1,8 @@
 return {
   -- Tabnine cmp source
   {
-    "nvim-cmp",
-    optional = true,
-    dependencies = {
-      {
         "tzachar/cmp-tabnine",
-        build = {
-          PithyVim.is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
-        },
-        dependencies = "hrsh7th/nvim-cmp",
+    build = PithyVim.is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
         opts = {
           max_lines = 1000,
           max_num_results = 3,
@@ -19,7 +12,11 @@ return {
           require("cmp_tabnine.config"):setup(opts)
         end,
       },
-    },
+
+  {
+    "nvim-cmp",
+    optional = true,
+    dependencies = { "tzachar/cmp-tabnine" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, 1, {
@@ -35,6 +32,17 @@ return {
         end
       end)
     end,
+  },
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    dependencies = { "tzachar/cmp-tabnine", "saghen/blink.compat" },
+    opts = {
+      sources = {
+        compat = { "cmp_tabnine" },
+        providers = { cmp_tabnine = { kind = "TabNine" } },
+      },
+    },
   },
   -- Show TabNine status in lualine
   {

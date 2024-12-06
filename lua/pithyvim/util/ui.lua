@@ -34,7 +34,7 @@ end
 function M.maximize()
   ---@type {k:string, v:any}[]?
   local maximized = nil
-  return Snacks.toggle({
+  local toggle =  Snacks.toggle({
     name = "Maximize",
     get = function()
       return maximized ~= nil
@@ -51,16 +51,6 @@ function M.maximize()
         set("winminwidth", 10)
         set("winminheight", 4)
         vim.cmd("wincmd =")
-        -- `QuitPre` seems to be executed even if we quit a normal window, so we don't want that
-        -- `VimLeavePre` might be another consideration? Not sure about differences between the 2
-        vim.api.nvim_create_autocmd("ExitPre", {
-          once = true,
-          group = vim.api.nvim_create_augroup("pithyvim_restore_max_exit_pre", { clear = true }),
-          desc = "Restore width/height when close Neovim while maximized",
-          callback = function()
-            M.maximize.set(false)
-          end,
-        })
       else
         for _, opt in ipairs(maximized) do
           vim.o[opt.k] = opt.v
@@ -70,6 +60,19 @@ function M.maximize()
       end
     end,
   })
+
+  -- `QuitPre` seems to be executed even if we quit a normal window, so we don't want that
+  -- `VimLeavePre` might be another consideration? Not sure about differences between the 2
+  vim.api.nvim_create_autocmd("ExitPre", {
+    group = vim.api.nvim_create_augroup("pithyvim_restore_max_exit_pre", { clear = true }),
+    desc = "Restore width/height when close Neovim while maximized",
+    callback = function()
+      if toggle:get() then
+        toggle:set(false)
+      end
+    end,
+  })
+  return toggle
 end
 
 -- fold
