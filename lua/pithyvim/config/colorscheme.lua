@@ -5,6 +5,19 @@ return {
       ["name"] = "onedark",
       ["moduleName"] = "onedarkpro",
       ["setup"] = {
+        colors = {
+          -- -- git diff
+          -- git_add = "#87af87",
+          -- git_delete = "#af5f5f",
+          -- git_change = "#8787af",
+          -- git_text = "#ff8700",
+
+          -- diff
+          diff_add = "#014431",
+          diff_delete = "#501b20",
+          diff_change = "#454566",
+          diff_text = "#dddd11",
+        },
         highlights = {
           Comment = { underline = false, italic = true, extend = true }, -- extend 用于保证注释颜色为深灰色
           Directory = { bold = true },
