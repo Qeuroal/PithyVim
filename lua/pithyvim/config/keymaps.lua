@@ -140,11 +140,11 @@ end
 
 -- lazygit
 if vim.fn.executable("lazygit") == 1 then
-  map("n", "<leader>gg", function() Snacks.lazygit( { cwd = PithyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-  map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+  map("n", "<leader>gG", function() Snacks.lazygit( { cwd = PithyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+  map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
   map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
-  map("n", "<leader>gl", function() Snacks.lazygit.log({ cwd = PithyVim.root.git() }) end, { desc = "Lazygit Log" })
-  map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
+  map("n", "<leader>gL", function() Snacks.lazygit.log({ cwd = PithyVim.root.git() }) end, { desc = "Lazygit Log" })
+  map("n", "<leader>gl", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
 end
 
 map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
@@ -164,8 +164,8 @@ map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 map("n", "<leader>L", function() PithyVim.news.changelog() end, { desc = "PithyVim Changelog" })
 
 -- floating terminal
-map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
-map("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = PithyVim.root() }) end, { desc = "Terminal (Root Dir)" })
+map("n", "<leader>ft", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+map("n", "<leader>fT", function() Snacks.terminal(nil, { cwd = PithyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 map("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = PithyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 map("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = PithyVim.root() }) end, { desc = "which_key_ignore" })
 
