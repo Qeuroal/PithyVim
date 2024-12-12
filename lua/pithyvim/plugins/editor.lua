@@ -6,14 +6,14 @@ return {
     cmd = "Neotree",
     keys = {
       {
-        "<leader>fe",
+        "<leader>fE",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = PithyVim.root() })
         end,
         desc = "Explorer NeoTree (Root Dir)",
       },
       {
-        "<leader>fE",
+        "<leader>fe",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
