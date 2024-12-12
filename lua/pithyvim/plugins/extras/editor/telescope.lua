@@ -97,7 +97,7 @@ return {
       },
       { "<leader>/", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", PithyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- find
       {
         "<leader>fb",

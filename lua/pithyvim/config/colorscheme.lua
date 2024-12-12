@@ -16,9 +16,7 @@ return {
           diff_add = "#014431",
           diff_delete = "#501b20",
           diff_change = "#454566",
-          -- diff_text = "#5f686f",
-          -- diff_text = "#017271",
-          diff_text = "#637592",
+          diff_text =  "#7c3000"     -- "#00688b", #637592, #017271, #5f686f
         },
         highlights = {
           Comment = { underline = false, italic = true, extend = true }, -- extend 用于保证注释颜色为深灰色
