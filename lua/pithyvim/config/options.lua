@@ -1,6 +1,7 @@
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ";"
 
 -- PithyVim auto format
 vim.g.autoformat = false
