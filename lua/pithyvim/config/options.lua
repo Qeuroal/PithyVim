@@ -135,8 +135,8 @@ opt.winminwidth = 5                 -- Minimum window width
 opt.wrap = true                     -- Disable line wrap
 opt.listchars:append {
     tab = "│─",
-    multispace = "---+",
-    leadmultispace = "---+",
+    multispace = "│---",
+    leadmultispace = "│---",
     lead = "-",
     trail = space,
     nbsp = "%",
