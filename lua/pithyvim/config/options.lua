@@ -135,13 +135,15 @@ opt.winminwidth = 5                 -- Minimum window width
 opt.wrap = true                     -- Disable line wrap
 opt.listchars:append {
     tab = "│─",
-    multispace = space,
-    lead = space,
+    multispace = "---+",
+    leadmultispace = "---+",
+    lead = "-",
     trail = space,
-    nbsp = space,
+    nbsp = "%",
     eol = '⤶',
     extends = '◀',
     precedes = '▶',
+    -- ahead = space,
 }
 -- opt.whichwrap = opt.whichwrap + "<,>,h,l"    -- 设置光标键跨行
 if vim.fn.has("nvim-0.10") == 1 then
