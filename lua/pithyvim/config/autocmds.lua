@@ -125,3 +125,15 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+-- Autoset indent...
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.shiftwidth = 3
+    vim.opt_local.tabstop = 3
+    vim.opt_local.softtabstop = 3
+  end,
+})
+
+
