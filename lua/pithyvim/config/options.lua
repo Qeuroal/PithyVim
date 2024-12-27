@@ -7,11 +7,21 @@ vim.g.maplocalleader = ";"
 -- PithyVim auto format
 vim.g.autoformat = false
 
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = true
+
 -- PithyVim picker to use.
 -- Can be one of: telescope, fzf
 -- Leave it to "auto" to automatically use the picker
 -- enabled with `:LazyExtras`
 vim.g.pithyvim_picker = "auto"
+
+-- PithyVim completion engine to use.
+-- Can be one of: nvim-cmp, blink.cmp
+-- Leave it to "auto" to automatically use the completion engine
+-- enabled with `:LazyExtras`
+vim.g.pithyvim_cmp = "auto"
 
 -- if the completion engine supports the AI source,
 -- use that instead of inline suggestions

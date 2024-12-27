@@ -265,6 +265,15 @@ function M.memoize(fn)
   end
 end
 
+---@return "nvim-cmp" | "blink.cmp"
+function M.cmp_engine()
+  vim.g.pithyvim_cmp = vim.g.pithyvim_cmp or "auto"
+  if vim.g.pithyvim_cmp == "auto" then
+    return PithyVim.has_extra("coding.nvim-cmp") and "nvim-cmp" or "blink.cmp"
+  end
+  return vim.g.pithyvim_cmp
+end
+
 --- Checks whether a given path exists and is a directory
 --@param path (string) path to check
 --@returns (bool)

@@ -2,6 +2,7 @@
 local prios = {
   ["pithyvim.plugins.extras.test.core"] = 1,
   ["pithyvim.plugins.extras.dap.core"] = 1,
+  ["pithyvim.plugins.extras.coding.nvim-cmp"] = 2,
   ["pithyvim.plugins.extras.ui.edgy"] = 2,
   ["pithyvim.plugins.extras.lang.typescript"] = 5,
   ["pithyvim.plugins.extras.coding.blink"] = 5,

@@ -4,6 +4,9 @@ return {
   { "garymjr/nvim-snippets", enabled = false },
   { import = "pithyvim.plugins.extras.coding.luasnip" },
 
+  -- Use nvim-cmp instead of blink.cmp
+  { import = "pithyvim.plugins.extras.coding.nvim-cmp" },
+
   -- Use mini.comment instead of ts-comments
   { "folke/ts-comments.nvim", enabled = false },
   { import = "pithyvim.plugins.extras.coding.mini-comment" },
