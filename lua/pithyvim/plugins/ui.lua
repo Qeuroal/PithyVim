@@ -337,6 +337,7 @@ return {
     },
   },
 
+  -- Qeuroal: undotree
   {
     "mbbill/undotree",
     lazy = true,

@@ -1,5 +1,6 @@
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = " "
+-- Qeuroal:
 -- vim.g.maplocalleader = "\\"
 vim.g.maplocalleader = ";"
 
@@ -40,10 +41,10 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
--- encoding
+-- Qeuroal: encoding
 vim.g.encoding = "UTF-8"
 
-
+-- Qeuroal
 local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
 if not PithyVim.is_directory(undodir) then
   vim.fn.mkdir(undodir, "p")

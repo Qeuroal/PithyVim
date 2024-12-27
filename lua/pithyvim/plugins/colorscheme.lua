@@ -1,6 +1,6 @@
 return {
 
-  -- onedarkpro
+  -- Qeuroal: onedarkpro
   {
     "olimorris/onedarkpro.nvim",
     lazy = true,

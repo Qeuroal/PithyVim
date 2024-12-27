@@ -75,7 +75,7 @@ function M.maximize()
   return toggle
 end
 
--- fold
+-- Qeuroal: fold
 function M.toggleFoldmethod()
     -- 获取当前的 foldmethod
     local current_method = vim.o.foldmethod -- 检查当前的 foldmethod 并切换

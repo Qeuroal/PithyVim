@@ -67,7 +67,7 @@ return {
         use_libuv_file_watcher = true,
       },
       window = {
-        width = 32,
+        width = 32, 	-- Qeuroal
         mappings = {
           ["l"] = "open",
           ["h"] = "close_node",
@@ -88,6 +88,7 @@ return {
           },
           ["P"] = { "toggle_preview", config = { use_float = false } },
         },
+        -- Qeuroal:
         fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
           ["<down>"] = "move_cursor_down",
           ["<C-j>"] = "move_cursor_down",
@@ -109,6 +110,7 @@ return {
           },
         },
       },
+      -- Qeuroal
       event_handlers = {
         {
           event = "file_open_requested",
@@ -185,6 +187,7 @@ return {
       { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      -- Qeuroal
       { "<leader>j", mode = { "n", "x", "o" }, function () require("flash").jump({ search = { mode = "search", max_length = 0 }, label = { after = { 0, 0 } }, pattern = "^" }) end, desc = "Flash jump a line" },
       { "<leader>J", mode = { "n", "x", "o" }, function () require("flash").jump({continue = true}) end, desc = "Flash continue last search" },
     },
@@ -332,7 +335,7 @@ return {
           win = { position = "right" },
         },
       },
-      auto_preview = false,
+      auto_preview = false, -- Qeuroal
     },
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
@@ -390,7 +393,7 @@ return {
     },
   },
 
-  -- tmux
+  -- Qeuroal: tmux
   {
     "alexghergh/nvim-tmux-navigation",
     config = function()
@@ -398,7 +401,7 @@ return {
     end,
   },
 
-  -- 高亮 RGB 颜色
+  -- Qeuroal: 高亮 RGB 颜色
   {
     "NvChad/nvim-colorizer.lua",
     main = "colorizer",

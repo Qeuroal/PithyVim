@@ -8,7 +8,7 @@ PithyVim.config = M
 
 ---@class PithyVimOptions
 local defaults = {
-  -- default color config
+  -- Qeuroal: default color config
   colorSetting = require("pithyvim.config.colorscheme"),
   -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
   ---@type string|fun()

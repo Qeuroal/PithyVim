@@ -97,7 +97,7 @@ return {
       },
       { "<leader>/", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" }, -- Qeuroal
       -- find
       {
         "<leader>fb",
@@ -215,6 +215,7 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
+              -- Qeuroal
               ["<C-c>"] = actions.close,
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
@@ -223,6 +224,7 @@ return {
             },
             n = {
               ["q"] = actions.close,
+	      -- Qeuroal
               ["<C-c>"] = actions.close,
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
