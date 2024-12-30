@@ -168,6 +168,7 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
+      --{{{> Qeuroal
       keymap = {
         preset = 'none',
         ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
@@ -190,6 +191,7 @@ return {
         ['<Tab>'] = { 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
       },
+      --<}}}
       sources = {
         -- add lazydev to your completion providers
         default = { "lazydev" },

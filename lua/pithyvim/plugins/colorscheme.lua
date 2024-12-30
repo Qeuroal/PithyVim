@@ -1,11 +1,12 @@
 return {
 
-  -- Qeuroal: onedarkpro
+  --{{{> Qeuroal: onedarkpro
   {
     "olimorris/onedarkpro.nvim",
     lazy = true,
     priority = 1000, -- Ensure it loads first
   },
+  --<}}}
 
   -- tokyonight
   {

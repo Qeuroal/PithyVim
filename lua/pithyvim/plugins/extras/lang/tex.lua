@@ -25,7 +25,7 @@ return {
   {
     "lervag/vimtex",
     lazy = false, -- lazy-loading will disable inverse search
-    -- Qeuroal
+    --{{{> Qeuroal
     init = function ()
       vim.g.vimtex_quickfix_mode = 0
       vim.g.tex_conceal='abdmg'
@@ -49,6 +49,7 @@ return {
         styles = 1,
       }
       -- default: {'math_super_sub': 1, 'accents': 1, 'greek': 1, 'styles': 1, 'math_fracs': 1, 'math_symbols': 1, 'spacing': 1, 'ligatures': 1 , 'fancy': 1, 'sections': 0, 'math_delimiters': 1, 'math_bounds': 1, 'cites': 1}
+    --<}}}
     end,
     config = function()
       vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover

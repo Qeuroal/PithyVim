@@ -1,8 +1,9 @@
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = " "
--- Qeuroal:
+--{{{> Qeuroal
 -- vim.g.maplocalleader = "\\"
 vim.g.maplocalleader = ";"
+--<}}}
 
 -- PithyVim auto format
 vim.g.autoformat = false
@@ -51,15 +52,18 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
--- Qeuroal: encoding
+--{{{> Qeuroal: encoding
 vim.g.encoding = "UTF-8"
+--<}}}
 
--- Qeuroal
+--{{{> Qeuroal
 local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
 if not PithyVim.is_directory(undodir) then
   vim.fn.mkdir(undodir, "p")
 end
 local space = "·"
+--<}}}
+
 local opt = vim.opt
 
 opt.backup = false             -- creates a backup file

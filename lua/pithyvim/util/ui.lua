@@ -24,7 +24,7 @@ function M.foldexpr()
   return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
 end
 
--- Qeuroal: fold
+--{{{> Qeuroal: fold
 function M.toggleFoldmethod()
     -- 获取当前的 foldmethod
     local current_method = vim.o.foldmethod -- 检查当前的 foldmethod 并切换
@@ -37,5 +37,6 @@ function M.toggleFoldmethod()
         vim.o.foldmethod = 'expr'
     end
 end
+--<}}}
 
 return M

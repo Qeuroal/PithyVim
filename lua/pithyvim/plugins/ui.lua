@@ -315,7 +315,7 @@ return {
     },
   },
 
-  -- Qeuroal: undotree
+  --{{{> Qeuroal: undotree
   {
     "mbbill/undotree",
     lazy = true,
@@ -329,4 +329,5 @@ return {
       { "<leader>uu", "<Cmd>UndotreeToggle<CR>", desc = "undo tree toggle", silent = true, noremap = true },
     },
   },
+  --<}}}
 }
