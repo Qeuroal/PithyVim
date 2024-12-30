@@ -16,7 +16,7 @@ return {
       "hrsh7th/cmp-path",
     },
     -- Not all LSP servers add brackets when completing a function.
-    -- To better deal with this, LazyVim adds a custom option to cmp,
+    -- To better deal with this, PithyVim adds a custom option to cmp,
     -- that you can configure. For example:
     --
     -- ```lua
@@ -41,15 +41,15 @@ return {
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
-          ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
-          ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<CR>"] = PithyVim.cmp.confirm({ select = auto_select }),
+          ["<C-y>"] = PithyVim.cmp.confirm({ select = true }),
+          ["<S-CR>"] = PithyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<C-CR>"] = function(fallback)
             cmp.abort()
             fallback()
           end,
           ["<tab>"] = function(fallback)
-            return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
+            return PithyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
           end,
         }),
         sources = cmp.config.sources({
@@ -61,7 +61,7 @@ return {
         }),
         formatting = {
           format = function(entry, item)
-            local icons = LazyVim.config.icons.kinds
+            local icons = PithyVim.config.icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
@@ -107,10 +107,10 @@ return {
     opts = function(_, opts)
       opts.snippet = {
         expand = function(item)
-          return LazyVim.cmp.expand(item.body)
+          return PithyVim.cmp.expand(item.body)
         end,
       }
-      if LazyVim.has("nvim-snippets") then
+      if PithyVim.has("nvim-snippets") then
         table.insert(opts.sources, { name = "snippets" })
       end
     end,
