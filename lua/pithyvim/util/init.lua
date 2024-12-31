@@ -274,6 +274,7 @@ function M.cmp_engine()
   return vim.g.pithyvim_cmp
 end
 
+--{{{> Qeuroal
 --- Checks whether a given path exists and is a directory
 --@param path (string) path to check
 --@returns (bool)
@@ -300,5 +301,6 @@ function _G.get_cache_dir()
   end
   return pithyvim_cache_dir
 end
+--<}}}
 
 return M
