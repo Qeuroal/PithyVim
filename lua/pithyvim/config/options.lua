@@ -1,16 +1,28 @@
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = " "
+--{{{> Qeuroal
 -- vim.g.maplocalleader = "\\"
 vim.g.maplocalleader = ";"
+--<}}}
 
 -- PithyVim auto format
 vim.g.autoformat = false
+
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = true
 
 -- PithyVim picker to use.
 -- Can be one of: telescope, fzf
 -- Leave it to "auto" to automatically use the picker
 -- enabled with `:LazyExtras`
 vim.g.pithyvim_picker = "auto"
+
+-- PithyVim completion engine to use.
+-- Can be one of: nvim-cmp, blink.cmp
+-- Leave it to "auto" to automatically use the completion engine
+-- enabled with `:LazyExtras`
+vim.g.pithyvim_cmp = "auto"
 
 -- if the completion engine supports the AI source,
 -- use that instead of inline suggestions
@@ -40,15 +52,18 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
--- encoding
+--{{{> Qeuroal: encoding
 vim.g.encoding = "UTF-8"
+--<}}}
 
-
+--{{{> Qeuroal
 local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
 if not PithyVim.is_directory(undodir) then
   vim.fn.mkdir(undodir, "p")
 end
 local space = "·"
+--<}}}
+
 local opt = vim.opt
 
 opt.backup = false             -- creates a backup file

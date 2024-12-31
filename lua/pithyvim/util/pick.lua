@@ -42,10 +42,11 @@ function M.register(picker)
   return true
 end
 
+---@return "telescope" | "fzf"
 function M.want()
   vim.g.pithyvim_picker = vim.g.pithyvim_picker or "auto"
   if vim.g.pithyvim_picker == "auto" then
-    return PithyVim.has_extra("editor.fzf") and "fzf" or "telescope"
+    return PithyVim.has_extra("editor.telescope") and "telescope" or "fzf"
   end
   return vim.g.pithyvim_picker
 end

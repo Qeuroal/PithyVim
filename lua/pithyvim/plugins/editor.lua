@@ -67,7 +67,9 @@ return {
         use_libuv_file_watcher = true,
       },
       window = {
+        --{{{> Qeuroal
         width = 32,
+        --<}}}
         mappings = {
           ["l"] = "open",
           ["h"] = "close_node",
@@ -88,12 +90,14 @@ return {
           },
           ["P"] = { "toggle_preview", config = { use_float = false } },
         },
+        --{{{> Qeuroal
         fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
           ["<down>"] = "move_cursor_down",
           ["<C-j>"] = "move_cursor_down",
           ["<up>"] = "move_cursor_up",
           ["<C-k>"] = "move_cursor_up",
         },
+        -- <}}}
       },
       default_component_configs = {
         indent = {
@@ -109,6 +113,7 @@ return {
           },
         },
       },
+      -- Qeuroal
       event_handlers = {
         {
           event = "file_open_requested",
@@ -185,8 +190,10 @@ return {
       { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      --{{{> Qeuroal
       { "<leader>j", mode = { "n", "x", "o" }, function () require("flash").jump({ search = { mode = "search", max_length = 0 }, label = { after = { 0, 0 } }, pattern = "^" }) end, desc = "Flash jump a line" },
       { "<leader>J", mode = { "n", "x", "o" }, function () require("flash").jump({continue = true}) end, desc = "Flash continue last search" },
+      --<}}}
     },
   },
 
@@ -197,12 +204,15 @@ return {
     event = "VeryLazy",
     opts_extend = { "spec" },
     opts = {
+      preset = "helix",
       defaults = {},
       spec = {
         {
           mode = { "n", "v" },
           { "<leader><tab>", group = "tabs" },
           { "<leader>c", group = "code" },
+          { "<leader>d", group = "debug" },
+          { "<leader>dp", group = "profiler" },
           { "<leader>f", group = "file/find" },
           { "<leader>g", group = "git" },
           { "<leader>gh", group = "hunks" },
@@ -321,6 +331,20 @@ return {
       end,
     },
   },
+  {
+    "gitsigns.nvim",
+    opts = function()
+      Snacks.toggle({
+        name = "Git Signs",
+        get = function()
+          return require("gitsigns.config").config.signcolumn
+        end,
+        set = function(state)
+          require("gitsigns").toggle_signs(state)
+        end,
+      }):map("<leader>uG")
+    end,
+  },
 
   -- better diagnostics list and others
   {
@@ -332,7 +356,9 @@ return {
           win = { position = "right" },
         },
       },
+      --{{{> Qeuroal
       auto_preview = false,
+      --<}}}
     },
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
@@ -390,15 +416,16 @@ return {
     },
   },
 
-  -- tmux
+  --{{{> Qeuroal: tmux
   {
     "alexghergh/nvim-tmux-navigation",
     config = function()
       require("pithyvim.plugins.config.nvim_tmux_navigation").setup()
     end,
   },
+  --<}}}
 
-  -- 高亮 RGB 颜色
+  --{{{> Qeuroal: 高亮 RGB 颜色
   {
     "NvChad/nvim-colorizer.lua",
     main = "colorizer",
@@ -409,6 +436,7 @@ return {
       vim.cmd "ColorizerToggle"
     end
   },
+  --<}}}
 
   {
     import = "pithyvim.plugins.extras.editor.fzf",

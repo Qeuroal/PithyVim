@@ -215,7 +215,9 @@ return {
       },
       { "<leader>/", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      --{{{> Qeuroal
       { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      --<}}}
       -- find
       { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", PithyVim.pick.config_files(), desc = "Find Config File" },

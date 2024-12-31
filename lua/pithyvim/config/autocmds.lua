@@ -66,7 +66,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "neotest-summary",
     "notify",
     "qf",
-    "snacks_win",
     "spectre_panel",
     "startuptime",
     "tsplayground",
@@ -126,7 +125,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
--- Autoset indent...
+--{{{> Qeuroal: Autoset indent...
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
@@ -135,5 +134,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.softtabstop = 3
   end,
 })
+--<}}}
 
 

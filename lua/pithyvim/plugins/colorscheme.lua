@@ -1,11 +1,12 @@
 return {
 
-  -- onedarkpro
+  --{{{> Qeuroal: onedarkpro
   {
     "olimorris/onedarkpro.nvim",
     lazy = true,
     priority = 1000, -- Ensure it loads first
   },
+  --<}}}
 
   -- tokyonight
   {
@@ -26,6 +27,7 @@ return {
         cmp = true,
         dashboard = true,
         flash = true,
+        fzf = true,
         grug_far = true,
         gitsigns = true,
         headlines = true,
