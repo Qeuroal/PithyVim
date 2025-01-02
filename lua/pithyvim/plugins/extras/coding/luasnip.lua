@@ -15,10 +15,11 @@ return {
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load()
           --{{{> Qeuroal
-          require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/json_snippets" } })
-          require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snippets/snipmate" } })
+          -- Note: 如果要使用自定义片段, 必须打开 luasnip 插件
+          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets/json_snippets" } })
+          require("luasnip.loaders.from_snipmate").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets/snipmate" } })
+          -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
           --<}}}
-          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
         end,
       },
     },
