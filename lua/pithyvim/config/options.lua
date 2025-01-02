@@ -52,8 +52,14 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
---{{{> Qeuroal: encoding
+--{{{> Qeuroal
+-- encoding
 vim.g.encoding = "UTF-8"
+
+-- EditorConfig is enabled by default. 
+-- Nvim searches all parent directories of that file for ".editorconfig" files,
+-- parses them, and applies any properties that match the opened file. 
+vim.g.editorconfig = true
 --<}}}
 
 --{{{> Qeuroal
