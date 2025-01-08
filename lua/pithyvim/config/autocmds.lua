@@ -126,6 +126,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 --{{{> Qeuroal: Autoset indent...
+--Note: 优先级: .editorconfig > this config
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
