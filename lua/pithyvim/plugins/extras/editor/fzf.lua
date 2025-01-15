@@ -288,6 +288,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
+      if PithyVim.pick.want() ~= "fzf" then
+        return
+      end
       local Keys = require("pithyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
