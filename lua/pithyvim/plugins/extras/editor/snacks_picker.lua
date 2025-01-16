@@ -46,7 +46,7 @@ return {
       { "<leader>ff", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       { "<leader>fR", PithyVim.pick("oldfiles"), desc = "Recent" },
-      { "<leader>fr", PithyVim.pick("oldfiles", { only_cwd = true }), desc = "Recent (cwd)" },
+      { "<leader>fr", PithyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
