@@ -450,4 +450,10 @@ return {
       return PithyVim.pick.want() == "telescope"
     end,
   },
+  {
+    import = "pithyvim.plugins.extras.editor.snacks_picker",
+    enabled = function()
+      return PithyVim.pick.want() == "snacks"
+    end,
+  },
 }
