@@ -49,6 +49,7 @@ return {
       { "<leader>fr", PithyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       -- Grep
       { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
@@ -111,7 +112,7 @@ return {
         { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
         { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
         { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-        { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols", has = "documentSymbol" },
+        { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
       })
     end,
   },
