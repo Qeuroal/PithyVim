@@ -100,7 +100,9 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
-    vim.opt_local.spell = true
+    --{{{> Qeuroal: 默认不检查拼写, 切换快捷键为 <leader>us. 设置默认检查为 vim.opt_local.spell = true
+    vim.opt_local.spell = false
+    --<}}}
   end,
 })
 
