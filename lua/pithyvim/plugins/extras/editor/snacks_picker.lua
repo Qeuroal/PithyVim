@@ -27,11 +27,32 @@ end
 
 return {
   desc = "Fast and modern file picker",
-  -- recommended = true,
+  recommended = true,
   {
     "folke/snacks.nvim",
     opts = {
-      picker = {},
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<a-c>"] = {
+                "toggle_cwd",
+                mode = { "n", "i" },
+              },
+            },
+          },
+        },
+        actions = {
+          ---@param p snacks.Picker
+          toggle_cwd = function(p)
+            local root = PithyVim.root({ buf = p.input.filter.current_buf, normalize = true })
+            local cwd = vim.fs.normalize((vim.uv or vim.loop).cwd() or ".")
+            local current = p:cwd()
+            p:set_cwd(current == root and cwd or root)
+            p:find()
+          end,
+        },
+      },
     },
     -- stylua: ignore
     keys = {
@@ -41,12 +62,14 @@ return {
       { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- find
       { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>fB", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, desc = "Buffers (all)" },
       { "<leader>fc", PithyVim.pick.config_files(), desc = "Find Config File" },
       { "<leader>fF", PithyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>ff", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       { "<leader>fR", PithyVim.pick("oldfiles"), desc = "Recent" },
       { "<leader>fr", PithyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
@@ -56,6 +79,7 @@ return {
       { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       { "<leader>sG", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>sg", PithyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
       { "<leader>sW", PithyVim.pick("grep_word"), desc = "Visual selection or word (Root Dir)", mode = { "n", "x" } },
       { "<leader>sw", PithyVim.pick("grep_word", { root = false }), desc = "Visual selection or word (cwd)", mode = { "n", "x" } },
       -- search
@@ -66,6 +90,7 @@ return {
       { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
       { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
       { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+      { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
       { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
       { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
       { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
@@ -73,8 +98,9 @@ return {
       { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
       { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
       { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+      { "<leader>su", function() Snacks.picker.undo() end, desc = "Undotree" },
+      -- ui
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      { "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
     },
   },
   {
@@ -113,6 +139,7 @@ return {
         { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
         { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
         { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
+        { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
       })
     end,
   },
