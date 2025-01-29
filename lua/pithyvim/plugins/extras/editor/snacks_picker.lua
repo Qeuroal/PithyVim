@@ -60,6 +60,7 @@ return {
       { "<leader>/", PithyVim.pick("grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
       -- find
       { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fB", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, desc = "Buffers (all)" },
@@ -68,7 +69,7 @@ return {
       { "<leader>ff", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       { "<leader>fR", PithyVim.pick("oldfiles"), desc = "Recent" },
-      { "<leader>fr", PithyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
+      { "<leader>fr", function() Snacks.picker.recent({ filter = { cwd = true }}) end, desc = "Recent (cwd)" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
