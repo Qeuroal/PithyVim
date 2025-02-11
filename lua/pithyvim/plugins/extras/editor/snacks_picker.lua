@@ -136,9 +136,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
-      if PithyVim.pick.want() ~= "snacks" then
-        return
-      end
       local Keys = require("pithyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
@@ -159,6 +156,17 @@ return {
       { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
       { "<leader>sT", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     },
+  },
+  {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      table.insert(opts.dashboard.preset.keys, 3, {
+        icon = " ",
+        key = "p",
+        desc = "Projects",
+        action = ":lua Snacks.picker.projects()",
+      })
+    end,
   },
   {
     "folke/flash.nvim",

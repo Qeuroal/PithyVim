@@ -61,9 +61,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    enabled = function()
-      return PithyVim.pick.want() == "telescope"
-    end,
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
       {
@@ -283,9 +280,6 @@ return {
   {
     "stevearc/dressing.nvim",
     lazy = true,
-    enabled = function()
-      return PithyVim.pick.want() == "telescope"
-    end,
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
@@ -303,9 +297,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
-      if PithyVim.pick.want() ~= "telescope" then
-        return
-      end
       local Keys = require("pithyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {

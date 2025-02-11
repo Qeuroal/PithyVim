@@ -28,10 +28,6 @@ function M.register(picker)
     return true
   end
 
-  if M.picker and M.picker.name ~= M.want() then
-    M.picker = nil
-  end
-
   if M.picker and M.picker.name ~= picker.name then
     PithyVim.warn(
       "`PithyVim.pick`: picker already set to `" .. M.picker.name .. "`,\nignoring new picker `" .. picker.name .. "`"
@@ -40,17 +36,6 @@ function M.register(picker)
   end
   M.picker = picker
   return true
-end
-
----@return "telescope" | "fzf" | "snacks"
-function M.want()
-  vim.g.pithyvim_picker = vim.g.pithyvim_picker or "auto"
-  if vim.g.pithyvim_picker == "auto" then
-    return PithyVim.has_extra("editor.snacks_picker") and "snacks"
-      or PithyVim.has_extra("editor.telescope") and "telescope"
-      or "fzf"
-  end
-  return vim.g.pithyvim_picker
 end
 
 ---@param command? string

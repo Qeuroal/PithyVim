@@ -1,17 +1,4 @@
 return {
-  {
-    import = "pithyvim.plugins.extras.coding.nvim-cmp",
-    enabled = function()
-      return PithyVim.cmp_engine() == "nvim-cmp"
-    end,
-  },
-  {
-    import = "pithyvim.plugins.extras.coding.blink",
-    enabled = function()
-      return PithyVim.cmp_engine() == "blink.cmp"
-    end,
-  },
-
   -- auto pairs
   {
     "echasnovski/mini.pairs",
