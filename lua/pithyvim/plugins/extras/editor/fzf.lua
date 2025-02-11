@@ -40,7 +40,6 @@ end
 
 return {
   desc = "Awesome picker for FZF (alternative to Telescope)",
-  recommended = true,
   {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
@@ -288,9 +287,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
-      if PithyVim.pick.want() ~= "fzf" then
-        return
-      end
       local Keys = require("pithyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
