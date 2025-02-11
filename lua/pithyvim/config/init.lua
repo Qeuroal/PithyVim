@@ -378,6 +378,11 @@ function M.get_defaults()
       { name = "snacks", extra = "editor.snacks_explorer" },
       { name = "neo-tree", extra = "editor.neo-tree" },
     },
+    --{{{> Qeuroal
+    snip = {
+      { name = "luasnip", extra = "coding.luasnip" },
+    },
+    --<}}}
   }
 
   -- existing installs keep their defaults
