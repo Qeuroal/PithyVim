@@ -43,6 +43,14 @@ return {
     ["tokyonight"] = {
       ["name"] = "tokyonight",
       ["moduleName"] = "tokyonight",
+      ["setup"] = {
+        on_colors = function (color)
+          color.diff.add = "#014431"
+          color.diff.delete = "#501b20"
+          color.diff.change = "#454566"
+          color.diff.ignore =  "#7c3000"
+        end
+      },
     },
   },
 }
