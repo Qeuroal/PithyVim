@@ -1,5 +1,6 @@
 return {
-  ["default"] = "onedarkpro",
+  -- ["default"] = "onedarkpro",
+  ["default"] = "tokyonight",
   ["schemes"] = {
     ["onedarkpro"] = {
       ["name"] = "onedark",
@@ -30,6 +31,7 @@ return {
         options = {
           cursorline = true,
           transparency = false,
+          -- highlight inactive
           highlight_inactive_windows = true,
           lualine_transparency = false, -- Center bar transparency?
         },
