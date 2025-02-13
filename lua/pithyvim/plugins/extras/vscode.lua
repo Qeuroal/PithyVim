@@ -69,7 +69,7 @@ return {
     },
   },
   {
-    "qeuroal/PithyVim",
+    "Qeuroal/PithyVim",
     config = function(_, opts)
       opts = opts or {}
       -- disable the colorscheme
