@@ -38,6 +38,10 @@ return {
         },
       },
     },
+    ["tokyonight"] = {
+      ["name"] = "tokyonight",
+      ["moduleName"] = "tokyonight",
+    },
   },
 }
 
