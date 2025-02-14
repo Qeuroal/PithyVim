@@ -1,5 +1,5 @@
 return {
-  ["default"] = "tokyonight",
+  ["default"] = "onedarkpro",
   ["schemes"] = {
     ["onedarkpro"] = {
       ["name"] = "onedark",
