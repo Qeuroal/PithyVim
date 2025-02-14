@@ -375,6 +375,10 @@ function M.get_defaults()
       { name = "nvim-cmp", extra = "coding.nvim-cmp" },
     },
     explorer = {
+      --{{{> Qeuroal
+      -- snacks_explorer has question that keymap <c-j> isn't switch windows and grep error
+      { name = "neo-tree", extra = "editor.neo-tree" },
+      --<}}}
       { name = "snacks", extra = "editor.snacks_explorer" },
       { name = "neo-tree", extra = "editor.neo-tree" },
     },
