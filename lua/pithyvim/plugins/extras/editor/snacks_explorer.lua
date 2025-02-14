@@ -2,7 +2,20 @@ return {
   desc = "Snacks File Explorer",
   recommended = true,
   "folke/snacks.nvim",
-  opts = { explorer = {} },
+  --{{{> Qeuroal
+  opts = {
+    explorer = {},
+    picker = {
+      sources = {
+        explorer = {
+          -- your explorer picker configuration comes here
+          -- or leave it empty to use the default settings
+          diagnostics = false,
+        }
+      }
+    }
+  },
+  --<}}}
   keys = {
     {
       "<leader>fE",

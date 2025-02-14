@@ -47,7 +47,7 @@ return {
         on_colors = function (color)
           color.diff.add = "#014431"
           color.diff.delete = "#501b20"
-          color.diff.change = "#454566"
+          color.diff.change = "#800000"
           color.diff.ignore =  "#7c3000"
         end
       },
