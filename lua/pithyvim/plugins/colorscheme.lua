@@ -2,7 +2,7 @@ return {
 
   --{{{> Qeuroal: onedarkpro
   {
-    "olimorris/onedarkpro.nvim",
+    "qeuroal/onedarkpro.nvim",
     lazy = true,
     priority = 1000, -- Ensure it loads first
   },
