@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "PithyVimKeymapsDefaults",
   callback = function()
     -- VSCode-specific keymaps for search and navigation
-    vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
+    vim.keymap.set("n", "<leader><leader>", "<cmd>Find<cr>")
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
     vim.keymap.set("n", "<leader>ss", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
 
