@@ -39,8 +39,20 @@ return {
                 "toggle_cwd",
                 mode = { "n", "i" },
               },
+              --{{{> Qeuroal
+              ["<C-c>"] = { "close", mode = { "i", "n" } },
+              --<}}}
             },
           },
+          --{{{> Qeuroal
+          list = {
+            keys = {
+              -- ["<C-j>"] = { "false", mode = { "n" } },
+              -- ["<C-j>"] = { "false" },
+              -- ["<C-k>"] = { "false" },
+            },
+          },
+          --<}}}
         },
         actions = {
           ---@param p snacks.Picker
