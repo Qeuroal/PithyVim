@@ -47,6 +47,7 @@ return {
           --{{{> Qeuroal
           list = {
             keys = {
+              -- ["<C-j>"] = { "false", mode = { "n" } },
               -- ["<C-j>"] = { "false" },
               -- ["<C-k>"] = { "false" },
             },
