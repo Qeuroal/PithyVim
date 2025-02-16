@@ -22,16 +22,16 @@ return {
           Comment = { underline = false, italic = true, extend = true }, -- extend 用于保证注释颜色为深灰色
           Directory = { bold = true },
           ErrorMsg = { italic = true, bold = true },
-          ["CursorLine"] = {
-            -- bg = "#31353f",  -- 正常的
-            bg = "#3b3b49",
-          },
+          CursorLine = { bg = "#3b3b49", }, -- bg = "#31353f" (正常的)
+          -- 括号颜色
+          MatchParen = { bold = true, underline = true, fg = "#FFFF00" }, -- #B22222, #FF4500, #FFFF00, #DC143C
           -- NonText = { fg="#5c6370" },
           -- LineNr = { fg = "#495162" },
         },
         options = {
           cursorline = true,
           transparency = false,
+          nobackground = true,
           -- highlight inactive
           highlight_inactive_windows = true,
           lualine_transparency = false, -- Center bar transparency?
