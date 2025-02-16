@@ -242,6 +242,6 @@ if vim.fn.has("nvim-0.11") == 0 then
 end
 
 -- fold
-map("n", "<leader>uzt", "<cmd>lua PithyVim.ui.toggleFoldmethod()<cr>", { desc = "Toggle between 'expr' and 'marker' for foldmethod settings." })
+map("n", "<leader>uz", "<cmd>lua PithyVim.ui.toggleFoldmethod()<cr>", { desc = "Toggle between 'expr' and 'marker' for foldmethod settings." })
 
 
