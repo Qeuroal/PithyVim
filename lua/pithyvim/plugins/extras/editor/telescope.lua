@@ -95,7 +95,7 @@ return {
       { "<leader>/", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       --{{{> Qeuroal
-      { "<leader><leader>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       --<}}}
       -- find
       {
