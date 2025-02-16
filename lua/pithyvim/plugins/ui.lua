@@ -213,6 +213,16 @@ return {
           },
           view = "mini",
         },
+        --{{{> Qeuroal
+        -- noice.nvim don't pop up when execute `grep`
+        {
+          filter = {
+            event = "msg_show",
+            kind = "search_count",
+          },
+          opts = { skip = true },
+        },
+        --<}}}
       },
       presets = {
         bottom_search = true,

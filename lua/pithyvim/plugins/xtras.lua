@@ -11,6 +11,9 @@ local prios = {
   -- default priority is 50
   ["pithyvim.plugins.extras.editor.aerial"] = 100,
   ["pithyvim.plugins.extras.editor.outline"] = 100,
+  ["pithyvim.plugins.extras.ui.alpha"] = 19,
+  ["pithyvim.plugins.extras.ui.dashboard-nvim"] = 19,
+  ["pithyvim.plugins.extras.ui.mini-starter"] = 19,
 }
 
 if vim.g.xtras_prios then
