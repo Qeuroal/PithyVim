@@ -27,8 +27,8 @@ return {
           MatchParen = { bold = true, underline = true, fg = "#FFFF00" }, -- #B22222, #FF4500, #FFFF00, #DC143C
           -- NonText = { fg="#5c6370" },
           -- LineNr = { fg = "#495162" },
-          ["@markup.list.checked"] = { fg = "#ffffff", bg = "#017271" },
-          ["@markup.list.unchecked"] = { fg = "#ffffff", bg = "#FF4500" },
+          ["@markup.list.checked"] = { fg = "#98c379" }, -- #73DACA
+          ["@markup.list.unchecked"] = { fg = "#FF4500" }, -- #7AA2F7
         },
         options = {
           cursorline = true,
