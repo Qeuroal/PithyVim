@@ -42,12 +42,14 @@ return {
     "pwntester/octo.nvim",
     opts = function(_, opts)
       vim.treesitter.language.register("markdown", "octo")
-      if PithyVim.has("telescope.nvim") then
+      if PithyVim.has_extra("editor.telescope") then
         opts.picker = "telescope"
-      elseif PithyVim.has("fzf-lua") then
+      elseif PithyVim.has_extra("editor.fzf") then
         opts.picker = "fzf-lua"
+      elseif PithyVim.has_extra("editor.snacks_picker") then
+        opts.picker = "snacks"
       else
-        PithyVim.error("`octo.nvim` requires `telescope.nvim` or `fzf-lua`")
+        PithyVim.error("`octo.nvim` requires `telescope.nvim` or `fzf-lua` or `snacks.nvim`")
       end
 
       -- Keep some empty windows in sessions

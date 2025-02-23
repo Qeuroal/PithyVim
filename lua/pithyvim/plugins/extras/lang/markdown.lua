@@ -99,13 +99,34 @@ return {
         sign = false,
         width = "block",
         right_pad = 1,
+        --{{{ Qeuroal
+        min_width = 45,
+        --}}}
       },
       heading = {
         sign = false,
         icons = {},
       },
       checkbox = {
-        enabled = false,
+        --{{{> Qeuroal
+        enabled = true,
+        render_modes = false,
+        position = 'inline',
+        unchecked = {
+          icon = '󰄱 ',
+          highlight = 'RenderMarkdownUnchecked',
+          scope_highlight = nil,
+        },
+        checked = {
+          icon = '󰱒 ',
+          highlight = 'RenderMarkdownChecked',
+          scope_highlight = '@markup.strikethrough',
+        },
+        custom = {
+          todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+          important = { raw = '[~]', rendered = '󰓎 ', highlight = 'DiagnosticWarn' },
+        },
+        --<}}}
       },
     },
     ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
