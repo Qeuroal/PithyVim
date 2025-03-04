@@ -63,9 +63,11 @@ return {
       --{{{> Qeuroal
       linters = {
         ["markdownlint-cli2"] = {
-          -- reference: https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+          -- reference:
+          --    https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+          --    https://github.com/LazyVim/LazyVim/discussions/4094
           -- NOTE: ~ will not be parsed as HOME directory
-          args = { "--config", os.getenv("HOME") .. "/.config/nvim/.markdownlint.jsonc", "--" },
+          args = { "--config", os.getenv("HOME") .. "/.config/nvim/config/markdown/.markdownlint.jsonc", "--" },
         },
       },
       --<}}}
