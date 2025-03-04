@@ -60,6 +60,14 @@ return {
       linters_by_ft = {
         markdown = { "markdownlint-cli2" },
       },
+      --{{{> Qeuroal
+      linters = {
+        ["markdownlint-cli2"] = {
+          -- reference: https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+          args = { "--config", os.getenv("HOME") .. "/.config/nvim/.markdownlint.jsonc", "--" },
+        },
+      },
+      --<}}}
     },
   },
   {
