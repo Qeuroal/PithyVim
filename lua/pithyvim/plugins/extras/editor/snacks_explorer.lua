@@ -13,6 +13,42 @@ return {
 
           -- 关闭explorer诊断提示
           diagnostics = false,
+          layout = {
+            -- preview = "main",
+            layout = {
+              backdrop = false,
+              width = 36,
+              min_width = 36,
+              -- height = 0,
+              position = "left",
+              border = "right",
+              box = "horizontal",
+              {
+                box = "vertical",
+                {
+                  win = "input",
+                  height = 1,
+                  -- width = 0.5,
+                  border = "rounded",
+                  title = "{title} {live} {flags}",
+                  title_pos = "center",
+                },
+                {
+                  win = "list",
+                  border = "none",
+                  -- width = 0.5,
+                },
+                {
+                  win = "preview",
+                  title = "{preview}",
+                  -- width = 0.5,
+                  height = 0.45,
+                  max_width = 36,
+                  border = "top",
+                },
+              },
+            },
+          },
         }
       }
     }
