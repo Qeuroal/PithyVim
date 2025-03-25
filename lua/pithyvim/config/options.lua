@@ -190,11 +190,22 @@ vim.g.markdown_recommended_style = 0
 -- default enable: pcall (vim.diagnostic.enable)
 pcall(vim.diagnostic.enable, false)
 
--- {{{> diffopt
+--{{{> diffopt
 vim.o.diffopt = vim.o.diffopt .. ",followwrap"
 vim.o.diffopt = vim.o.diffopt .. ",context:3"
 vim.o.diffopt = vim.o.diffopt .. ",algorithm:patience"
 vim.o.diffopt = vim.o.diffopt .. ",indent-heuristic"
--- <}}}
+--<}}}
+
+--{{{> Qeuroal: wrap and linebreak
+opt.breakindentopt = { "shift:2", "sbr" }   -- 设置折行时的缩进量为 2 个字符，并启用 showbreak
+opt.showbreak = "↪"                         -- 可选：自定义 showbreak 的提示符
+opt.linebreak = false
+-- opt.breakat = "^I!@*-+;:,./?"               -- 当 vim.opt.linebreak = true 时有效, 将选择合适的地方折行.
+--                                             -- 合适的地方, 是由breakat选项中的字符来确定的.
+--                                             -- 在默认的情况下, 这些字符是 “^I!@*-+_;:,./?” 
+--                                             -- (Note: 在 Pithyvim 中默认为 “^I!@*-+;:,./?”)
+
+--<}}}
 
 
