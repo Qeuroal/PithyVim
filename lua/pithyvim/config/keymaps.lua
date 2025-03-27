@@ -80,7 +80,10 @@ map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
 -- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+-- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })  -- 按<c-s>后光标会向下移动一行
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr>", { desc = "Save File" })          -- 解决按<c-s>后光标会向下移动一行. 
+                                                                                    -- 因此将 "<cmd>w<cr><esc>" 改为 "<cmd>w<cr>".
+                                                                                    -- 未来解决了这个问题将重新修改.
 
 --keywordprg
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
@@ -183,9 +186,9 @@ if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
 end
 
-map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
-map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
-map({"n", "x" }, "<leader>gY", function()
+map("n", "<leader>gB", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
+map({ "n", "x" }, "<leader>gb", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+map({"n", "x" }, "<leader>gy", function()
   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
 end, { desc = "Git Browse (copy)" })
 
