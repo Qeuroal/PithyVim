@@ -80,7 +80,10 @@ map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
 -- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+-- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })  -- 按<c-s>后光标会向下移动一行
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr>", { desc = "Save File" })          -- 解决按<c-s>后光标会向下移动一行. 
+                                                                                    -- 因此将 "<cmd>w<cr><esc>" 改为 "<cmd>w<cr>".
+                                                                                    -- 未来解决了这个问题将重新修改.
 
 --keywordprg
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
