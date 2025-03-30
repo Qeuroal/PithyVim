@@ -216,13 +216,14 @@ return {
         --{{{> Qeuroal
         -- noice.nvim don't pop up when execute `grep`.
         -- Noice by default uses virttext, this snippets also disables that. (https://github.com/folke/noice.nvim/wiki/A-Guide-to-Messages)
-        {
-          filter = {
-            event = "msg_show",
-            kind = "search_count",
-          },
-          opts = { skip = true },
-        },
+        -- WARNING: the search flag willn't show if filter the event of msg_show.
+        -- {
+        --   filter = {
+        --     event = "msg_show",
+        --     kind = "search_count",
+        --   },
+        --   opts = { skip = true },
+        -- },
         --<}}}
       },
       presets = {
