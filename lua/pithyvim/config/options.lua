@@ -208,4 +208,9 @@ opt.linebreak = false
 
 --<}}}
 
+--{{{> Qeuroal: gui
+vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
+
+--<}}}
+
 
