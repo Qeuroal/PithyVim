@@ -29,6 +29,7 @@ return {
           -- LineNr = { fg = "#495162" },
           ["@markup.list.checked"] = { fg = "#98c379" }, -- #73DACA
           ["@markup.list.unchecked"] = { fg = "#FF4500" }, -- #7AA2F7
+          ["RenderMarkdownCodeInline"] = { fg = "#f1948a" } -- #8B7500, #340000
         },
         options = {
           cursorline = true,
