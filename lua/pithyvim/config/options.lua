@@ -208,6 +208,12 @@ opt.linebreak = false
 
 --<}}}
 
+--{{{> Qeuroal: shada
+-- opt.shada = string.gsub(opt.shada._value, "'100", "'0")   -- 将 '100 设置为 '0, 以此保证 jumplist 不共享且不保存,
+--                                                           -- 从而在每次打开 neovim 后, jumplist 都为空
+
+--<}}}
+
 --{{{> Qeuroal: gui
 vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
 
