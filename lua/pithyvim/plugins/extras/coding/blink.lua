@@ -173,7 +173,7 @@ return {
       --{{{> Qeuroal
       keymap = {
         preset = 'none',
-        ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-l>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-e>'] = { 'hide' },
         ['<C-y>'] = { 'select_and_accept' },
         ['<Enter>'] = {
