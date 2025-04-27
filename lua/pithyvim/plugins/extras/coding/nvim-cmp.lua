@@ -43,7 +43,7 @@ return {
           ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-n>"] = cmp.mapping.abort(),
           ["<C-p>"] = cmp.mapping.abort(),
-          ["<C-o>"] = cmp.mapping.complete(),
+          ["<C-l>"] = cmp.mapping.complete(),
           --<}}}
           ["<CR>"] = PithyVim.cmp.confirm({ select = auto_select }),
           ["<C-y>"] = PithyVim.cmp.confirm({ select = true }),
