@@ -89,6 +89,7 @@ opt.autowrite = true            -- Enable auto write
 -- integration works automatically. Requires Neovim >= 0.10.0
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"     -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"   -- 补全时默认不选择第1项
+-- opt.wildmenu = true             -- 补全增强, 但是目前并不清楚有什么用
 opt.conceallevel = 2            -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true              -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true           -- Enable highlighting of the current line
