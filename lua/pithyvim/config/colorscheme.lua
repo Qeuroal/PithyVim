@@ -57,6 +57,12 @@ return {
         end
       },
     },
+    ["everforest"] = {
+      ["name"] = "everforest",
+      ["moduleName"] = "everforest",
+      ["setup"] = {
+      },
+    },
   },
 }
 
