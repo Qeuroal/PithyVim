@@ -54,6 +54,7 @@ return {
           color.diff.delete = "#501b20"
           color.diff.change = "#800000"
           color.diff.ignore =  "#7c3000"
+          color.bg_visual = "#414878" -- #414858, #2e3c64, #424559, #414878
         end
       },
     },
