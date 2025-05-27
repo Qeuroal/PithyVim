@@ -48,7 +48,7 @@ return {
     optional = true,
     opts = function()
       local dap = require("dap")
-      local path = PithyVim.get_pkg_path("php-debug-adapter")
+      local path = require("mason-registry").get_package("php-debug-adapter"):get_install_path()
       dap.adapters.php = {
         type = "executable",
         command = "node",
