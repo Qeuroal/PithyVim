@@ -17,7 +17,7 @@ local defaults = {
     local schemeOpt = M.colorSetting.schemes[scheme]
     if (type(schemeOpt) ~= "table") then
       PithyVim.warn("the default don't exist!!!")
-      require("habamax").load()
+      require("tokyonight").load()
     end
     local setup = schemeOpt.setup
     local moduleName = schemeOpt["moduleName"] or scheme
