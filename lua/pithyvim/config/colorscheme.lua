@@ -1,5 +1,5 @@
 return {
-  ["default"] = "tokyonight",
+  ["default"] = "catppuccin",
   ["schemes"] = {
     ["onedarkpro"] = {
       ["name"] = "onedark",
@@ -64,6 +64,13 @@ return {
       ["setup"] = {
       },
     },
+    ["catppuccin"] = {
+      ["name"] = "catppuccin",
+      ["moduleName"] = "catppuccin",
+      ["setup"] = {
+        flavour = "Macchiato"
+      },
+    }
   },
 }
 
