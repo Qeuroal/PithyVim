@@ -69,7 +69,7 @@ return {
     -- stylua: ignore
     keys = {
       { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>/", PithyVim.pick("grep"), desc = "Grep (Root Dir)" },
+      { "<leader>/", PithyVim.pick("grep", { root = false }), desc = "Grep (cwd)" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader><space>", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
