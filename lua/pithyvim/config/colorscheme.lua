@@ -68,7 +68,7 @@ return {
       ["name"] = "catppuccin",
       ["moduleName"] = "catppuccin",
       ["setup"] = {
-        flavour = "Macchiato" -- Mocha
+        flavour = "macchiato", -- latte, frappe, macchiato, mocha
       },
     }
   },
