@@ -7,12 +7,6 @@ return {
     lazy = true,
     priority = 1000, -- Ensure it loads first
   },
-  {
-    "catppuccin/nvim",
-    lazy = true,
-    priority = 1000, -- Ensure it loads first
-    name = "catppuccin",
-  },
   --<}}}
 
   -- tokyonight
@@ -40,6 +34,7 @@ return {
   {
     "catppuccin/nvim",
     lazy = true,
+    priority = 1000, -- Ensure it loads first
     name = "catppuccin",
     opts = {
       integrations = {
