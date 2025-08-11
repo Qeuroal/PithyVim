@@ -4,12 +4,6 @@ PithyVim.on_very_lazy(function()
   })
 end)
 
---{{{> Qeuroal
--- path of markdownlint.jsonc
--- local markdownlint_path = PithyVim.is_win() and os.getenv("USERPROFILE") .. "\\AppData\\Local\\nvim\\config\\markdown\\.markdownlint.jsonc" or os.getenv("HOME") .. "/.config/nvim/config/markdown/.markdownlint.jsonc"
--- local markdownlint_path = vim.fn.stdpath("config") .. (PithyVim.is_win() and "\\config\\markdown\\.markdownlint.jsonc" or "/config/markdown/.markdownlint.jsonc")
---<}}}
-
 return {
   recommended = function()
     return PithyVim.extras.wants({
