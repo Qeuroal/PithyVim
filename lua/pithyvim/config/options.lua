@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 --{{{> Qeuroal
 -- vim.g.maplocalleader = "\\"
-vim.g.maplocalleader = ";"
+vim.g.maplocalleader = "\\"
 --<}}}
 
 -- PithyVim auto format
