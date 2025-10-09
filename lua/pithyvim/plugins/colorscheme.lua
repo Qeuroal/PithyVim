@@ -37,6 +37,14 @@ return {
     priority = 1000, -- Ensure it loads first
     name = "catppuccin",
     opts = {
+      lsp_styles = {
+        underlines = {
+          errors = { "undercurl" },
+          hints = { "undercurl" },
+          warnings = { "undercurl" },
+          information = { "undercurl" },
+        },
+      },
       integrations = {
         aerial = true,
         alpha = true,
@@ -52,26 +60,14 @@ return {
         leap = true,
         lsp_trouble = true,
         mason = true,
-        markdown = true,
         mini = true,
-        native_lsp = {
-          enabled = true,
-          underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
-          },
-        },
         navic = { enabled = true, custom_bg = "lualine" },
         neotest = true,
         neotree = true,
         noice = true,
         notify = true,
-        semantic_tokens = true,
         snacks = true,
         telescope = true,
-        treesitter = true,
         treesitter_context = true,
         which_key = true,
       },
