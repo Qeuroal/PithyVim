@@ -3,7 +3,8 @@ local prios = {
   ["pithyvim.plugins.extras.test.core"] = 1,
   ["pithyvim.plugins.extras.dap.core"] = 1,
   ["pithyvim.plugins.extras.coding.nvim-cmp"] = 2,
-  ["pithyvim.plugins.extras.ui.edgy"] = 2,
+  ["pithyvim.plugins.extras.editor.neo-tree"] = 2,
+  ["pithyvim.plugins.extras.ui.edgy"] = 3,
   ["pithyvim.plugins.extras.lang.typescript"] = 5,
   ["pithyvim.plugins.extras.coding.blink"] = 5,
   ["pithyvim.plugins.extras.formatting.prettier"] = 10,
@@ -42,15 +43,7 @@ end
 ---@type string[]
 extras = PithyVim.dedup(extras)
 
-local version = vim.version()
-local v = version.major .. "_" .. version.minor
-
-local compat = { "0_9" }
-
 PithyVim.plugin.save_core()
-if vim.tbl_contains(compat, v) then
-  table.insert(extras, 1, "pithyvim.plugins.compat.nvim-" .. v)
-end
 if vim.g.vscode then
   table.insert(extras, 1, "pithyvim.plugins.extras.vscode")
 end

@@ -60,7 +60,8 @@ return {
     end,
   },
 
-  -- statusline
+  -- Displays a fancy status line with git status,
+  -- LSP diagnostics, filetype information, and more.
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -257,7 +258,7 @@ return {
 
   -- icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     lazy = true,
     opts = {
       file = {

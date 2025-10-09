@@ -1,9 +1,6 @@
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = " "
---{{{> Qeuroal
--- vim.g.maplocalleader = "\\"
 vim.g.maplocalleader = "\\"
---<}}}
 
 -- PithyVim auto format
 vim.g.autoformat = false
@@ -86,8 +83,8 @@ opt.hlsearch = true            -- highlight all matches on previous search patte
 
 opt.autowrite = true            -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
--- integration works automatically. Requires Neovim >= 0.10.0
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"     -- Sync with system clipboard
+-- integration works automatically.
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"   -- 补全时默认不选择第1项
 -- opt.wildmenu = true             -- 补全增强, 但是目前并不清楚有什么用
 opt.conceallevel = 2            -- Hide * markup for bold and italic, but not markers with substitutions
@@ -102,7 +99,7 @@ opt.fillchars = {
     diff = "╱",
     eob = " ",
 }
-opt.formatexpr = "v:lua.require'pithyvim.util'.format.formatexpr()"
+opt.formatexpr = "v:lua.PithyVim.format.formatexpr()"
 opt.formatoptions = "jcroqlnt"      -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -131,12 +128,13 @@ opt.sidescroll = 10                 -- 设置向右滚动字符数
 opt.signcolumn = "yes"              -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true                -- Don't ignore case with capitals
 opt.smartindent = true              -- Insert indents automatically
+opt.smoothscroll = true
 opt.spelllang = { "en", "cjk" }     -- 设置拼写检查的语种, 其中: "cjk" 能够保证检查英文时, 不在中文下面设置下滑线
                                     -- 可通过快捷键 <leader>us 设置拼写检查开启/关闭
 opt.splitbelow = true               -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true               -- Put new windows right of current
-opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+opt.statuscolumn = [[%!v:lua.PithyVim.statuscolumn()]]
 opt.autoindent = true               -- 设置自动缩进
 opt.cindent = true                  -- 设置使用C/C++语言的自动缩进方式
 -- opt.cinoptions=":0,g0,N-s,(0,w1"    -- 设置C/C++语言的具体缩进方式
@@ -169,19 +167,12 @@ opt.listchars:append {
     -- ahead = space,
 }
 -- opt.whichwrap = opt.whichwrap + "<,>,h,l"    -- 设置光标键跨行
-if vim.fn.has("nvim-0.10") == 1 then
-    opt.smoothscroll = true
-    opt.foldexpr = "v:lua.require'pithyvim.util'.ui.foldexpr()"
-    opt.foldmethod = "expr"
-    opt.foldtext = ""
-else
-    opt.foldmethod = "indent"
-    opt.foldtext = "v:lua.require'pithyvim.util'.ui.foldtext()"
-end
 opt.foldmarker = "{{{>,<}}}"
 opt.foldlevel = 99                      -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
                                         -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
 opt.foldenable = false                  -- 默认不折叠
+opt.foldmethod = "indent"
+opt.foldtext = ""
 
 
 -- Fix markdown indentation settings

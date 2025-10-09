@@ -31,7 +31,7 @@ return {
         version = not vim.g.pithyvim_blink_main and "*",
       },
     },
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -41,6 +41,7 @@ return {
           return PithyVim.cmp.expand(snippet)
         end,
       },
+
       appearance = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
@@ -50,6 +51,7 @@ return {
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
+
       completion = {
         accept = {
           -- experimental auto-brackets support
@@ -61,10 +63,14 @@ return {
           draw = {
             treesitter = { "lsp" },
           },
+          -- border = "rounded",
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
+          -- window = {
+          --   border = "rounded",
+          -- },
         },
         ghost_text = {
           enabled = vim.g.ai_cmp,
@@ -82,7 +88,24 @@ return {
       },
 
       cmdline = {
-        enabled = false,
+        enabled = true,
+        -- keymap = { preset = "cmdline" },
+        --{{{> Qeuroal
+        keymap = {
+          preset = "cmdline",
+          ['<C-j>'] = { 'select_next', 'fallback' },
+          ['<C-k>'] = { 'select_prev', 'fallback' },
+        },
+        --<}}}
+        completion = {
+          list = { selection = { preselect = false } },
+          menu = {
+            auto_show = function(ctx)
+              return vim.fn.getcmdtype() == ":"
+            end,
+          },
+          ghost_text = { enabled = true },
+        },
       },
 
       keymap = {
@@ -109,13 +132,13 @@ return {
       if not opts.keymap["<Tab>"] then
         if opts.keymap.preset == "super-tab" then -- super-tab
           opts.keymap["<Tab>"] = {
-            require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
-            PithyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+            require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
+            PithyVim.cmp.map({ "snippet_forward", "ai_nes", "ai_accept" }),
             "fallback",
           }
         else -- other presets
           opts.keymap["<Tab>"] = {
-            PithyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+            PithyVim.cmp.map({ "snippet_forward", "ai_nes", "ai_accept" }),
             "fallback",
           }
         end
@@ -195,8 +218,9 @@ return {
       },
       --<}}}
       sources = {
-        -- add lazydev to your completion providers
-        default = { "lazydev" },
+        per_filetype = {
+          lua = { inherit_defaults = true, "lazydev" },
+        },
         providers = {
           lazydev = {
             name = "LazyDev",

@@ -79,11 +79,13 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
+--{{{> Qeuroal
 -- save file
 -- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })  -- 按<c-s>后光标会向下移动一行
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr>", { desc = "Save File" })          -- 解决按<c-s>后光标会向下移动一行. 
                                                                                     -- 因此将 "<cmd>w<cr><esc>" 改为 "<cmd>w<cr>".
                                                                                     -- 未来解决了这个问题将重新修改.
+--<}}}
 
 --keywordprg
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
@@ -138,10 +140,12 @@ end, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    vim.diagnostic.jump({
+      count = (next and 1 or -1) * vim.v.count1,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+      float = true,
+    })
   end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
@@ -181,12 +185,12 @@ end
 if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gG", function() Snacks.lazygit( { cwd = PithyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
   map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
-  map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
-  map("n", "<leader>gL", function() Snacks.picker.git_log({ cwd = PithyVim.root.git() }) end, { desc = "Git Log" })
-  map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
 end
 
+map("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
 map("n", "<leader>gB", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
+map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
+map("n", "<leader>gL", function() Snacks.picker.git_log({ cwd = PithyVim.root.git() }) end, { desc = "Git Log" })
 map({ "n", "x" }, "<leader>gb", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
 map({"n", "x" }, "<leader>gy", function()
   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
@@ -235,16 +239,6 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- map("i", "<C-j>", "<esc>A<cr>", { desc = "cursor_down", noremap = true, silent = true } )
 -- map("i", "<C-h>", "<Left>", { desc = "cursor_left", noremap = true, silent = true } )
 -- map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true } )
-
--- native snippets. only needed on < 0.11, as 0.11 creates these by default
-if vim.fn.has("nvim-0.11") == 0 then
-  map("s", "<Tab>", function()
-    return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-  end, { expr = true, desc = "Jump Next" })
-  map({ "i", "s" }, "<S-Tab>", function()
-    return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-  end, { expr = true, desc = "Jump Previous" })
-end
 
 -- fold
 map("n", "<leader>uz", "<cmd>lua PithyVim.ui.toggleFoldmethod()<cr>", { desc = "Toggle between 'expr' and 'marker' for foldmethod settings." })
