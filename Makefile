@@ -7,6 +7,6 @@ l local:
 
 GITMERGE_INFO=merge dev
 gm gitmerge:
-	@echo ">>> GITMERGE_INFO: ${GITMERGE_INFO}."
+	@echo "\033[32m>>> GITMERGE_INFO: ${GITMERGE_INFO}.\033[0m"
 	@git switch master && git merge --no-ff -m "${GITMERGE_INFO}" dev && git push && git switch dev
 
