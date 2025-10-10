@@ -49,7 +49,7 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
---{{{> Qeuroal
+--{{{> Qeuroal: vim.g config
 -- encoding
 vim.g.encoding = "UTF-8"
 
@@ -59,7 +59,7 @@ vim.g.encoding = "UTF-8"
 vim.g.editorconfig = true
 --<}}}
 
---{{{> Qeuroal
+--{{{> Qeuroal: local variable
 local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
 if not PithyVim.is_directory(undodir) then
   vim.fn.mkdir(undodir, "p")
@@ -69,7 +69,7 @@ local space = "·"
 
 local opt = vim.opt
 
---{{{> Qeuroal
+--{{{> Qeuroal: vim.opt config
 opt.backup = false             -- creates a backup file
 opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
 opt.hidden = true              -- required to keep multiple buffers and open multiple buffers
