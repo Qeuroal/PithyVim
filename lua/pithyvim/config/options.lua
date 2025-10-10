@@ -105,7 +105,8 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true               -- Ignore case
 opt.inccommand = "nosplit"          -- preview incremental substitute
-opt.jumpoptions = "stack"           -- modify style of the jumplist to stack
+opt.jumpoptions = "view"            -- modify style of the jumplist to stack
+                                    -- stack causes the position of the previous row in the window to change during the jump
 opt.laststatus = 3                  -- global statusline
 opt.linebreak = false               -- Wrap lines at convenient points
 opt.list = false                    -- Show some invisible characters (tabs...
