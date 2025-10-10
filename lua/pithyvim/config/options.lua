@@ -49,7 +49,7 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
---{{{> Qeuroal
+--{{{> Qeuroal: vim.g config
 -- encoding
 vim.g.encoding = "UTF-8"
 
@@ -59,7 +59,7 @@ vim.g.encoding = "UTF-8"
 vim.g.editorconfig = true
 --<}}}
 
---{{{> Qeuroal
+--{{{> Qeuroal: local variable
 local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
 if not PithyVim.is_directory(undodir) then
   vim.fn.mkdir(undodir, "p")
@@ -69,6 +69,7 @@ local space = "·"
 
 local opt = vim.opt
 
+--{{{> Qeuroal: vim.opt config
 opt.backup = false             -- creates a backup file
 opt.cmdheight = 1              -- more space in the neovim command line for displaying messages
 opt.hidden = true              -- required to keep multiple buffers and open multiple buffers
@@ -80,6 +81,7 @@ opt.titlestring = "%<%F%=%l/%L - nvim"   -- what the title of the window will be
 opt.writebackup = false        -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 opt.numberwidth = 4            -- set number column width to 2 {default 4}
 opt.hlsearch = true            -- highlight all matches on previous search pattern
+--<}}}
 
 opt.autowrite = true            -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
@@ -99,6 +101,12 @@ opt.fillchars = {
     diff = "╱",
     eob = " ",
 }
+opt.foldmarker = "{{{>,<}}}"
+opt.foldlevel = 99                      -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
+                                        -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
+opt.foldmethod = "indent"
+opt.foldtext = ""
+opt.foldenable = false                  -- 默认不折叠
 opt.formatexpr = "v:lua.PithyVim.format.formatexpr()"
 opt.formatoptions = "jcroqlnt"      -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
@@ -155,6 +163,13 @@ opt.virtualedit = { "block", "onemore" }        -- Allow cursor to move where th
 opt.wildmode = "longest:full,full"  -- Command-line completion mode
 opt.winminwidth = 5                 -- Minimum window width
 opt.wrap = true                     -- Disable line wrap
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
+
+--{{{> Qeuroal
+-- listchars
 opt.listchars:append {
     tab = "│─",
     multispace = "│---",
@@ -167,30 +182,21 @@ opt.listchars:append {
     precedes = '▶',
     -- ahead = space,
 }
--- opt.whichwrap = opt.whichwrap + "<,>,h,l"    -- 设置光标键跨行
-opt.foldmarker = "{{{>,<}}}"
-opt.foldlevel = 99                      -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
-                                        -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
-opt.foldenable = false                  -- 默认不折叠
-opt.foldmethod = "indent"
-opt.foldtext = ""
 
-
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+-- -- 设置光标键跨行
+-- opt.whichwrap = opt.whichwrap + "<,>,h,l"
 
 -- disable diagnostic, enter "<leader>ud" to toggle the option
 -- default enable: pcall (vim.diagnostic.enable)
 pcall(vim.diagnostic.enable, false)
 
---{{{> diffopt
+-- diffopt
 vim.o.diffopt = vim.o.diffopt .. ",followwrap"
 vim.o.diffopt = vim.o.diffopt .. ",context:3"
 vim.o.diffopt = vim.o.diffopt .. ",algorithm:patience"
 vim.o.diffopt = vim.o.diffopt .. ",indent-heuristic"
---<}}}
 
---{{{> Qeuroal: wrap and linebreak
+-- wrap and linebreak
 opt.breakindentopt = { "shift:2", "sbr" }   -- 设置折行时的缩进量为 2 个字符，并启用 showbreak
 opt.showbreak = "↪"                         -- 可选：自定义 showbreak 的提示符
 opt.linebreak = false
@@ -199,15 +205,11 @@ opt.linebreak = false
 --                                             -- 在默认的情况下, 这些字符是 “^I!@*-+_;:,./?” 
 --                                             -- (Note: 在 Pithyvim 中默认为 “^I!@*-+;:,./?”)
 
---<}}}
-
---{{{> Qeuroal: shada
+-- -- shada
 -- opt.shada = string.gsub(opt.shada._value, "'100", "'0")   -- 将 '100 设置为 '0, 以此保证 jumplist 不共享且不保存,
 --                                                           -- 从而在每次打开 neovim 后, jumplist 都为空
 
---<}}}
-
---{{{> Qeuroal: gui
+-- gui
 vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
 
 --<}}}
