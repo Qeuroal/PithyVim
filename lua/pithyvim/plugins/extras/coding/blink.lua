@@ -89,14 +89,15 @@ return {
 
       cmdline = {
         enabled = true,
-        -- keymap = { preset = "cmdline" },
-        --{{{> Qeuroal
         keymap = {
           preset = "cmdline",
+          --{{{> Qeuroal
           ['<C-j>'] = { 'select_next', 'fallback' },
           ['<C-k>'] = { 'select_prev', 'fallback' },
+          --<}}}
+          ["<Right>"] = false,
+          ["<Left>"] = false,
         },
-        --<}}}
         completion = {
           list = { selection = { preselect = false } },
           menu = {

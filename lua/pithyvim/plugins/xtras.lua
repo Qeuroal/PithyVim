@@ -5,8 +5,9 @@ local prios = {
   ["pithyvim.plugins.extras.coding.nvim-cmp"] = 2,
   ["pithyvim.plugins.extras.editor.neo-tree"] = 2,
   ["pithyvim.plugins.extras.ui.edgy"] = 3,
-  ["pithyvim.plugins.extras.lang.typescript"] = 5,
+  ["pithyvim.plugins.extras.ai.copilot-native"] = 4,
   ["pithyvim.plugins.extras.coding.blink"] = 5,
+  ["pithyvim.plugins.extras.lang.typescript"] = 5,
   ["pithyvim.plugins.extras.formatting.prettier"] = 10,
   -- default core extra priority is 20
   -- default priority is 50
