@@ -110,7 +110,7 @@ return {
           local function enabled(feat, query)
             local f = opts[feat] or {} ---@type pithyvim.TSFeat
             return f.enable ~= false
-              and not vim.tbl_contains(f.disable or {}, lang)
+              and not (type(f.disable) == "table" and vim.tbl_contains(f.disable, lang))
               and PithyVim.treesitter.have(ft, query)
           end
 
