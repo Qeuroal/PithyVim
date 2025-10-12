@@ -394,9 +394,9 @@ function M.get_defaults()
     -- snip = {
     --   { name = "luasnip", extra = "coding.luasnip" },
     -- },
-    -- indent_ui = {
-    --   { name = "mini-indentscope", extra = "ui.mini-indentscope" },
-    -- },
+    indent_ui = {
+      { name = "mini-indentscope", extra = "ui.mini-indentscope" },
+    },
     --<}}}
   }
 
