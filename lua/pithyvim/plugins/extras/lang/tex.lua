@@ -2,10 +2,7 @@ return {
   recommended = function()
     return PithyVim.extras.wants({
       ft = { "tex", "plaintex", "bib" },
-      -- root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
-      --{{{>Qeuroal 增添 tex 文件为判断标准
-      root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml", "*.tex" },
-      --<}}}
+      root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
     })
   end,
 
