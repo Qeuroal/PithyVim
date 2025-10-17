@@ -13,7 +13,7 @@ return {
         PithyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
         return
       end
-      PithyVim.treesitter.ensure_treesitter_cli(function()
+      PithyVim.treesitter.build(function()
         TS.update(nil, { summary = true })
       end)
     end,
@@ -90,7 +90,7 @@ return {
         return not PithyVim.treesitter.have(lang)
       end, opts.ensure_installed or {})
       if #install > 0 then
-        PithyVim.treesitter.ensure_treesitter_cli(function()
+        PithyVim.treesitter.build(function()
           TS.install(install, { summary = true }):await(function()
             PithyVim.treesitter.get_installed(true) -- refresh the installed langs
           end)
