@@ -13,6 +13,8 @@ return {
         PithyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
         return
       end
+      -- make sure we're using the latest treesitter util
+      package.loaded["pithyvim.util.treesitter"] = nil
       PithyVim.treesitter.build(function()
         TS.update(nil, { summary = true })
       end)
