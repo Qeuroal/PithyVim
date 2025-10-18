@@ -3,7 +3,7 @@ _G.PithyVim = require("pithyvim.util")
 ---@class PithyVimConfig: PithyVimOptions
 local M = {}
 
-M.version = "15.7.1" -- x-release-please-version
+M.version = "1.8.0" -- x-release-please-version
 PithyVim.config = M
 
 ---@class PithyVimOptions
