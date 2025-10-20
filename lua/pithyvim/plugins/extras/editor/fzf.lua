@@ -255,8 +255,8 @@ return {
       { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
       { "<leader>sW", PithyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
       { "<leader>sw", PithyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
-      { "<leader>sW", PithyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
-      { "<leader>sw", PithyVim.pick("grep_visual", { root = false }), mode = "v", desc = "Selection (cwd)" },
+      { "<leader>sW", PithyVim.pick("grep_visual"), mode = "x", desc = "Selection (Root Dir)" },
+      { "<leader>sw", PithyVim.pick("grep_visual", { root = false }), mode = "x", desc = "Selection (cwd)" },
       { "<leader>uC", PithyVim.pick("colorschemes"), desc = "Colorscheme with Preview" },
       {
         "<leader>ss",
