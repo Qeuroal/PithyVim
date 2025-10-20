@@ -138,8 +138,8 @@ return {
       { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
       { "<leader>sW", PithyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
       { "<leader>sw", PithyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
-      { "<leader>sW", PithyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
-      { "<leader>sw", PithyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
+      { "<leader>sW", PithyVim.pick("grep_string"), mode = "x", desc = "Selection (Root Dir)" },
+      { "<leader>sw", PithyVim.pick("grep_string", { root = false }), mode = "x", desc = "Selection (cwd)" },
       { "<leader>uC", PithyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
       {
         "<leader>ss",

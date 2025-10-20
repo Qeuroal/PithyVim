@@ -25,12 +25,29 @@ end
 local extras = {} ---@type string[]
 local defaults = PithyVim.config.get_defaults()
 
+local changed = false
+local updated = {} ---@type string[]
+
 -- Add extras from LazyExtras that are not disabled
 for _, extra in ipairs(PithyVim.config.json.data.extras) do
-  local def = defaults[extra]
-  if not (def and def.enabled == false) then
-    extras[#extras + 1] = extra
+  if PithyVim.plugin.renamed_extras[extra] then
+    extra = PithyVim.plugin.renamed_extras[extra]
+    changed = true
   end
+  if PithyVim.plugin.deprecated_extras[extra] then
+    changed = true
+  else
+    updated[#updated + 1] = extra
+    local def = defaults[extra]
+    if not (def and def.enabled == false) then
+      extras[#extras + 1] = extra
+    end
+  end
+end
+
+if changed then
+  PithyVim.config.json.data.extras = updated
+  PithyVim.json.save()
 end
 
 -- Add default extras
