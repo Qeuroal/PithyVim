@@ -220,6 +220,7 @@ return {
       --<}}}
       -- find
       { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>fB", "<cmd>FzfLua buffers<cr>", desc = "Buffers (all)" },
       { "<leader>fc", PithyVim.pick.config_files(), desc = "Find Config File" },
       { "<leader>fF", PithyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>ff", PithyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
@@ -228,15 +229,19 @@ return {
       { "<leader>fR", PithyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
       { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
+      { "<leader>gd", "<cmd>FzfLua git_diff<cr>", desc = "Git Diff (hunks)" },
+      { "<leader>gl", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
+      { "<leader>gS", "<cmd>FzfLua git_stash<cr>", desc = "Git Stash" },
       -- search
       { '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
+      { "<leader>s/", "<cmd>FzfLua search_history<cr>", desc = "Search History" },
       { "<leader>sa", "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
-      { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
+      { "<leader>sb", "<cmd>FzfLua lines<cr>", desc = "Buffer Lines" },
       { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
       { "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
-      { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
-      { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Diagnostics" },
+      { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Buffer Diagnostics" },
       { "<leader>sG", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>sg", PithyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
