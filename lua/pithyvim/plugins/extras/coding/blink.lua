@@ -37,9 +37,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
       snippets = {
-        expand = function(snippet, _)
-          return PithyVim.cmp.expand(snippet)
-        end,
+        preset = "default",
       },
 
       appearance = {
@@ -63,14 +61,10 @@ return {
           draw = {
             treesitter = { "lsp" },
           },
-          -- border = "rounded",
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
-          -- window = {
-          --   border = "rounded",
-          -- },
         },
         ghost_text = {
           enabled = vim.g.ai_cmp,

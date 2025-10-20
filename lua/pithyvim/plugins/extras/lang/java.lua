@@ -169,7 +169,9 @@ return {
           },
           settings = opts.settings,
           -- enable CMP capabilities
-          capabilities = PithyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
+          capabilities = PithyVim.has("blink.cmp") and require("blink.cmp").get_lsp_capabilities() or PithyVim.has(
+            "cmp-nvim-lsp"
+          ) and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
 
         -- Existing server will be reused if the root_dir matches.
