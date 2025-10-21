@@ -110,6 +110,9 @@ return {
     },
     ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
     config = function(_, opts)
+      if opts.snippets and opts.snippets.preset == "default" then
+        opts.snippets.expand = PithyVim.cmp.expand
+      end
       -- setup compat sources
       local enabled = opts.sources.default
       for _, source in ipairs(opts.sources.compat or {}) do
