@@ -86,7 +86,7 @@ opt.hlsearch = true            -- highlight all matches on previous search patte
 opt.autowrite = true            -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically.
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"   -- 补全时默认不选择第1项
 -- opt.wildmenu = true             -- 补全增强, 但是目前并不清楚有什么用
 opt.conceallevel = 2            -- Hide * markup for bold and italic, but not markers with substitutions
