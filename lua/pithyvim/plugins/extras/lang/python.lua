@@ -58,10 +58,10 @@ return {
       },
       setup = {
         [ruff] = function()
-          PithyVim.lsp.on_attach(function(client, _)
+          Snacks.util.lsp.on({ name = ruff }, function(_, client)
             -- Disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
-          end, ruff)
+          end)
         end,
       },
     },
