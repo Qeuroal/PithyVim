@@ -239,4 +239,6 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- fold
 map("n", "<leader>uz", "<cmd>lua PithyVim.ui.toggleFoldmethod()<cr>", { desc = "Toggle between 'expr' and 'marker' for foldmethod settings." })
 
+-- lua
+map({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "Run Lua", ft = "lua" })
 
