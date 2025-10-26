@@ -101,7 +101,7 @@ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Commen
 -- lazy
 --{{{> Qeuroal: lazy group
 map("n", "<leader>ll", "<cmd>Lazy<cr>", { desc = "Lazy" })
-map("n", "<leader>le", "<cmd>LazyExtras<cr>", { desc = "LazyExtras" })
+map("n", "<leader>lx", "<cmd>LazyExtras<cr>", { desc = "LazyExtras" })
 --<}}}
 
 -- new file
