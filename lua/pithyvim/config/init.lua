@@ -397,6 +397,9 @@ function M.get_defaults()
     indent_ui = {
       { name = "mini-indentscope", extra = "ui.mini-indentscope" },
     },
+    surround = {
+      { name = "mini.surround", extra = "coding.mini-surround" },
+    }
     --<}}}
   }
 
