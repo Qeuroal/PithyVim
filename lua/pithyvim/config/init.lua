@@ -3,7 +3,7 @@ _G.PithyVim = require("pithyvim.util")
 ---@class PithyVimConfig: PithyVimOptions
 local M = {}
 
-M.version = "1.11.0" -- x-release-please-version
+M.version = "1.13.0" -- x-release-please-version
 PithyVim.config = M
 
 ---@class PithyVimOptions
@@ -52,7 +52,9 @@ local defaults = {
       dots = "󰇘",
     },
     ft = {
-      octo = "",
+      octo = " ",
+      gh = " ",
+      ["markdown.gh"] = " ",
     },
     dap = {
       Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
