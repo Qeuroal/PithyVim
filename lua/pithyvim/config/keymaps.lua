@@ -245,3 +245,6 @@ map("n", "<leader>uz", "<cmd>lua PithyVim.ui.toggleFoldmethod()<cr>", { desc = "
 -- lua
 map({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "Run Lua", ft = "lua" })
 
+-- visual
+map({"v"}, "gy", '"+y', { desc = "Yank to system clipboard" })
+
