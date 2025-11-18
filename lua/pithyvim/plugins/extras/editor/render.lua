@@ -1,11 +1,11 @@
 return {
   -- ansi render
   {
-    '0xferrous/ansi.nvim',
+    'qeuroal/ansiesc.nvim',
     cmd = { "AnsiEnable" },
     config = function()
       require('ansi').setup({
-        auto_enable = false,  -- Auto-enable for configured filetypes
+        auto_enable = true,  -- Auto-enable for configured filetypes
         filetypes = { 'log', 'ansi' },  -- Filetypes to auto-enable
         theme = "catppuccin",
       })
