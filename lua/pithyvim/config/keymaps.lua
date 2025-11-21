@@ -159,9 +159,6 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- lsp
-map("n", "<leader>cr", function() print("Restart LSP"); vim.cmd("LspRestart") end, { desc = "Restart LSP" })
-
 -- stylua: ignore start
 
 -- toggle options
