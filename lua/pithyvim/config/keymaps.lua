@@ -247,4 +247,5 @@ map({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "R
 
 -- visual
 map({"v"}, "gy", '"+y', { desc = "Yank to system clipboard" })
+map({"n"}, "gp", '"+p', { desc = "Paste from system clipboard" })
 
