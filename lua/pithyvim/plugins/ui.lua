@@ -284,7 +284,17 @@ return {
     "snacks.nvim",
     opts = {
       indent = { enabled = true },
-      input = { enabled = true },
+      --{{{> Qeuroal
+      input = {
+        enabled = true,
+        win = {
+          keys = {
+            i_ctrl_c = { "<C-c>", "cancel", mode = "i" },
+            n_ctrl_c = { "<C-c>", "cancel", mode = "n" },
+          },
+        },
+      },
+      --<}}}
       notifier = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = true },
