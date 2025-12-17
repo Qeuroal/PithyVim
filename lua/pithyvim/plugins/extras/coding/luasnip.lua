@@ -29,7 +29,6 @@ return {
     opts = {
       history = false, -- true: 允许后跳; false 反之
       delete_check_events = "TextChanged",
-      region_check_events = "InsertEnter,CursorMovedI,CursorMoved",
       exit_roots = true, -- true: 遇到 $0, 即不允许后跳; false 反之
     },
     --<}}}
