@@ -25,10 +25,14 @@ return {
         end,
       },
     },
+    --{{{> Qeuroal: snippet 结束后, 不再被允许后跳
     opts = {
-      history = true,
+      history = false, -- true: 允许后跳; false 反之
       delete_check_events = "TextChanged",
+      region_check_events = "InsertEnter,CursorMovedI,CursorMoved",
+      exit_roots = true, -- true: 遇到 $0, 即不允许后跳; false 反之
     },
+    --<}}}
   },
 
   -- add snippet_forward action
@@ -68,7 +72,18 @@ return {
     -- stylua: ignore
     keys = {
       { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      --{{{> Qeuroal: backward jump issue
+      -- { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      { "<s-tab>",
+        function()
+          local luasnip = require("luasnip")
+          if luasnip.in_snippet() and luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          end
+        end,
+        mode = { "i", "s" },
+      },
+      --<}}}
     },
   },
 
