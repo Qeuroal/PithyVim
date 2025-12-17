@@ -393,9 +393,9 @@ function M.get_defaults()
       { name = "neo-tree", extra = "editor.neo-tree" },
     },
     --{{{> Qeuroal
-    -- snip = {
-    --   { name = "luasnip", extra = "coding.luasnip" },
-    -- },
+    snip = {
+      { name = "luasnip", extra = "coding.luasnip" },
+    },
     indent_ui = {
       { name = "mini-indentscope", extra = "ui.mini-indentscope" },
     },
