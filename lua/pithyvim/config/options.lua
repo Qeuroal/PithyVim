@@ -117,7 +117,7 @@ opt.jumpoptions = "view"            -- modify style of the jumplist to stack
                                     -- stack causes the position of the previous row in the window to change during the jump
 opt.laststatus = 3                  -- global statusline
 opt.linebreak = false               -- Wrap lines at convenient points
-opt.list = false                    -- Show some invisible characters (tabs...
+opt.list = false                    -- Show some invisible characters (tabs...)
 opt.mouse = ""                      -- allow the mouse to be used in neovim
 -- opt.guicursor = "a:block"           -- set block for any mode
 opt.number = true                   -- Print line number
