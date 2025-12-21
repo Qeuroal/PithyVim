@@ -102,13 +102,14 @@ opt.fillchars = {
     eob = " ",
 }
 opt.foldmarker = "{{{>,<}}}"
-opt.foldlevel = 99                      -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
-                                        -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
+opt.foldlevel = 99                  -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
+                                    -- 99: 键入 zm 不可以折叠, 只能先使用 zM 将 foldlevel 设置为0
 opt.foldmethod = "indent"
 opt.foldtext = ""
-opt.foldenable = false                  -- 默认不折叠
+opt.foldenable = false              -- 默认不折叠
 opt.formatexpr = "v:lua.PithyVim.format.formatexpr()"
 opt.formatoptions = "jcroqlnt"      -- tcqj
+opt.textwidth = 120                 -- 行宽
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true               -- Ignore case
