@@ -141,11 +141,10 @@ function M.ensure_treesitter_cli(cb)
         vim.schedule_wrap(function(success)
           if success then
             PithyVim.info("Installed `tree-sitter-cli` with `mason.nvim`.")
-          cb(true)
-           else
-          cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
+            cb(true)
+          else
+            cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
           end
-
         end)
       )
     end
