@@ -3,10 +3,6 @@ local M = {}
 
 M._installed = nil ---@type table<string,boolean>?
 M._queries = {} ---@type table<string,boolean>
---{{{> Qeuroal
-M._installing_cli = false ---@type boolean
-M._install_callbacks = {} ---@type fun(ok:boolean, err?:string)[]
---<}}}
 
 ---@param update boolean?
 function M.get_installed(update)
@@ -135,16 +131,6 @@ function M.ensure_treesitter_cli(cb)
     return cb(true)
   end
 
-  --{{{> Qeuroal
-  -- if already installing, queue the callback
-  if M._installing_cli then
-    table.insert(M._install_callbacks, cb)
-    return
-  end
-
-  M._installing_cli = true
-  --<}}}
-
   local mr = require("mason-registry")
   mr.refresh(function()
     local p = mr.get_package("tree-sitter-cli")
@@ -153,38 +139,15 @@ function M.ensure_treesitter_cli(cb)
       p:install(
         nil,
         vim.schedule_wrap(function(success)
-          --{{{> Qeuroal
-          M._installing_cli = false
-          local ok = success
-          local err = success and nil or "Failed to install `tree-sitter-cli` with `mason.nvim`."
-          --<}}}
-
           if success then
             PithyVim.info("Installed `tree-sitter-cli` with `mason.nvim`.")
-          --{{{> Qeuroal
-          --   cb(true)
-          -- else
-          --   cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
-          --<}}}
+          cb(true)
+           else
+          cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
           end
 
-          --{{{> Qeuroal
-          -- call the original callback
-          cb(ok, err)
-
-          -- call all queued callbacks
-          for _, queued_cb in ipairs(M._install_callbacks) do
-            queued_cb(ok, err)
-          end
-          M._install_callbacks = {}
-          --<}}}
         end)
       )
-    --{{{> Qeuroal
-    else
-      M._installing_cli = false
-      cb(true)
-    --<}}}
     end
   end)
 end
