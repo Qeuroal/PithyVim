@@ -161,6 +161,11 @@ function M.ensure_treesitter_cli(cb)
 
           if success then
             PithyVim.info("Installed `tree-sitter-cli` with `mason.nvim`.")
+          --{{{> Qeuroal
+          --   cb(true)
+          -- else
+          --   cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
+          --<}}}
           end
 
           --{{{> Qeuroal
