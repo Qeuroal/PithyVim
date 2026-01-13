@@ -54,6 +54,11 @@ return {
               -- ["<C-k>"] = { "false" },
             },
           },
+          preview = {
+            keys = {
+              ["<C-c>"] = { "close", mode = { "n" } },
+            },
+          },
           --<}}}
         },
         actions = {
