@@ -61,6 +61,20 @@ return {
           },
           --<}}}
         },
+        --{{{> Qeuroal
+        sources = {
+          git_diff = {
+            win = {
+              input = {
+                keys = {
+                  ["<C-r>"] = false, -- 禁用单个 <C-r>
+                  ["<C-r><C-r>"] = { "git_restore", mode = { "n", "i" }, nowait = true },
+                },
+              },
+            },
+          },
+        },
+        --<}}}
         actions = {
           ---@param p snacks.Picker
           toggle_cwd = function(p)
