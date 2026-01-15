@@ -1,4 +1,3 @@
-*.log
 /.repro
 /.tests
 /build
@@ -6,6 +5,3 @@
 /doc/tags
 foo.*
 node_modules
-tt.*
-.DS_Store
-.aider*
