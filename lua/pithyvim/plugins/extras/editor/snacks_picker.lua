@@ -74,7 +74,7 @@ return {
             },
           },
           --{{{> follow symlinks
-          -- files = { follow = true },
+          files = { follow = true },
           -- grep = { follow = true },
           -- grep_word = { follow = true },
           --<}}}
