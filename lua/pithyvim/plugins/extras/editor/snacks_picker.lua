@@ -73,11 +73,16 @@ return {
               },
             },
           },
-          --{{{> follow symlinks
-          files = { follow = true },
-          -- grep = { follow = true },
-          -- grep_word = { follow = true },
-          --<}}}
+          files = {
+            follow = true, -- follow symlinks
+            hidden = true, -- show hidden files
+          },
+          grep = {
+            -- follow = true, -- follow symlinks
+          },
+          grep_word = {
+            -- follow = true, -- follow symlinks
+          },
         },
         --<}}}
         actions = {
