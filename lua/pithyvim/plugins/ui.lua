@@ -22,6 +22,13 @@ return {
         close_command = function(n) Snacks.bufdelete(n) end,
         -- stylua: ignore
         right_mouse_command = function(n) Snacks.bufdelete(n) end,
+        --{{{> Qeuroal: sort by directory then file name
+        sort_by = function(buffer_x, buffer_y)
+          local path_x = buffer_x.path
+          local path_y = buffer_y.path
+          return path_x < path_y
+        end,
+        --<}}}
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
