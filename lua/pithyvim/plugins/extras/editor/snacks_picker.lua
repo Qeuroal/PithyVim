@@ -74,7 +74,7 @@ return {
             },
           },
           files = {
-            follow = true, -- follow symlinks
+            follow = false, -- don't follow symlinks
             hidden = true, -- show hidden files
           },
           grep = {

@@ -22,6 +22,28 @@ return {
         close_command = function(n) Snacks.bufdelete(n) end,
         -- stylua: ignore
         right_mouse_command = function(n) Snacks.bufdelete(n) end,
+        --{{{> Qeuroal: sort by directory then file name (Files before Folders)
+        sort_by = function(buffer_x, buffer_y)
+          local path_x = buffer_x.path
+          local path_y = buffer_y.path
+          -- normalize paths
+          path_x = path_x:gsub("\\", "/")
+          path_y = path_y:gsub("\\", "/")
+          local parts_x = vim.split(path_x, "/")
+          local parts_y = vim.split(path_y, "/")
+          local n = math.min(#parts_x, #parts_y)
+          for i = 1, n do
+            if parts_x[i] ~= parts_y[i] then
+              local is_file_x = (i == #parts_x)
+              local is_file_y = (i == #parts_y)
+              if is_file_x and not is_file_y then return true end
+              if not is_file_x and is_file_y then return false end
+              return parts_x[i] < parts_y[i]
+            end
+          end
+          return #parts_x < #parts_y
+        end,
+        --<}}}
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
