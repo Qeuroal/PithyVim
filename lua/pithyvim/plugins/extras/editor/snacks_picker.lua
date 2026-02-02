@@ -79,9 +79,27 @@ return {
           },
           grep = {
             -- follow = true, -- follow symlinks
+            hidden = true,
           },
           grep_word = {
             -- follow = true, -- follow symlinks
+          },
+          select = {
+            kinds = {
+              sidekick_cli = {
+                layout = { preset = "vscode" },
+              },
+              sidekick_prompt = {
+                layout = { preset = "vscode" },
+              },
+            },
+          },
+          explorer = {
+            hidden = true,
+            layout = {
+              preset = "sidebar",
+              preview = { main = true, enabled = false },
+            },
           },
         },
         --<}}}
