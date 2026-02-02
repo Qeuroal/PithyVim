@@ -59,6 +59,13 @@ vim.g.encoding = "UTF-8"
 vim.g.editorconfig = true
 --<}}}
 
+--{{{> Qeuroal: neovide
+if vim.g.neovide then
+  vim.o.guifont = "JetBrainsMonoNL Nerd Font:h34"
+  vim.g.neovide_scale_factor = 0.3
+end
+--<}}}
+
 --{{{> Qeuroal: local variable
 local undodir = PithyVim.join_paths(get_cache_dir(), "undo")
 if not PithyVim.is_directory(undodir) then
