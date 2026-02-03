@@ -24,9 +24,9 @@ return {
 
   {
     "lervag/vimtex",
-    lazy = true, -- lazy-loading will disable inverse search
-    ft = { "tex", "plaintex", "bib", "sty" },
+    lazy = false, -- lazy-loading will disable inverse search
     --{{{> Qeuroal
+    -- ft = { "tex", "plaintex", "bib", "sty" },
     init = function ()
       vim.g.vimtex_quickfix_mode = 0
       vim.g.tex_conceal='abdmg'
