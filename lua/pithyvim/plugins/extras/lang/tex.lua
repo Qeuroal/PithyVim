@@ -24,7 +24,8 @@ return {
 
   {
     "lervag/vimtex",
-    lazy = false, -- lazy-loading will disable inverse search
+    lazy = true, -- lazy-loading will disable inverse search
+    ft = { "tex", "plaintex", "bib", "sty" },
     --{{{> Qeuroal
     init = function ()
       vim.g.vimtex_quickfix_mode = 0
