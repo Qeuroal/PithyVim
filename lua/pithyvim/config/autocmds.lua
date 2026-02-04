@@ -102,8 +102,6 @@ vim.api.nvim_create_autocmd("FileType", {
     --{{{> Qeuroal
     vim.opt_local.wrap = false -- 默认不换行
     vim.opt_local.spell = false -- 默认不检查拼写, 切换快捷键为 <leader>us. 设置默认检查为 vim.opt_local.spell = true
-    vim.opt_local.textwidth = 120 -- 确保 gw 使用 120 宽度，防止被 ftplugin 覆盖
-    -- vim.opt_local.formatoptions:remove("t") -- 强制移除自动换行，防止 ftplugin 加回
     --<}}}
   end,
 })
@@ -134,7 +132,8 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("disable_autowrap"),
   pattern = "*",
   callback = function()
-    vim.opt_local.formatoptions:remove("t")
+    vim.opt_local.textwidth = 120 -- 确保 gw 使用 120 宽度，防止被 ftplugin 覆盖
+    vim.opt_local.formatoptions:remove("t") -- 强制移除自动换行，防止 ftplugin 加回
   end,
 })
 --<}}}
