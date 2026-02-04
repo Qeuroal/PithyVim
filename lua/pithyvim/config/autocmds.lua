@@ -132,8 +132,8 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("disable_autowrap"),
   pattern = "*",
   callback = function()
-    vim.opt_local.formatoptions:remove("t") -- 强制移除自动换行，防止 ftplugin 加回
     vim.opt_local.textwidth = 120 -- 确保 gw 使用 120 宽度，防止被 ftplugin 覆盖
+    vim.opt_local.formatoptions:remove("t") -- 强制移除自动换行，防止 ftplugin 加回
   end,
 })
 --<}}}
