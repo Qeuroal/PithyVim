@@ -129,19 +129,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
---{{{> Qeuroal: Autoset indent...
---Note: 优先级: .editorconfig > this config
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("markdown_auto_indent"),
-  pattern = "markdown",
-  callback = function()
-    vim.opt_local.shiftwidth = 3
-    vim.opt_local.tabstop = 3
-    vim.opt_local.softtabstop = 3
-  end,
-})
---<}}}
-
 --{{{> Qeuroal: Force remove 't' from formatoptions for all file types to prevent auto-wrapping
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("disable_autowrap"),
