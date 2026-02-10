@@ -73,6 +73,16 @@ return {
               },
             },
           },
+          git_status = {
+            win = {
+              input = {
+                keys = {
+                  ["<C-r>"] = false, -- 禁用单个 <C-r>
+                  ["<C-r><C-r>"] = { "git_restore", mode = { "n", "i" }, nowait = true },
+                },
+              },
+            },
+          },
           files = {
             follow = false, -- don't follow symlinks
             hidden = true, -- show hidden files
