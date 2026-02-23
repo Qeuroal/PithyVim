@@ -31,6 +31,7 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      -- refs: https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
       picker = {
         win = {
           input = {
