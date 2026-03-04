@@ -11,7 +11,7 @@ local ruff = vim.g.pithyvim_python_ruff or "ruff"
 
 return {
   recommended = function()
-    return PithyVim.extras.wants({
+    return vim.fn.executable("python") == 1 or vim.fn.executable("python3") == 1 or PithyVim.extras.wants({
       ft = "python",
       root = {
         "pyproject.toml",
