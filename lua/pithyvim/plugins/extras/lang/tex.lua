@@ -1,6 +1,6 @@
 return {
   recommended = function()
-    return PithyVim.extras.wants({
+    return vim.fn.executable("latexmk") == 1 or PithyVim.extras.wants({
       ft = { "tex", "plaintex", "bib" },
       root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
     })
