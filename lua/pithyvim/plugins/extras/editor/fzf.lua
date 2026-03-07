@@ -229,7 +229,7 @@ return {
       { "<leader>fR", PithyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
       { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
-      { "<leader>gd", "<cmd>FzfLua git_diff<cr>", desc = "Git Diff (hunks)" },
+      { "<leader>gd", "<cmd>FzfLua git_diff<cr>", desc = "Git Diff (files)" },
       { "<leader>gl", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
       { "<leader>gS", "<cmd>FzfLua git_stash<cr>", desc = "Git Stash" },
