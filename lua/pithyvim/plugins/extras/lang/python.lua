@@ -38,23 +38,8 @@ return {
               logLevel = "error",
             },
           },
-          keys = {
-            {
-              "<leader>co",
-              PithyVim.lsp.action["source.organizeImports"],
-              desc = "Organize Imports",
-            },
-          },
         },
-        ruff_lsp = {
-          keys = {
-            {
-              "<leader>co",
-              PithyVim.lsp.action["source.organizeImports"],
-              desc = "Organize Imports",
-            },
-          },
-        },
+        ruff_lsp = {},
       },
       setup = {
         [ruff] = function()

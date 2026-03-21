@@ -82,6 +82,7 @@ return {
         { path = "PithyVim", words = { "PithyVim" } },
         { path = "snacks.nvim", words = { "Snacks" } },
         { path = "lazy.nvim", words = { "PithyVim" } },
+        { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
       },
     },
   },

@@ -100,6 +100,18 @@ return {
                 desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },
               { "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
                 desc = "Prev Reference", enabled = function() return Snacks.words.is_enabled() end },
+              {
+                "<leader>co",
+                PithyVim.lsp.action["source.organizeImports"],
+                desc = "Organize Imports",
+                has = "codeAction",
+                enabled = function(buf)
+                  local code_actions = vim.tbl_filter(function(action)
+                    return action:find("^source%.organizeImports%.?$")
+                  end, PithyVim.lsp.code_actions({ bufnr = buf }))
+                  return #code_actions > 0
+                end
+              },
             },
           },
           stylua = { enabled = false },
