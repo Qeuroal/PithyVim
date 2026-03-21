@@ -168,7 +168,10 @@ return {
       PithyVim.format.register(PithyVim.lsp.formatter())
 
       -- setup keymaps
-      for server, server_opts in pairs(opts.servers) do
+      local names = vim.tbl_keys(opts.servers) ---@type string[]
+      table.sort(names)
+      for _, server in ipairs(names) do
+        local server_opts = opts.servers[server]
         if type(server_opts) == "table" and server_opts.keys then
           require("pithyvim.plugins.lsp.keymaps").set({ name = server ~= "*" and server or nil }, server_opts.keys)
         end

@@ -1,3 +1,13 @@
+if pithyvim_docs then
+  -- LSP Server to use for TypeScript.
+  ---@type "vtsls" | "tsgo"
+  vim.g.pithyvim_ts_lsp = "vtsls" -- currently the default
+
+  -- To use the newer, much faster `tsgo` LSP server, either:
+  -- * enable the `tsgo` extra, or
+  -- * set `vim.g.pithyvim_ts_lsp = "tsgo"` in your `options.lua`
+end
+
 local extra = PithyVim.config.register_defaults("ts_lsp", {
   { name = "vtsls", extra = "lang.typescript.vtsls" },
   { name = "tsgo", extra = "lang.typescript.tsgo" },

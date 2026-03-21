@@ -475,36 +475,10 @@ function M.get_defaults()
     table.insert(checks.explorer, 1, table.remove(checks.explorer, 2))
   end
 
-  default_extras = {}
-  for name, check in pairs(checks) do
-    local valid = {} ---@type string[]
-    for _, extra in ipairs(check) do
-      if extra.enabled ~= false then
-        valid[#valid + 1] = extra.name
-      end
-    end
-    local origin = "default"
-    local use = vim.g["pithyvim_" .. name]
-    use = vim.tbl_contains(valid, use or "auto") and use or nil
-    origin = use and "global" or origin
-    for _, extra in ipairs(use and {} or check) do
-      if extra.enabled ~= false and PithyVim.has_extra(extra.extra) then
-        use = extra.name
-        break
-      end
-    end
-    origin = use and "extra" or origin
-    use = use or valid[1]
-    for _, extra in ipairs(check) do
-      local import = "pithyvim.plugins.extras." .. extra.extra
-      extra = vim.deepcopy(extra)
-      extra.enabled = extra.name == use
-      if extra.enabled then
-        extra.origin = origin
-      end
-      default_extras[import] = extra
-    end
+  for name, extras in pairs(checks) do
+    M.register_defaults(name, extras)
   end
+
   return default_extras
 end
 

@@ -41,7 +41,7 @@ return {
                 parameterTypes = { enabled = true },
                 variableTypes = { enabled = true },
                 propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = false },
                 enumMemberValues = { enabled = true },
               },
             },
