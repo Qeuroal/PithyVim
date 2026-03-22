@@ -213,8 +213,8 @@ map("n", "<leader>L", function() PithyVim.news.changelog() end, { desc = "PithyV
 -- floating terminal
 map("n", "<leader>ft", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
 map("n", "<leader>fT", function() Snacks.terminal(nil, { cwd = PithyVim.root() }) end, { desc = "Terminal (Root Dir)" })
-map({"n","t"}, "<c-/>",function() Snacks.terminal.focus(nil, { cwd = PithyVim.root() }) end, { desc = "Terminal (Root Dir)" })
-map({"n","t"}, "<c-_>",function() Snacks.terminal.focus(nil, { cwd = PithyVim.root() }) end, { desc = "which_key_ignore" })
+map({"n","t"}, "<c-/>",function() Snacks.terminal.focus() end, { desc = "Terminal (Root Dir)" })
+map({"n","t"}, "<c-_>",function() Snacks.terminal.focus() end, { desc = "which_key_ignore" })
 -- map({"n","t"}, "<c-/>",function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
 -- map({"n","t"}, "<c-_>",function() Snacks.terminal() end, { desc = "which_key_ignore" })
 
