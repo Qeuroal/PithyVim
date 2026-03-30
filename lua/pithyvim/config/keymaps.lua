@@ -242,7 +242,11 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true } )
 
 -- fold
-map("n", "<leader>cz", function() PithyVim.toggleFoldmethod() end, { desc = "Toggle Foldmethod" })
+-- map("n", "<leader>cz", function() PithyVim.toggleFoldmethod() end, { desc = "Toggle Foldmethod" })
+Snacks.toggle.option("foldmethod", { name = "Fold Method", on = "expr", off = "marker" }):map("<leader>tz")
+
+-- clipboard
+Snacks.toggle.option("clipboard", { name = "Clipboard Sync", on = "unnamedplus", off = "" }):map("<leader>tc")
 
 -- lua
 map({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "Run Lua", ft = "lua" })
