@@ -78,6 +78,7 @@ return {
           { "<leader>gh", group = "hunks" },
           --{{{> Qeuroal: groups
           { "<leader>l", group = "lazy" },
+          { "<leader>t", group = "toggle" },
           --<}}}
           { "<leader>q", group = "quit/session" },
           { "<leader>s", group = "search" },
