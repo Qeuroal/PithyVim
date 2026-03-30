@@ -242,7 +242,7 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- map("i", "<C-l>", "<Right>", { desc = "cursor_right", noremap = true, silent = true } )
 
 -- fold
-Snacks.toggle.option("foldmethod", { name = "Marker Fold Method", on = "expr", off = "marker" }):map("<leader>tz")
+Snacks.toggle.option("foldmethod", { name = "Expr Fold Method", on = "expr", off = "marker" }):map("<leader>tz")
 
 -- clipboard
 Snacks.toggle.option("clipboard", { name = "Clipboard Sync", on = "unnamedplus", off = "" }):map("<leader>tc")
