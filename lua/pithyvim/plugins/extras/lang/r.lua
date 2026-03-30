@@ -2,7 +2,7 @@ return {
   recommended = function()
     return PithyVim.extras.wants({
       ft = "r",
-      root = { "*.R", "*.Rmd", "*qmd" },
+      root = { "*.R", "*.Rmd", "*.qmd" },
     })
   end,
   {

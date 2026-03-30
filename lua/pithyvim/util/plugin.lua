@@ -28,6 +28,7 @@ M.deprecated_extras = {
 }
 M.renamed_extras = {
   ["pithyvim.plugins.extras.lang.omnisharp"] = "pithyvim.plugins.extras.lang.dotnet",
+  ["pithyvim.plugins.extras.formatting.biome"] = "pithyvim.plugins.extras.lang.typescript.biome",
 }
 
 M.deprecated_modules = {}
@@ -110,13 +111,41 @@ function M.fix_imports()
       )
       spec.import = rename
     end
-    local dep = M.deprecated_extras[spec and spec.import]
+    local dep = M.deprecated_extras[spec.import]
     if dep then
       dep = dep .. "\n" .. "Please remove the extra from `pithyvim.json` to hide this warning."
       PithyVim.warn(dep, { title = "PithyVim", once = true, stacktrace = true, stacklevel = 6 })
       return false
     end
+
+    local modname = spec.import
+    if type(modname) == "string" and vim.startswith(modname, "pithyvim.plugins.extras.") then
+      M.single_import(spec)
+    end
   end)
+end
+
+---@param spec LazySpecImport
+function M.single_import(spec)
+  local modname = spec.import
+  if type(modname) ~= "string" then
+    return
+  end
+  spec.name = modname
+  spec.import = function()
+    local modinfo = vim.loader.find(modname)[1]
+    local modpath = modinfo and modinfo.modpath
+    local mod, err = loadfile(modpath)
+    if mod then
+      local ret, foo = mod()
+      if foo then
+        return nil, "Spec module returned more than one value. Expected a single value."
+      end
+      return ret
+    else
+      return nil, err
+    end
+  end
 end
 
 function M.fix_renames()
