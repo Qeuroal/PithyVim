@@ -61,8 +61,8 @@ vim.g.editorconfig = true
 
 --{{{> Qeuroal: neovide
 if vim.g.neovide then
-  vim.o.guifont = "JetBrainsMonoNL Nerd Font:h34"
-  vim.g.neovide_scale_factor = 0.3
+  vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
+  vim.g.neovide_scale_factor = 0.9
 end
 --<}}}
 
@@ -216,9 +216,6 @@ opt.linebreak = false
 -- -- shada
 -- opt.shada = string.gsub(opt.shada._value, "'100", "'0")   -- 将 '100 设置为 '0, 以此保证 jumplist 不共享且不保存,
 --                                                           -- 从而在每次打开 neovim 后, jumplist 都为空
-
--- gui
-vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
 
 --<}}}
 

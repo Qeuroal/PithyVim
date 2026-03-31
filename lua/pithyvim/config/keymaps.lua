@@ -250,8 +250,11 @@ Snacks.toggle.option("clipboard", { name = "Clipboard Sync", on = "unnamedplus",
 -- lua
 map({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "Run Lua", ft = "lua" })
 
+--{{{> Qeuroal
 -- visual
 map({"v"}, "gy", '"+y', { desc = "Yank to system clipboard" })
 map({"n"}, "gp", '"+p', { desc = "Paste from system clipboard" })
 map({"n"}, "gP", '"+P', { desc = "Paste from system clipboard" })
+--<}}}
+
 
