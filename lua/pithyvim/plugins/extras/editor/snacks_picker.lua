@@ -153,8 +153,8 @@ return {
       { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
       { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
       -- Grep
-      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-      { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+      { "<leader>sB", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>sb", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       { "<leader>sG", PithyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>sg", PithyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
       { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
@@ -221,10 +221,11 @@ return {
             { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
             { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
             { "<leader>ss", function() Snacks.picker.lsp_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
+            { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
             --{{{ Qeuroal
             { "<leader>'", function() Snacks.picker.lsp_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Symbols", has = "documentSymbol" },
+            { "<leader>\"", function() Snacks.picker.lsp_workspace_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
             --}}}
-            { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols({ filter = PithyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols", has = "workspace/symbols" },
             { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming", has = "callHierarchy/incomingCalls" },
             { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing", has = "callHierarchy/outgoingCalls" },
           },
