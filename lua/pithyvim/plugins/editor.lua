@@ -74,9 +74,11 @@ return {
           { pattern = "copy", icon = "󰆏 ", color = "cyan" },
           { pattern = "jump", icon = " ", color = "yellow" },
           { pattern = "keyword", icon = " ", color = "blue" },
+          { pattern = "keymaps", icon = "󱥰 ", color = "purple" },
           { pattern = "log", icon = "󰋚 ", color = "blue" },
           { pattern = "history", icon = "󰋚 ", color = "blue" },
           { pattern = "pithy", icon = "󰛓 ", color = "azure" },
+          { pattern = "buffer", icon = " ", color = "blue" },
         },
       },
       --<}}}
