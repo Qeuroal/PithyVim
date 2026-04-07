@@ -72,6 +72,7 @@ return {
           -- 只要 desc 中包含 "pattern", 就自动使用这个图标
           { pattern = "explorer", icon = " ", color = "blue" },
           { pattern = "copy", icon = "󰆏 ", color = "cyan" },
+          { pattern = "paste", icon = "󰆒 ", color = "cyan" },
           { pattern = "jump", icon = " ", color = "yellow" },
           { pattern = "keyword", icon = " ", color = "blue" },
           { pattern = "keymaps", icon = "󱥰 ", color = "purple" },
