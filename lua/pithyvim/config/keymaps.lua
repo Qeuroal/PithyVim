@@ -108,8 +108,8 @@ map("n", "<leader>le", "<cmd>LazyExtras<cr>", { desc = "LazyExtras" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- 将当前文件和所在目录的绝对路径复制到系统剪贴板
-map("n", "<leader>fY", function() local path = vim.fn.expand("%:p:h") vim.fn.setreg("+", path) vim.notify('Copied directory to clipboard: ' .. path) end, { desc = "Copy current directory to clipboard" })
-map("n", "<leader>fy", function() local path = vim.fn.expand("%:p") vim.fn.setreg("+", path) vim.notify('Copied directory to clipboard: ' .. path) end, { desc = "Copy current directory to clipboard" })
+map("n", "<leader>fY", function() local path = vim.fn.expand("%:p") vim.fn.setreg("+", path) vim.notify('Copied file path: ' .. path) end, { desc = "Copy current file path" })
+map("n", "<leader>fy", function() local path = vim.fn.expand("%:p:h") vim.fn.setreg("+", path) vim.notify('Copied directory: ' .. path) end, { desc = "Copy current directory path" })
 
 -- location list
 map("n", "<leader>xl", function()
