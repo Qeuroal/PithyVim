@@ -66,6 +66,22 @@ return {
     opts = {
       preset = "helix",
       defaults = {},
+      --{{{> Qeuroal: icons
+      icons = {
+        rules = {
+          -- 只要 desc 中包含 "pattern", 就自动使用这个图标
+          { pattern = "explorer", icon = " ", color = "blue" },
+          { pattern = "copy", icon = "󰆏 ", color = "cyan" },
+          { pattern = "jump", icon = " ", color = "yellow" },
+          { pattern = "keyword", icon = " ", color = "blue" },
+          { pattern = "keymaps", icon = "󱥰 ", color = "purple" },
+          { pattern = "log", icon = "󰋚 ", color = "blue" },
+          { pattern = "history", icon = "󰋚 ", color = "blue" },
+          { pattern = "pithy", icon = "󰛓 ", color = "azure" },
+          { pattern = "buffer", icon = " ", color = "blue" },
+        },
+      },
+      --<}}}
       spec = {
         {
           mode = { "n", "x" },
