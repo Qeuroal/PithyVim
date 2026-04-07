@@ -68,6 +68,9 @@ return {
             win = {
               input = {
                 keys = {
+                  ["<Tab>"] = false, -- 禁用 <Tab>
+                  ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
+                  ["<a-Tab>"] = { "git_stage", mode = { "n", "i" } },
                   ["<C-r>"] = false, -- 禁用单个 <C-r>
                   ["<C-r><C-r>"] = { "git_restore", mode = { "n", "i" }, nowait = true },
                 },
@@ -78,6 +81,8 @@ return {
             win = {
               input = {
                 keys = {
+                  ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
+                  ["<a-Tab>"] = { "git_stage", mode = { "n", "i" } },
                   ["<C-r>"] = false, -- 禁用单个 <C-r>
                   ["<C-r><C-r>"] = { "git_restore", mode = { "n", "i" }, nowait = true },
                 },
