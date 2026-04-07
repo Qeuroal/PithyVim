@@ -59,9 +59,9 @@ vim.g.encoding = "UTF-8"
 vim.g.editorconfig = true
 --<}}}
 
---{{{> Qeuroal: neovide
+--{{{> Qeuroal: gui
+vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
 if vim.g.neovide then
-  vim.o.guifont = "JetBrainsMonoNL Nerd Font:h20"
   vim.g.neovide_scale_factor = 0.9
 end
 --<}}}
