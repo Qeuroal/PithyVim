@@ -82,7 +82,7 @@ map("i", ";", ";<c-g>u")
 --{{{> Qeuroal
 -- save file
 -- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })  -- 按<c-s>后光标会向下移动一行
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr>", { desc = "Save File" })          -- 解决按<c-s>后光标会向下移动一行. 
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr>", { desc = "Save File" })          -- 解决按<c-s>后光标会向下移动一行.
                                                                                     -- 因此将 "<cmd>w<cr><esc>" 改为 "<cmd>w<cr>".
                                                                                     -- 未来解决了这个问题将重新修改.
 --<}}}
@@ -110,6 +110,9 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 -- 将当前文件和所在目录的绝对路径复制到系统剪贴板
 map("n", "<leader>fy", function() local path = vim.fn.expand("%:p") vim.fn.setreg("+", path) vim.notify('Copied file path: ' .. path) end, { desc = "Copy file path" })
 map("n", "<leader>fY", function() local path = vim.fn.expand("%:p:h") vim.fn.setreg("+", path) vim.notify('Copied directory: ' .. path) end, { desc = "Copy directory path" })
+
+-- 复制并打印最终 .editorconfig 规则
+map("n", "<leader>fC", function() vim.notify('Config rules:' .. vim.inspect(vim.b.editorconfig)) end, { desc = "Show editorconfig rules" })
 
 -- location list
 map("n", "<leader>xl", function()
