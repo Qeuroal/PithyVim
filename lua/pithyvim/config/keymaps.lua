@@ -169,8 +169,8 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- stylua: ignore start
 
 -- toggle options
-PithyVim.format.snacks_toggle():map("<leader>uf")
-PithyVim.format.snacks_toggle(true):map("<leader>uF")
+PithyVim.format.snacks_toggle():map("<leader>uF")
+PithyVim.format.snacks_toggle(true):map("<leader>uf")
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
