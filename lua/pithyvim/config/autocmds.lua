@@ -128,4 +128,29 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+--{{{> Qeuroal: CamelToSnake and SnakeToCamel
+vim.api.nvim_create_user_command("CamelToSnake", function(opts)
+  for line = opts.line1, opts.line2 do
+    local text = vim.fn.getline(line)
+
+    text = text:gsub("([A-Z]+)([A-Z][a-z])", "%1_%2")
+    text = text:gsub("([a-z0-9])([A-Z])", "%1_%2")
+    text = text:lower()
+
+    vim.fn.setline(line, text)
+  end
+end, { range = true })
+
+vim.api.nvim_create_user_command("SnakeToCamel", function(opts)
+  for line = opts.line1, opts.line2 do
+    local text = vim.fn.getline(line)
+
+    text = text:gsub("_([a-zA-Z0-9])", function(c)
+      return c:upper()
+    end)
+
+    vim.fn.setline(line, text)
+  end
+end, { range = true })
+--<}}}
 
