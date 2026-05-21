@@ -48,7 +48,7 @@ end, { desc = "Delete Buffer" })
 map("n", "<leader>bo", function()
   Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
-map("n", "<leader>bi", function()∂
+map("n", "<leader>bi", function()
   Snacks.bufdelete.invisible()
 end, { desc = "Delete Invisible Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
