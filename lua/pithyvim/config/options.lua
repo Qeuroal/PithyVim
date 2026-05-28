@@ -101,12 +101,12 @@ opt.confirm = true              -- Confirm to save changes before exiting modifi
 opt.cursorline = true           -- Enable highlighting of the current line
 opt.expandtab = true            -- Use spaces instead of tabs
 opt.fillchars = {
-    foldopen = "",
-    foldclose = "",
-    fold = " ",
-    foldsep = " ",
-    diff = "╱",
-    eob = " ",
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 }
 opt.foldmarker = "{{{>,<}}}"
 opt.foldlevel = 99                  -- 0: 键入 zm 可以折叠, 但是只会折叠一层, 必须使用zR设置层次折叠
@@ -179,16 +179,16 @@ vim.g.markdown_recommended_style = 0
 --{{{> Qeuroal
 -- listchars
 opt.listchars:append {
-    tab = "│─",
-    multispace = "│---",
-    leadmultispace = "│---",
-    lead = "-",
-    trail = space,
-    nbsp = "%",
-    eol = '⤶',
-    extends = '◀',
-    precedes = '▶',
-    -- ahead = space,
+  tab = "│─",
+  multispace = "│---",
+  leadmultispace = "│---",
+  lead = "-",
+  trail = space,
+  nbsp = "%",
+  eol = '⤶',
+  extends = '◀',
+  precedes = '▶',
+  -- ahead = space,
 }
 
 -- -- 设置光标键跨行
