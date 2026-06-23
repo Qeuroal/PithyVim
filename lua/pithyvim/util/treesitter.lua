@@ -3,7 +3,9 @@ local M = {}
 
 M._installed = nil ---@type table<string,boolean>?
 M._queries = {} ---@type table<string,boolean>
+--{{{> Qeuroal
 M._ts_cli_callbacks = nil ---@type fun(ok:boolean, err?:string)[]?
+--<}}}
 
 ---@param update boolean?
 function M.get_installed(update)
@@ -122,6 +124,7 @@ function M.ensure_treesitter_cli(cb)
     return cb(true)
   end
 
+  --{{{> Qeuroal
   if M._ts_cli_callbacks then
     M._ts_cli_callbacks[#M._ts_cli_callbacks + 1] = cb
     return
@@ -138,20 +141,26 @@ function M.ensure_treesitter_cli(cb)
       callback(ok, err)
     end
   end
+  --<}}}
 
   -- try installing with mason
   if not pcall(require, "mason") then
+    --{{{> Qeuroal
     return done(false, "`mason.nvim` is disabled in your config, so we cannot install it automatically.")
+    --<}}}
   end
 
   -- check again since we might have installed it already
   if vim.fn.executable("tree-sitter") == 1 then
+    --{{{> Qeuroal
     return done(true)
+    --<}}}
   end
 
   local mr = require("mason-registry")
   mr.refresh(function()
     local p = mr.get_package("tree-sitter-cli")
+    --{{{> Qeuroal
     if p:is_installed() then
       return done(true)
     elseif p:is_installing() then
@@ -162,15 +171,20 @@ function M.ensure_treesitter_cli(cb)
         done(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
       end)
     else
+    --<}}}
       PithyVim.info("Installing `tree-sitter-cli` with `mason.nvim`...")
       p:install(
         nil,
         vim.schedule_wrap(function(success)
           if success then
             PithyVim.info("Installed `tree-sitter-cli` with `mason.nvim`.")
+            --{{{> Qeuroal
             done(true)
+            --<}}}
           else
+            --{{{> Qeuroal
             done(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
+            --<}}}
           end
         end)
       )
