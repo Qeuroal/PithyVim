@@ -36,6 +36,11 @@ return {
     priority = 1000, -- Ensure it loads first
     name = "catppuccin",
     opts = {
+      custom_highlights = function(colors)
+        return {
+          WinSeparator = { fg = colors.blue, bg = "NONE" }, -- colors.sapphire, colors.overlay2
+        }
+      end,
       lsp_styles = {
         underlines = {
           errors = { "undercurl" },
