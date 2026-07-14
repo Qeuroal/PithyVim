@@ -69,6 +69,11 @@ return {
       ["moduleName"] = "catppuccin",
       ["setup"] = {
         flavour = "macchiato", -- latte, frappe, macchiato, mocha
+        custom_highlights = function(colors)
+          return {
+            WinSeparator = { fg = colors.blue, bg = "NONE" }, -- colors.overlay2
+          }
+        end,
       },
     }
   },
