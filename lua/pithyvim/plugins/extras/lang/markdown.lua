@@ -44,6 +44,22 @@ return {
     "mason-org/mason.nvim",
     opts = { ensure_installed = { "markdownlint-cli2", "markdown-toc" } },
   },
+  --{{{> Qeuroal
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "latex" } },
+  },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      image = {
+        enabled = true,
+        force = false,
+        math = { enabled = true },
+      },
+    },
+  },
+  --<}}}
   {
     "nvimtools/none-ls.nvim",
     optional = true,
@@ -107,6 +123,9 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
+      --{{{> Qeuroal
+      latex = { enabled = false },
+      --<}}}
       code = {
         sign = false,
         width = "block",
@@ -123,7 +142,6 @@ return {
         --{{{> Qeuroal
         enabled = true,
         render_modes = false,
-        position = 'inline',
         unchecked = {
           icon = '󰄱 ',
           highlight = 'RenderMarkdownUnchecked',
