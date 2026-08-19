@@ -47,7 +47,20 @@ return {
   --{{{> Qeuroal
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "latex" } },
+    opts = function(_, opts)
+      if vim.fn.executable("tree-sitter") ~= 1 then
+        return
+      end
+
+      local output = vim.trim(vim.fn.system({ "tree-sitter", "--version" }))
+      local version = vim.version.parse(output)
+      if version and vim.version.ge(version, { 0, 26, 1 }) then
+        opts.ensure_installed = opts.ensure_installed or {}
+        if not vim.tbl_contains(opts.ensure_installed, "latex") then
+          table.insert(opts.ensure_installed, "latex")
+        end
+      end
+    end,
   },
   {
     "folke/snacks.nvim",
