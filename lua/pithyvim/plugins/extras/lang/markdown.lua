@@ -52,8 +52,13 @@ return {
         return
       end
 
-      local output = vim.trim(vim.fn.system({ "tree-sitter", "--version" }))
-      local version = vim.version.parse(output)
+      local result = vim.system({ "tree-sitter", "--version" }, { text = true }):wait()
+      if result.code ~= 0 then
+        return
+      end
+
+      local version_text = (result.stdout or ""):match("tree%-sitter%s+(%d+%.%d+%.%d+)")
+      local version = version_text and vim.version.parse(version_text)
       if version and vim.version.ge(version, { 0, 26, 1 }) then
         opts.ensure_installed = opts.ensure_installed or {}
         if not vim.tbl_contains(opts.ensure_installed, "latex") then

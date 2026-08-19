@@ -287,6 +287,8 @@ return {
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
     opts = {
+      -- Prefer tools already available in the user's shell PATH.
+      PATH = "append",
       ensure_installed = {
         "stylua",
         "shfmt",
