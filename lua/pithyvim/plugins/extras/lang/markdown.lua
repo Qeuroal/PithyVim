@@ -69,6 +69,23 @@ return {
   },
   {
     "folke/snacks.nvim",
+    init = function()
+      local Placement = require("snacks.image.placement")
+      if rawget(Placement, "_pithyvim_multiline_source") then
+        return
+      end
+      rawset(Placement, "_pithyvim_multiline_source", true)
+      local render = Placement._render
+
+      function Placement:_render(extmarks)
+        if self.hidden then
+          for _, extmark in ipairs(extmarks) do
+            extmark.conceal_lines = nil
+          end
+        end
+        return render(self, extmarks)
+      end
+    end,
     opts = {
       image = {
         enabled = true,
