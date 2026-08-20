@@ -97,6 +97,7 @@ return {
           { pattern = "highlight", icon = " ", color = "blue" },
           { pattern = "document_symbol", icon = " ", color = "blue" },
           { pattern = "method", icon = " ", color = "blue" },
+          { pattern = "align", icon = " ", color = "blue" },
         },
       },
       --<}}}

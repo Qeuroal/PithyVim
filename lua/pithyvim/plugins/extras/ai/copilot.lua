@@ -19,9 +19,31 @@ return {
       },
       panel = { enabled = false },
       filetypes = {
-        markdown = true,
-        help = true,
+        ["*"] = true,
+        ["markdown"] = true,
+        ["help"] = true,
       },
+      --{{{> Qeuroal
+      should_attach = function(_, bufname)
+        local blacklist = {
+          "cookie",
+          "cookies",
+          "%.env",
+          "token",
+          "secret",
+          "credential",
+          "config",
+        }
+
+        for _, pattern in ipairs(blacklist) do
+          if string.match(bufname:lower(), pattern) then
+            return false
+          end
+        end
+
+        return true
+      end,
+      --<}}}
     },
   },
 

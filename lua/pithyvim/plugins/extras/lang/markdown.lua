@@ -44,6 +44,40 @@ return {
     "mason-org/mason.nvim",
     opts = { ensure_installed = { "markdownlint-cli2", "markdown-toc" } },
   },
+  --{{{> Qeuroal
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      if vim.fn.executable("tree-sitter") ~= 1 then
+        return
+      end
+
+      local result = vim.system({ "tree-sitter", "--version" }, { text = true }):wait()
+      if result.code ~= 0 then
+        return
+      end
+
+      local version_text = (result.stdout or ""):match("tree%-sitter%s+(%d+%.%d+%.%d+)")
+      local version = version_text and vim.version.parse(version_text)
+      if version and vim.version.ge(version, { 0, 26, 1 }) then
+        opts.ensure_installed = opts.ensure_installed or {}
+        if not vim.tbl_contains(opts.ensure_installed, "latex") then
+          table.insert(opts.ensure_installed, "latex")
+        end
+      end
+    end,
+  },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      image = {
+        enabled = true,
+        force = false,
+        math = { enabled = true },
+      },
+    },
+  },
+  --<}}}
   {
     "nvimtools/none-ls.nvim",
     optional = true,
@@ -107,6 +141,9 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
+      --{{{> Qeuroal
+      latex = { enabled = false },
+      --<}}}
       code = {
         sign = false,
         width = "block",
@@ -123,7 +160,6 @@ return {
         --{{{> Qeuroal
         enabled = true,
         render_modes = false,
-        position = 'inline',
         unchecked = {
           icon = '󰄱 ',
           highlight = 'RenderMarkdownUnchecked',
