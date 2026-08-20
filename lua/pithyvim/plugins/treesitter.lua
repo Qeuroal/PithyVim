@@ -88,7 +88,10 @@ return {
 
       -- install missing parsers
       local install = vim.tbl_filter(function(lang)
-        return not PithyVim.treesitter.have(lang)
+        --{{{> Qeuroal
+        -- return not PithyVim.treesitter.have(lang)
+        return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
+        --<}}}
       end, opts.ensure_installed or {})
       if #install > 0 then
         PithyVim.treesitter.build(function()
