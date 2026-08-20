@@ -58,6 +58,28 @@ return {
   {
     "folke/sidekick.nvim",
     opts = function()
+      --{{{> Qeuroal
+      local status = require("sidekick.status")
+      if not status._pithyvim_limit_handler then
+        local on_status = status.on_status
+        local notified = false
+
+        status.on_status = function(err, res, ctx)
+          local message = res and res.message or ""
+          if message:lower():find("completions limit reached", 1, true) then
+            require("sidekick.nes").disable()
+            if not notified then
+              notified = true
+              PithyVim.warn("Copilot completions limit reached. Sidekick NES has been disabled.")
+            end
+            return
+          end
+          return on_status(err, res, ctx)
+        end
+        status._pithyvim_limit_handler = true
+      end
+      --<}}}
+
       -- Accept inline suggestions or next edits
       PithyVim.cmp.actions.ai_nes = function()
         local Nes = require("sidekick.nes")
