@@ -10,4 +10,4 @@
 - 个性化
 
    - 默认不检查拼写
-   - 颜色设置 (onedarkpro)
+   - 颜色设置 (catppuccin)
