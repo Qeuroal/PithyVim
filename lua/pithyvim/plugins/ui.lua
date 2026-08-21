@@ -320,7 +320,9 @@ return {
       --<}}}
       notifier = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true },
+      --{{{> Qeuroal
+      scroll = { enabled = false },
+      --<}}}
       statuscolumn = { enabled = false }, -- we set this in options.lua
       toggle = { map = PithyVim.safe_keymap_set },
       words = { enabled = true },
