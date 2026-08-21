@@ -1,3 +1,4 @@
+--{{{> Qeuroal
 ---@module "luassert"
 
 local PithyVim = require("pithyvim.util")
@@ -28,3 +29,4 @@ describe("util", function()
     assert.are.equal(2, second())
   end)
 end)
+--<}}}

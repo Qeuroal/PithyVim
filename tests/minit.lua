@@ -1,5 +1,6 @@
 #!/usr/bin/env -S nvim -l
 
+--{{{> Qeuroal
 vim.env.LAZY_STDPATH = ".tests"
 vim.env.LAZY_PATH = vim.env.LAZY_PATH or vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
 
@@ -18,3 +19,4 @@ require("lazy.minit").setup({
     { "nvim-mini/mini.test", name = "mini.test" },
   },
 })
+--<}}}

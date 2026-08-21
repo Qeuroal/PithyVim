@@ -18,6 +18,13 @@ function M.get_installed(update)
   return M._installed or {}
 end
 
+--{{{> Qeuroal
+---@param lang string
+function M.have_parser(lang)
+  return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) > 0
+end
+--<}}}
+
 ---@param lang string
 ---@param query string
 function M.have_query(lang, query)
