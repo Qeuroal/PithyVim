@@ -1,0 +1,6 @@
+describe("source", function()
+  it("does not contain dd() calls", function()
+    local result = vim.system({ "rg", "--line-number", "\\bdd\\(", "lua" }, { text = true }):wait()
+    assert.are.equal(1, result.code, "Remove dd() calls:\n" .. (result.stdout or ""))
+  end)
+end)
