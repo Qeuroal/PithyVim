@@ -1,9 +1,12 @@
 .PHONY: l local \
-	r restore \
-	gm gitmerge
+	gm gitmerge \
+	t test
 
 l local:
 	@cp -rf ./lua ~/.local/share/nvim/lazy/PithyVim/
+
+t test:
+	@bash scripts/test
 
 GITMERGE_INFO ?=
 gm gitmerge:
@@ -13,4 +16,3 @@ ifdef GITMERGE_INFO
 else
 	@git checkout master && git merge --no-ff -m "merge dev" dev && git push && git checkout dev
 endif
-

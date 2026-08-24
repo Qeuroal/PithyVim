@@ -90,7 +90,7 @@ return {
       local install = vim.tbl_filter(function(lang)
         --{{{> Qeuroal
         -- return not PithyVim.treesitter.have(lang)
-        return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
+        return not PithyVim.treesitter.have_parser(lang)
         --<}}}
       end, opts.ensure_installed or {})
       if #install > 0 then

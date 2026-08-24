@@ -1,0 +1,277 @@
+*PithyVim.txt*                                                     PithyVim docs
+                                       For Neovim    Last change: 2026 August 21
+
+==============================================================================
+Table of Contents                                  *PithyVim-table-of-contents*
+
+  - Features                                                |PithyVim-features|
+  - Requirements                                        |PithyVim-requirements|
+  - Getting Started                                  |PithyVim-getting-started|
+  - File Structure                                    |PithyVim-file-structure|
+  - Defaults                                                |PithyVim-defaults|
+  - Keymaps                                                |PithyVim-keymaps|
+  - Extras                                                  |PithyVim-extras|
+  - Testing                                                |PithyVim-testing|
+  - Configuration                                      |PithyVim-configuration|
+
+
+PithyVim is a personal Neovim configuration built on lazy.nvim.  It keeps the
+the familiar lazy.nvim module layout while adding Qeuroal's editor defaults,
+Markdown/Notebook support, and local test coverage.
+
+
+FEATURES                                                    *PithyVim-features*
+
+- Lazy-loaded plugin specifications with optional language and UI extras
+- Catppuccin, TokyoNight, Everforest, and OneDarkPro color scheme registry
+- Snacks, Telescope, or FzfLua based picker workflows
+- Tree-sitter highlighting, folds, indentation, and parser compatibility checks
+- LSP, formatting, linting, DAP, completion, snippets, and AI integrations
+- Markdown images and math rendering, including multiline LaTeX source reveal
+- Jupyter Notebook facade for `ipynb` files
+- VimTeX with Skim synchronization support
+- Tmux pane navigation, alignment tools, ANSI rendering, and UndoTree
+- Offline mini.test regression and configuration-contract tests
+
+
+REQUIREMENTS                                            *PithyVim-requirements*
+
+- Neovim >= **0.11.2** (built with **LuaJIT**)
+- Git >= **2.19.0**
+- A Nerd Font <https://www.nerdfonts.com/> **(optional)**
+- A C compiler for nvim-treesitter
+- `rg` for source checks and grep pickers
+- `tree-sitter` CLI >= **0.26.1** for automatic LaTeX parser installation
+- `latexmk` and Skim **(optional, for TeX extras on macOS)**
+- A terminal with image support **(optional, for Snacks images and math)**
+
+
+GETTING STARTED                                      *PithyVim-getting-started*
+
+Clone this repository as your Neovim configuration:
+
+>sh
+    mv ~/.config/nvim ~/.config/nvim.bak
+    git clone https://github.com/Qeuroal/PithyVim ~/.config/nvim
+    nvim
+<
+
+The repository's `init.lua` loads `pithyvim`.  Plugins are installed by
+lazy.nvim on first start.  To run the local test suite:
+
+>sh
+    make test
+<
+
+The test command can also be run from outside the repository:
+
+>sh
+    /path/to/PithyVim/scripts/test --offline
+<
+
+To copy Lua sources into a local Lazy installation:
+
+>sh
+    make local
+<
+
+The `make gitmerge` target merges `dev` into `master` and pushes it.  Review
+that target before using it because it changes branches and remote state.
+
+
+FILE STRUCTURE                                        *PithyVim-file-structure*
+
+    init.lua                         Entry point
+    lua/pithyvim/config/              Options, autocmds, keymaps, setup
+    lua/pithyvim/plugins/             Core plugin specifications
+    lua/pithyvim/plugins/extras/      Optional language and feature specs
+    lua/pithyvim/util/                Shared helpers and plugin utilities
+    queries/lua/                      Custom Tree-sitter queries
+    tests/                            mini.test specs and regression checks
+    scripts/test                      Test runner
+    Makefile                          Local install, test, and merge targets
+    doc/PithyVim.txt                  This help file
+
+Files under `lua/pithyvim/config/` are loaded by the PithyVim setup.  Plugin
+specifications are imported by lazy.nvim.  User plugin overrides can be put
+in the user's own `lua/plugins/` directory.
+
+
+DEFAULTS                                                *PithyVim-defaults*
+
+PithyVim defaults are defined in `lua/pithyvim/config/options.lua`.
+
+- Automatic formatting is disabled by default (`vim.g.autoformat = false`).
+- Diagnostics are disabled by default and can be toggled with `<leader>ud`.
+- Indentation uses four spaces (`tabstop`, `shiftwidth`, and `softtabstop`).
+- Mouse input and invisible-character display are disabled.
+- Wrapping is enabled, `linebreak` is disabled, and `textwidth` is zero.
+- Folding starts disabled with `foldmethod=indent`; marker folds use `{{{>,<}}}`.
+- Persistent undo files are stored below the PithyVim/Neovim cache directory.
+- `virtualedit` includes `block` and `onemore`.
+- Diff mode uses `followwrap`, `context:3`, `algorithm:patience`, and
+  `indent-heuristic`.
+- Markdown, text, TeX, Typst, and Git commit buffers wrap without spell check.
+
+`CamelToSnake` and `SnakeToCamel` are range commands for converting selected
+lines.  `PITHYVIM_CACHE_DIR` can override the cache directory used by helpers.
+
+
+KEYMAPS                                                    *PithyVim-keymaps*
+
+The following are the main PithyVim additions.  Plugin-specific mappings are
+also shown by `:LazyExtras` and WhichKey.
+
+    <C-s>                 Save without leaving the current mode
+    <leader>ll             Open Lazy
+    <leader>le             Open LazyExtras
+    <leader>fy             Copy the current file path
+    <leader>fY             Copy the current directory path
+    <leader>fC             Show effective EditorConfig rules
+    <leader>xw             Open the error Quickfix list on the right
+    <leader>qw             Save and quit all windows
+    <leader>tz             Toggle marker/expr foldmethod
+    <leader>tc             Toggle system clipboard integration
+    gy                     Yank to the system clipboard
+    gp                     Paste from the system clipboard
+    gP                     Paste before from the system clipboard
+    <leader>uS             Toggle Snacks smooth scrolling
+    <leader>uu             Toggle UndoTree
+
+Lowercase picker mappings generally use the current working directory or
+current buffer.  Uppercase variants generally use the project root or
+workspace.  This applies to file search, grep, word search, and diagnostics.
+
+The optional Tmux navigation extra assigns `<C-h>`, `<C-j>`, `<C-k>`, and
+`<C-l>` to cross Neovim windows and Tmux panes.  `<C-\>` goes to the last
+active pane and `<C-Space>` goes to the next pane.
+
+
+COLOR SCHEMES                                          *PithyVim-colorschemes*
+
+The registry is in `lua/pithyvim/config/colorscheme.lua`.  The default is
+Catppuccin Macchiato.  Available registry entries are:
+
+- `catppuccin`
+- `tokyonight`
+- `everforest`
+- `onedarkpro`
+
+Catppuccin customizes `WinSeparator` with a blue foreground and transparent
+background.  The theme loader setup is controlled by `PithyVim.config`.
+
+
+PICKERS AND UI                                          *PithyVim-pickers*
+
+PithyVim supports picker extras for Snacks, Telescope, and FzfLua.  Their
+common behavior is:
+
+- cwd/root scope follows the lowercase/uppercase convention above
+- diagnostics distinguish workspace and current-buffer views
+- hidden files are enabled in the Snacks file and grep sources
+- Snacks file search does not follow symbolic links
+- Snacks picker uses `<C-c>` to close, `<C-j/k>` for selection, and
+  `<C-n/p>` for history
+- Git restore in Snacks requires the two-key sequence `<C-r><C-r>`
+
+Explorer extras configure left-side layouts, preview panes, hidden files, and
+diagnostic visibility.  `mini-align` provides `ga` and `gA`; `align.nvim`
+provides `aa`, `ad`, `aw`, `ar`, `gaw`, and `gaa`.  The ANSI renderer extra
+automatically handles `log` and `ansi` buffers.
+
+
+COMPLETION AND SNIPPETS                              *PithyVim-completion*
+
+Blink and nvim-cmp use `<C-j/k>` for candidate navigation.  Blink additionally
+uses `<C-l>` for documentation, `<C-y>` to accept, `<C-e>` to hide, and
+`<C-b/f>` to scroll documentation.  Tab and S-Tab move through snippets.
+
+LuaSnip automatically loads snippets from:
+
+    ~/.config/nvim/snippets/from_vscode
+    ~/.config/nvim/snippets/from_snipmate
+
+Snippet history is disabled and S-Tab only jumps when a backward jump is
+available.  Function and method completions avoid adding duplicate parentheses
+and safely handle end-of-line completion.
+
+
+AI                                                    *PithyVim-ai*
+
+Copilot attaches to all filetypes except sensitive filenames containing
+`cookie`, `.env`, `token`, `secret`, `credential`, or `config` patterns.
+Blink Copilot settings are merged with existing completion providers.
+
+When Sidekick reports `Completions limit reached`, PithyVim disables Sidekick
+NES and shows a single warning instead of repeatedly reporting the same error.
+
+
+MARKDOWN AND NOTEBOOKS                              *PithyVim-markdown*
+
+The Markdown extra enables Snacks images and math rendering.  `force=false`
+keeps rendering dependent on terminal support.  When the cursor enters a
+multiline rendered formula, concealed lines are revealed so the full LaTeX
+source can be edited.
+
+The LaTeX Tree-sitter parser is requested only when the system `tree-sitter`
+CLI is version 0.26.1 or newer.  This avoids ABI and GLIBC failures on older
+servers.  Render-markdown's own LaTeX renderer is disabled to avoid duplicate
+rendering; headings, code blocks, checkboxes, images, and math remain
+available through the configured renderers.
+
+The Jupyter extra is recommended for both an `ipynb` filetype and filenames
+ending in `.ipynb`.  It connects `ipynb.nvim` with Tree-sitter, LSP,
+render-markdown, and Snacks images.  Markdown rendering is attached to the
+`ipynb` filetype with `anti_conceal.enabled=false`.
+
+
+TEX AND LANGUAGE EXTRAS                                *PithyVim-tex*
+
+The TeX extra is recommended when `latexmk` is executable.  VimTeX uses Skim,
+supports forward/reverse synchronization, disables automatic viewer opening,
+and disables its built-in completion and insert mappings.  Math symbols,
+sections, ligatures, citations, accents, fractions, and conceal settings are
+configured for editing.
+
+The Python extra is also recommended when `python` or `python3` is executable.
+All language extras expose a `recommended` condition and can be enabled with
+the LazyExtras UI.
+
+
+TREE-SITTER AND LSP                                  *PithyVim-treesitter*
+
+Tree-sitter parser availability is checked directly on the runtimepath with
+`PithyVim.treesitter.have_parser()`.  Concurrent CLI installation requests
+share one Mason installation and notify all waiting callbacks.
+
+Tree-sitter highlighting, indentation, and folding are enabled only when the
+language parser and query are available.  `<leader>cL` restarts the active LSP.
+
+
+TESTING                                                  *PithyVim-testing*
+
+Run the complete offline suite with:
+
+>sh
+    scripts/test --offline
+<
+
+The suite checks plugin specs, language recommendations, parser duplication,
+renamed plugins, memoization, completion edge cases, runtime parser detection,
+Markdown multiline source reveal, Tree-sitter CLI version gates, and Jupyter
+recommendation conditions.
+
+The current suite is expected to report 442 cases, 5 groups, and zero failures.
+
+
+CONFIGURATION                                          *PithyVim-configuration*
+
+Use `lua/pithyvim/config/options.lua` for editor options, autocmds for buffer
+behavior, and keymaps for global mappings.  Use plugin extras for optional
+features instead of editing their upstream plugin defaults.
+
+PithyVim-specific settings are grouped with `--{{{> Qeuroal` and `--<}}}`
+markers in Lua files.  Keep new personal changes in the same marked style.
+
+==============================================================================
+vim:tw=78:ts=8:noet:ft=help:norl:
