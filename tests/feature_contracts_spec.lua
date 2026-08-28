@@ -158,7 +158,7 @@ describe("custom feature contracts", function()
     contains("lua/pithyvim/plugins/extras/lang/markdown.lua", { "latex = { enabled = false }", "min_width = 45" })
     contains("lua/pithyvim/plugins/extras/lang/jupyter.lua", { 'filetype == "ipynb"', '%.ipynb$', 'ft = { "ipynb" }', "anti_conceal = { enabled = false }" })
     contains("lua/pithyvim/plugins/extras/lang/python.lua", { 'vim.fn.executable("python")', 'vim.fn.executable("python3")' })
-    contains("lua/pithyvim/plugins/extras/lang/tex.lua", { 'vim.fn.executable("latexmk")', 'vimtex_view_method = "skim"', "vimtex_complete_enabled = 0", "vimtex_imaps_enabled = 0", "vimtex_syntax_conceal" })
+    contains("lua/pithyvim/plugins/extras/lang/tex.lua", { 'vim.fn.executable("latexmk")', 'vimtex_view_method = "skim"', "vimtex_complete_enabled = 0", "vimtex_imaps_enabled = 0", "vimtex_syntax_conceal", "greek = 0", "math_bounds = 0", "math_delimiters = 0", "math_fracs = 0", "math_super_sub = 0", "math_symbols = 0" })
   end)
 
   it("keeps Tree-sitter, LSP, and repository contracts", function()

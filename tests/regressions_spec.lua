@@ -73,12 +73,19 @@ describe("regressions", function()
 
   it("reveals all concealed lines when a Snacks image is hidden", function()
     local placement = package.loaded["snacks.image.placement"]
+    local doc = package.loaded["snacks.image.doc"]
     local Placement = {
       _render = function(_, extmarks)
         return extmarks
       end,
     }
+    local Doc = {
+      _img = function(ctx)
+        return ctx.result
+      end,
+    }
     package.loaded["snacks.image.placement"] = Placement
+    package.loaded["snacks.image.doc"] = Doc
 
     finally(function()
       _G.PithyVim = _G.PithyVim or require("pithyvim.util")
@@ -99,8 +106,19 @@ describe("regressions", function()
       local visible = { { conceal = "", conceal_lines = "" } }
       Placement._render({ hidden = false }, visible)
       assert.are.equal("", visible[1].conceal_lines)
+
+      local image = { type = "image" }
+      local math = { type = "math" }
+      assert.is_nil(Doc._img({ result = image }))
+      assert.is_nil(Doc._img({ result = math }))
+      Doc._pithyvim_state.images = true
+      assert.are.equal(image, Doc._img({ result = image }))
+      assert.is_nil(Doc._img({ result = math }))
+      Doc._pithyvim_state.math = true
+      assert.are.equal(math, Doc._img({ result = math }))
     end, function()
       package.loaded["snacks.image.placement"] = placement
+      package.loaded["snacks.image.doc"] = doc
     end)
   end)
 
@@ -132,11 +150,16 @@ describe("regressions", function()
 
     local setup_calls = 0
     local clean_calls = 0
+    local hover_close_calls = 0
     local autocmd_calls = 0
     finally(function()
       _G.Snacks = {
         image = {
           config = { enabled = false, math = { enabled = false } },
+          doc = {
+            _pithyvim_state = { images = false, math = false },
+            hover_close = function() hover_close_calls = hover_close_calls + 1 end,
+          },
           setup = function() setup_calls = setup_calls + 1 end,
           placement = { clean = function() clean_calls = clean_calls + 1 end },
         },
@@ -148,19 +171,27 @@ describe("regressions", function()
       assert.are.equal(1, setup_calls)
       assert.are.equal(1, autocmd_calls)
 
-      math_mapping()
-      assert.is_true(Snacks.image.config.math.enabled)
+      mapping()
+      assert.is_false(Snacks.image.doc._pithyvim_state.images)
+      assert.is_false(Snacks.image.config.enabled)
       assert.are.equal(1, clean_calls)
+      assert.are.equal(1, hover_close_calls)
       assert.are.equal(2, autocmd_calls)
 
       math_mapping()
-      assert.is_false(Snacks.image.config.math.enabled)
-      assert.are.equal(2, clean_calls)
+      assert.is_true(Snacks.image.doc._pithyvim_state.math)
+      assert.is_true(Snacks.image.config.math.enabled)
+      assert.is_true(Snacks.image.config.enabled)
+      assert.are.equal(2, setup_calls)
       assert.are.equal(3, autocmd_calls)
 
-      mapping()
+      math_mapping()
+      assert.is_false(Snacks.image.doc._pithyvim_state.math)
+      assert.is_false(Snacks.image.config.math.enabled)
+      assert.are.equal(2, clean_calls)
       assert.is_false(Snacks.image.config.enabled)
-      assert.are.equal(3, clean_calls)
+      assert.are.equal(2, hover_close_calls)
+      assert.are.equal(4, autocmd_calls)
     end, function()
       _G.Snacks = snacks
       vim.api.nvim_exec_autocmds = exec_autocmds

@@ -9,28 +9,33 @@ local function term_nav(dir)
 end
 
 --{{{> Qeuroal
-local function toggle_snacks_images()
-  local enabled = not Snacks.image.config.enabled
-  Snacks.image.config.enabled = enabled
-  if not enabled then
-    Snacks.image.placement.clean()
+local function refresh_snacks_images()
+  if vim.b.snacks_image_attached then
+    vim.api.nvim_exec_autocmds("BufWinEnter", { buffer = 0 })
+    vim.api.nvim_exec_autocmds("CursorMoved", { buffer = 0 })
   else
-    Snacks.image.setup()
-    -- Allow the current buffer to attach again after being disabled.
-    vim.b.snacks_image_attached = nil
     vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
   end
 end
 
-local function toggle_snacks_math()
-  local math = Snacks.image.config.math
-  math.enabled = not math.enabled
+local function toggle_snacks_image_type(kind)
+  local state = Snacks.image.doc._pithyvim_state
+  state[kind] = not state[kind]
+  Snacks.image.config.math.enabled = state.math
+  Snacks.image.config.enabled = state.images or state.math
   if Snacks.image.config.enabled then
-    Snacks.image.placement.clean(0)
-    vim.b.snacks_image_attached = nil
-    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
+    Snacks.image.setup()
+    refresh_snacks_images()
+  else
+    Snacks.image.placement.clean()
+    Snacks.image.doc.hover_close()
+    refresh_snacks_images()
   end
 end
+
+local function toggle_snacks_images() toggle_snacks_image_type("images") end
+
+local function toggle_snacks_math() toggle_snacks_image_type("math") end
 --<}}}
 
 return {
@@ -41,19 +46,38 @@ return {
     --{{{> Qeuroal
     init = function()
       local Placement = require("snacks.image.placement")
-      if rawget(Placement, "_pithyvim_multiline_source") then
-        return
-      end
-      rawset(Placement, "_pithyvim_multiline_source", true)
-      local render = Placement._render
+      if not rawget(Placement, "_pithyvim_multiline_source") then
+        rawset(Placement, "_pithyvim_multiline_source", true)
+        local render = Placement._render
 
-      function Placement:_render(extmarks)
-        if self.hidden then
-          for _, extmark in ipairs(extmarks) do
-            extmark.conceal_lines = nil
+        function Placement:_render(extmarks)
+          if self.hidden then
+            for _, extmark in ipairs(extmarks) do
+              extmark.conceal_lines = nil
+            end
+          end
+          return render(self, extmarks)
+        end
+      end
+
+      local Doc = require("snacks.image.doc")
+      Doc._pithyvim_state = Doc._pithyvim_state or { images = false, math = false }
+      if not rawget(Doc, "_pithyvim_filter_types") then
+        rawset(Doc, "_pithyvim_filter_types", true)
+        local image = Doc._img
+
+        function Doc._img(ctx)
+          local result = image(ctx)
+          if result then
+            local enabled
+            if result.type == "math" then
+              enabled = Doc._pithyvim_state.math
+            else
+              enabled = Doc._pithyvim_state.images
+            end
+            return enabled and result or nil
           end
         end
-        return render(self, extmarks)
       end
     end,
     --<}}}
