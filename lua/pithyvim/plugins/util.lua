@@ -18,9 +18,9 @@ local function refresh_snacks_images()
   end
 end
 
-local function toggle_snacks_image_type(kind)
+local function set_snacks_image_type(kind, enabled)
   local state = Snacks.image.doc._pithyvim_state
-  state[kind] = not state[kind]
+  state[kind] = enabled
   Snacks.image.config.math.enabled = state.math
   Snacks.image.config.enabled = state.images or state.math
   if Snacks.image.config.enabled then
@@ -32,10 +32,6 @@ local function toggle_snacks_image_type(kind)
     refresh_snacks_images()
   end
 end
-
-local function toggle_snacks_images() toggle_snacks_image_type("images") end
-
-local function toggle_snacks_math() toggle_snacks_image_type("math") end
 --<}}}
 
 return {
@@ -79,6 +75,25 @@ return {
           end
         end
       end
+
+      Snacks.toggle({
+        name = "Snacks Images",
+        get = function()
+          return Doc._pithyvim_state.images
+        end,
+        set = function(state)
+          set_snacks_image_type("images", state)
+        end,
+      }):map("<leader>ti")
+      Snacks.toggle({
+        name = "Snacks Math",
+        get = function()
+          return Doc._pithyvim_state.math
+        end,
+        set = function(state)
+          set_snacks_image_type("math", state)
+        end,
+      }):map("<leader>tm")
     end,
     --<}}}
     opts = {
@@ -109,10 +124,6 @@ return {
       { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
       { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       { "<leader>dps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer" },
-      --{{{> Qeuroal
-      { "<leader>ti", toggle_snacks_images, desc = "Toggle Snacks Images" },
-      { "<leader>tm", toggle_snacks_math, desc = "Toggle Snacks Math" },
-      --<}}}
     },
   },
 

@@ -153,7 +153,7 @@ describe("custom feature contracts", function()
   end)
 
   it("keeps Markdown, Jupyter, Python, and TeX contracts", function()
-    contains("lua/pithyvim/plugins/util.lua", { "Snacks.image.setup()", "conceal_lines = nil", "enabled = false", "force = false", "math = { enabled = false }", "<leader>ti", "<leader>tm" })
+    contains("lua/pithyvim/plugins/util.lua", { "Snacks.image.setup()", "Snacks.toggle({", "conceal_lines = nil", "enabled = false", "force = false", "math = { enabled = false }", "<leader>ti", "<leader>tm" })
     contains("lua/pithyvim/plugins/treesitter.lua", { "tree-sitter", "0, 26, 1", 'table.insert(opts.ensure_installed, "latex")' })
     contains("lua/pithyvim/plugins/extras/lang/markdown.lua", { "latex = { enabled = false }", "min_width = 45" })
     contains("lua/pithyvim/plugins/extras/lang/jupyter.lua", { 'filetype == "ipynb"', '%.ipynb$', 'ft = { "ipynb" }', "anti_conceal = { enabled = false }" })
