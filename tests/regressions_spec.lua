@@ -72,6 +72,7 @@ describe("regressions", function()
   end)
 
   it("reveals all concealed lines when a Snacks image is hidden", function()
+    local snacks = _G.Snacks
     local placement = package.loaded["snacks.image.placement"]
     local doc = package.loaded["snacks.image.doc"]
     local Placement = {
@@ -88,6 +89,11 @@ describe("regressions", function()
     package.loaded["snacks.image.doc"] = Doc
 
     finally(function()
+      _G.Snacks = {
+        toggle = function()
+          return { map = function() end }
+        end,
+      }
       _G.PithyVim = _G.PithyVim or require("pithyvim.util")
       local snacks
       for _, spec in ipairs(require("pithyvim.plugins.util")) do
@@ -117,6 +123,7 @@ describe("regressions", function()
       Doc._pithyvim_state.math = true
       assert.are.equal(math, Doc._img({ result = math }))
     end, function()
+      _G.Snacks = snacks
       package.loaded["snacks.image.placement"] = placement
       package.loaded["snacks.image.doc"] = doc
     end)
@@ -124,11 +131,11 @@ describe("regressions", function()
 
   it("keeps Snacks images disabled until explicitly toggled", function()
     local snacks = _G.Snacks
+    local placement = package.loaded["snacks.image.placement"]
+    local doc = package.loaded["snacks.image.doc"]
     local exec_autocmds = vim.api.nvim_exec_autocmds
     local attached = vim.b.snacks_image_attached
     local spec
-    local mapping
-    local math_mapping
 
     for _, candidate in ipairs(require("pithyvim.plugins.util")) do
       if candidate[1] == "snacks.nvim" then
@@ -138,62 +145,93 @@ describe("regressions", function()
     end
     assert.is_not_nil(spec)
     assert.is_false(spec.opts.image.enabled)
-    for _, key in ipairs(spec.keys) do
-      if key[1] == "<leader>ti" then
-        mapping = key[2]
-      elseif key[1] == "<leader>tm" then
-        math_mapping = key[2]
-      end
-    end
-    assert.is_not_nil(mapping)
-    assert.is_not_nil(math_mapping)
 
     local setup_calls = 0
     local clean_calls = 0
     local hover_close_calls = 0
     local autocmd_calls = 0
+    local toggles = {}
+    local Placement = {
+      _render = function(_, extmarks)
+        return extmarks
+      end,
+      clean = function()
+        clean_calls = clean_calls + 1
+      end,
+    }
+    local Doc = {
+      _img = function(ctx)
+        return ctx.result
+      end,
+      hover_close = function()
+        hover_close_calls = hover_close_calls + 1
+      end,
+    }
     finally(function()
+      package.loaded["snacks.image.placement"] = Placement
+      package.loaded["snacks.image.doc"] = Doc
       _G.Snacks = {
+        toggle = function(opts)
+          return {
+            map = function(_, key)
+              toggles[key] = opts
+            end,
+          }
+        end,
         image = {
           config = { enabled = false, math = { enabled = false } },
-          doc = {
-            _pithyvim_state = { images = false, math = false },
-            hover_close = function() hover_close_calls = hover_close_calls + 1 end,
-          },
+          doc = Doc,
           setup = function() setup_calls = setup_calls + 1 end,
-          placement = { clean = function() clean_calls = clean_calls + 1 end },
+          placement = Placement,
         },
       }
       vim.api.nvim_exec_autocmds = function() autocmd_calls = autocmd_calls + 1 end
+      spec.init()
 
-      mapping()
+      local images = toggles["<leader>ti"]
+      local math = toggles["<leader>tm"]
+      assert.is_not_nil(images)
+      assert.is_not_nil(math)
+      assert.is_false(images.get())
+      assert.is_false(math.get())
+
+      images.set(true)
+      assert.is_true(images.get())
       assert.is_true(Snacks.image.config.enabled)
       assert.are.equal(1, setup_calls)
       assert.are.equal(1, autocmd_calls)
 
-      mapping()
-      assert.is_false(Snacks.image.doc._pithyvim_state.images)
+      images.set(false)
+      assert.is_false(images.get())
       assert.is_false(Snacks.image.config.enabled)
       assert.are.equal(1, clean_calls)
       assert.are.equal(1, hover_close_calls)
       assert.are.equal(2, autocmd_calls)
 
-      math_mapping()
-      assert.is_true(Snacks.image.doc._pithyvim_state.math)
+      math.set(true)
+      assert.is_true(math.get())
       assert.is_true(Snacks.image.config.math.enabled)
       assert.is_true(Snacks.image.config.enabled)
       assert.are.equal(2, setup_calls)
       assert.are.equal(3, autocmd_calls)
 
-      math_mapping()
-      assert.is_false(Snacks.image.doc._pithyvim_state.math)
+      images.set(true)
+      images.set(false)
+      assert.is_false(images.get())
+      assert.is_true(math.get())
+      assert.is_true(Snacks.image.config.enabled)
+
+      math.set(false)
+      assert.is_false(math.get())
       assert.is_false(Snacks.image.config.math.enabled)
       assert.are.equal(2, clean_calls)
       assert.is_false(Snacks.image.config.enabled)
       assert.are.equal(2, hover_close_calls)
-      assert.are.equal(4, autocmd_calls)
+      assert.are.equal(6, autocmd_calls)
     end, function()
       _G.Snacks = snacks
+      package.loaded["snacks.image.placement"] = placement
+      package.loaded["snacks.image.doc"] = doc
       vim.api.nvim_exec_autocmds = exec_autocmds
       vim.b.snacks_image_attached = attached
     end)
