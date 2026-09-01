@@ -50,7 +50,17 @@ describe("custom feature contracts", function()
     for _, name in ipairs({ "onedarkpro", "tokyonight", "everforest", "catppuccin" }) do
       assert.is_table(colors.schemes[name])
     end
-    assert.are.equal("macchiato", colors.schemes.catppuccin.setup.flavour)
+    assert.is_nil(colors.schemes.catppuccin.setup)
+
+    local catppuccin
+    for _, spec in ipairs(require("pithyvim.plugins.colorscheme")) do
+      if spec.name == "catppuccin" then
+        catppuccin = spec
+        break
+      end
+    end
+    assert.is_not_nil(catppuccin)
+    assert.are.equal("macchiato", catppuccin.opts.flavour)
   end)
 
   it("keeps custom utility helpers", function()
@@ -111,6 +121,7 @@ describe("custom feature contracts", function()
     contains("lua/pithyvim/plugins/colorscheme.lua", {
       "olimorris/onedarkpro.nvim",
       "neanias/everforest-nvim",
+      'flavour = "macchiato"',
       "custom_highlights = function(colors)",
       "WinSeparator = { fg = colors.blue, bg = \"NONE\" }",
     })
@@ -153,7 +164,7 @@ describe("custom feature contracts", function()
   end)
 
   it("keeps Markdown, Jupyter, Python, and TeX contracts", function()
-    contains("lua/pithyvim/plugins/util.lua", { "Snacks.image.setup()", "Snacks.toggle({", "conceal_lines = nil", "enabled = false", "force = false", "math = { enabled = false }", "<leader>ti", "<leader>tm" })
+    contains("lua/pithyvim/plugins/util.lua", { "Snacks.image.setup()", "snacks.toggle({", "conceal_lines = nil", "enabled = false", "force = false", "math = { enabled = false }", "<leader>ti", "<leader>tm" })
     contains("lua/pithyvim/plugins/treesitter.lua", { "tree-sitter", "0, 26, 1", 'table.insert(opts.ensure_installed, "latex")' })
     contains("lua/pithyvim/plugins/extras/lang/markdown.lua", { "latex = { enabled = false }", "min_width = 45" })
     contains("lua/pithyvim/plugins/extras/lang/jupyter.lua", { 'filetype == "ipynb"', '%.ipynb$', 'ft = { "ipynb" }', "anti_conceal = { enabled = false }" })
