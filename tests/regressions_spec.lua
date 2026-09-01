@@ -190,7 +190,7 @@ describe("regressions", function()
     end)
   end)
 
-  it("keeps Snacks images disabled until explicitly toggled", function()
+  it("initializes and toggles Snacks image types independently", function()
     local snacks = _G.Snacks
     local placement = package.loaded["snacks.image.placement"]
     local inline = package.loaded["snacks.image.inline"]
@@ -212,6 +212,8 @@ describe("regressions", function()
     local clean_calls = 0
     local hover_close_calls = 0
     local autocmd_calls = 0
+    local config_calls = 0
+    local configured_opts
     local toggles = {}
     local Placement = {
       _render = function(_, extmarks)
@@ -238,6 +240,10 @@ describe("regressions", function()
       package.loaded["snacks.image.inline"] = Inline
       package.loaded["snacks.image.doc"] = Doc
       _G.Snacks = {
+        setup = function(opts)
+          config_calls = config_calls + 1
+          configured_opts = vim.deepcopy(opts)
+        end,
         toggle = function(opts)
           return {
             map = function(_, key)
@@ -253,12 +259,41 @@ describe("regressions", function()
         },
       }
       vim.api.nvim_exec_autocmds = function() autocmd_calls = autocmd_calls + 1 end
+
+      -- config 可能在 init 的 require 返回前重入，此时状态表尚未创建.
+      local startup_opts = vim.deepcopy(spec.opts)
+      startup_opts.image.enabled = true
+      assert.is_nil(Doc._pithyvim_state)
+      spec.config(nil, startup_opts)
+      assert.same({ images = true, math = false }, Doc._pithyvim_state)
+
       spec.init()
 
       local images = toggles["<leader>ti"]
       local math = toggles["<leader>tm"]
       assert.is_not_nil(images)
       assert.is_not_nil(math)
+
+      for _, case in ipairs({
+        { images = true, math = true },
+        { images = true, math = false },
+        { images = false, math = true },
+        { images = false, math = false },
+      }) do
+        local opts = vim.deepcopy(spec.opts)
+        opts.image.enabled = case.images
+        opts.image.math.enabled = case.math
+        spec.config(nil, opts)
+
+        assert.are.equal(case.images, images.get())
+        assert.are.equal(case.math, math.get())
+        assert.are.equal(case.images or case.math, Snacks.image.config.enabled)
+        assert.are.equal(case.math, Snacks.image.config.math.enabled)
+        assert.are.equal(case.images, opts.image.enabled)
+        assert.are.equal(case.images or case.math, configured_opts.image.enabled)
+        assert.are.equal(case.math, configured_opts.image.math.enabled)
+      end
+      assert.are.equal(5, config_calls)
       assert.is_false(images.get())
       assert.is_false(math.get())
 

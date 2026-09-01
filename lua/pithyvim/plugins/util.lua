@@ -154,6 +154,22 @@ return {
         },
       },
     },
+    --{{{> Qeuroal: 从最终 opts 初始化图片/公式 toggle；避免 init 的 require 触发 Lazy 重入时状态尚未创建
+    config = function(_, opts)
+      local images = opts.image.enabled
+      local math = opts.image.math.enabled
+      local state = Snacks.image.doc._pithyvim_state or { images = false, math = false }
+      Snacks.image.doc._pithyvim_state = state
+      state.images = images
+      state.math = math
+
+      local setup_opts = vim.deepcopy(opts)
+      setup_opts.image.enabled = images or math
+      Snacks.image.config.enabled = setup_opts.image.enabled
+      Snacks.image.config.math.enabled = math
+      Snacks.setup(setup_opts)
+    end,
+    --<}}}
     -- stylua: ignore
     keys = {
       { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
