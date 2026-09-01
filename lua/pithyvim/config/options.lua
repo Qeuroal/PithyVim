@@ -99,7 +99,6 @@ opt.completeopt = "menu,menuone,noselect"   -- 补全时默认不选择第1项
 opt.conceallevel = 2            -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true              -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true           -- Enable highlighting of the current line
-opt.expandtab = true            -- Use spaces instead of tabs
 opt.fillchars = {
   foldopen = "",
   foldclose = "",
@@ -135,8 +134,6 @@ opt.relativenumber = true           -- Relative line numbers
 opt.ruler = false                   -- Disable the default ruler
 opt.scrolloff = 1                   -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.shiftround = true               -- Round indent
-opt.shiftwidth = 4                  -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false                -- Dont show mode since we have a statusline
 opt.showcmd = true                  -- 显示按键
@@ -158,10 +155,11 @@ opt.cindent = true                  -- 设置使用C/C++语言的自动缩进方
                                     -- :0 表示 switch 下面的 case 语句不进行额外缩进
                                     -- g0 代表作用域声明(public:、private: 等)不额外缩进
                                     -- (0 和 w1 配合代表没结束的圆括号里的内容折行时不额外缩进
-opt.tabstop = 4                     -- Number of spaces tabs count for
-opt.softtabstop = 4                 -- 设置4个空格为制表符, 即"软"制表符宽度.
-                                    -- softtabstop看成"虚拟"的tapstop, 一旦设置了这个选项为非零值，再键入<Tab>和<BS>(退格键)
-                                    -- 你就感觉像设置了这个宽度的 tabstop 一样, " 实际插入的仍受expandtab和tabstop两个选项控制
+opt.expandtab = true                -- Use spaces instead of tabs
+opt.tabstop = 4                     -- 显示: 一个 Tab 字符显示多少列宽
+opt.softtabstop = -1                -- 编辑: Tab 键和 Backspace 键时移动多少列. -1: 使用 shiftwidth 值, 0: 使用 tabstop 值
+opt.shiftwidth = 0                  -- 缩进: 自动缩进、>>、<< 缩进多少列. 0: 使用 tabstop 值
+opt.shiftround = true               -- >>、<< 调整缩进时, 向 shiftwidth 值的倍数取整
 opt.termguicolors = true            -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300   -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true

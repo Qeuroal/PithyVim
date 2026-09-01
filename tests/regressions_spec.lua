@@ -53,6 +53,32 @@ describe("regressions", function()
     assert.are.equal(0, bracket_calls("hello", 5, 1))
   end)
 
+  it("derives effective indentation widths from tabstop", function()
+    local previous = vim.api.nvim_get_current_buf()
+    local buf = vim.api.nvim_create_buf(false, true)
+
+    finally(function()
+      vim.api.nvim_set_current_buf(buf)
+      vim.bo[buf].expandtab = true
+      vim.bo[buf].tabstop = 4
+      vim.bo[buf].shiftwidth = 0
+      vim.bo[buf].softtabstop = -1
+      vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "x", "" })
+
+      vim.api.nvim_win_set_cursor(0, { 1, 0 })
+      vim.cmd("normal! >>")
+      assert.are.equal(vim.bo[buf].tabstop, vim.fn.shiftwidth())
+      assert.are.equal(vim.bo[buf].tabstop, vim.fn.indent(1))
+
+      vim.api.nvim_win_set_cursor(0, { 2, 0 })
+      vim.cmd([[execute "normal! i\<Tab>x\<Esc>"]])
+      assert.are.equal(string.rep(" ", vim.bo[buf].tabstop) .. "x", vim.api.nvim_get_current_line())
+    end, function()
+      vim.api.nvim_set_current_buf(previous)
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end)
+  end)
+
   it("detects parsers already available on the runtime path", function()
     local root = vim.fs.joinpath(vim.fn.stdpath("cache"), "parser-regression")
     local parser_dir = vim.fs.joinpath(root, "parser")
