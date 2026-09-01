@@ -39,7 +39,7 @@ return {
   -- Snacks utils
   {
     "snacks.nvim",
-    --{{{> Qeuroal
+    --{{{> Qeuroal: 控制 Snacks 图片与公式渲染；修正上一行误隐藏公式并暂停 Insert 模式重复渲染
     init = function()
       local Placement = require("snacks.image.placement")
       if not rawget(Placement, "_pithyvim_multiline_source") then
@@ -58,6 +58,7 @@ return {
 
       local Doc = require("snacks.image.doc")
       Doc._pithyvim_state = Doc._pithyvim_state or { images = false, math = false }
+
       if not rawget(Doc, "_pithyvim_filter_types") then
         rawset(Doc, "_pithyvim_filter_types", true)
         local image = Doc._img
@@ -94,6 +95,40 @@ return {
           set_snacks_image_type("math", state)
         end,
       }):map("<leader>tm")
+
+      local Inline = require("snacks.image.inline")
+      -- Snacks 当前把 1-based 的 `to` 直接作为 extmark 的 0-based 结束行, 导致查询额外包含下一行.
+      -- 保存原方法并在运行时覆写 `Inline:get()`, 将结束行减一后再调用原实现.
+      -- TODO: 更新 Snacks 后检查 `snacks/image/inline.lua`; 若上游已使用 `to - 1`, 删除此覆写.
+      if not rawget(Inline, "_pithyvim_exact_line_ranges") then
+        rawset(Inline, "_pithyvim_exact_line_ranges", true)
+        local get = Inline.get
+
+        function Inline:get(from, to)
+          return get(self, from, to - 1)
+        end
+      end
+
+      if not rawget(Inline, "_pithyvim_normal_mode_updates") then
+        rawset(Inline, "_pithyvim_normal_mode_updates", true)
+        local update = Inline.update
+
+        function Inline:update()
+          if Doc._pithyvim_state.math and vim.fn.mode():sub(1, 1):lower() == "i" then
+            return
+          end
+          return update(self)
+        end
+      end
+
+      vim.api.nvim_create_autocmd("InsertLeave", {
+        group = vim.api.nvim_create_augroup("pithyvim_snacks_image_insert", { clear = true }),
+        callback = function()
+          if Doc._pithyvim_state.math then
+            refresh_snacks_images()
+          end
+        end,
+      })
     end,
     --<}}}
     opts = {

@@ -71,13 +71,26 @@ describe("regressions", function()
     end)
   end)
 
-  it("reveals all concealed lines when a Snacks image is hidden", function()
+  it("customizes Snacks inline rendering for formula editing", function()
     local snacks = _G.Snacks
     local placement = package.loaded["snacks.image.placement"]
+    local inline = package.loaded["snacks.image.inline"]
     local doc = package.loaded["snacks.image.doc"]
+    local mode = vim.fn.mode
     local Placement = {
       _render = function(_, extmarks)
         return extmarks
+      end,
+    }
+    local get_from, get_to
+    local update_calls = 0
+    local Inline = {
+      get = function(_, from, to)
+        get_from, get_to = from, to
+        return "found"
+      end,
+      update = function()
+        update_calls = update_calls + 1
       end,
     }
     local Doc = {
@@ -86,6 +99,7 @@ describe("regressions", function()
       end,
     }
     package.loaded["snacks.image.placement"] = Placement
+    package.loaded["snacks.image.inline"] = Inline
     package.loaded["snacks.image.doc"] = Doc
 
     finally(function()
@@ -113,6 +127,25 @@ describe("regressions", function()
       Placement._render({ hidden = false }, visible)
       assert.are.equal("", visible[1].conceal_lines)
 
+      local renderer = { buf = vim.api.nvim_get_current_buf() }
+      assert.are.equal("found", Inline.get(renderer, 7, 7))
+      assert.are.equal(7, get_from)
+      assert.are.equal(6, get_to)
+
+      Doc._pithyvim_state.math = true
+      vim.fn.mode = function()
+        return "i"
+      end
+      Inline.update(renderer)
+      assert.are.equal(0, update_calls)
+
+      vim.fn.mode = function()
+        return "n"
+      end
+      Inline.update(renderer)
+      assert.are.equal(1, update_calls)
+      Doc._pithyvim_state.math = false
+
       local image = { type = "image" }
       local math = { type = "math" }
       assert.is_nil(Doc._img({ result = image }))
@@ -125,13 +158,16 @@ describe("regressions", function()
     end, function()
       _G.Snacks = snacks
       package.loaded["snacks.image.placement"] = placement
+      package.loaded["snacks.image.inline"] = inline
       package.loaded["snacks.image.doc"] = doc
+      vim.fn.mode = mode
     end)
   end)
 
   it("keeps Snacks images disabled until explicitly toggled", function()
     local snacks = _G.Snacks
     local placement = package.loaded["snacks.image.placement"]
+    local inline = package.loaded["snacks.image.inline"]
     local doc = package.loaded["snacks.image.doc"]
     local exec_autocmds = vim.api.nvim_exec_autocmds
     local attached = vim.b.snacks_image_attached
@@ -159,6 +195,10 @@ describe("regressions", function()
         clean_calls = clean_calls + 1
       end,
     }
+    local Inline = {
+      get = function() end,
+      update = function() end,
+    }
     local Doc = {
       _img = function(ctx)
         return ctx.result
@@ -169,6 +209,7 @@ describe("regressions", function()
     }
     finally(function()
       package.loaded["snacks.image.placement"] = Placement
+      package.loaded["snacks.image.inline"] = Inline
       package.loaded["snacks.image.doc"] = Doc
       _G.Snacks = {
         toggle = function(opts)
@@ -231,6 +272,7 @@ describe("regressions", function()
     end, function()
       _G.Snacks = snacks
       package.loaded["snacks.image.placement"] = placement
+      package.loaded["snacks.image.inline"] = inline
       package.loaded["snacks.image.doc"] = doc
       vim.api.nvim_exec_autocmds = exec_autocmds
       vim.b.snacks_image_attached = attached
