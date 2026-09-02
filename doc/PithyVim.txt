@@ -180,6 +180,35 @@ diagnostic visibility.  `mini-align` provides `ga` and `gA`; `align.nvim`
 provides `aa`, `ad`, `aw`, `ar`, `gaw`, and `gaa`.  The ANSI renderer extra
 automatically handles `log` and `ansi` buffers.
 
+LIVE GREP TWO-STAGE SEARCH                         *PithyVim-live-grep-search*
+
+`<leader>/` uses Snacks Picker to search the current working directory in two
+stages.  Live mode sends the input to ripgrep as a regular expression:
+
+>text
+    foo              Match foo
+    foo|bar          Match foo or bar
+    ^local           Match lines starting with local
+    TODO$            Match lines ending with TODO
+    foo -- -w        Match the complete word foo
+    foo -- -g=*.lua  Search only Lua files
+<
+
+Use `<A-r>` to toggle between regular-expression and literal search.  Press
+`<C-g>` to leave Live mode and filter the existing results with the
+FZF-compatible Snacks matcher:
+
+>text
+    foo bar   Include both foo and bar
+    'foo      Include the exact term foo
+    ^foo      Start with foo
+    bar$      End with bar
+    !test     Exclude test
+    foo | bar Match foo or bar
+<
+
+Press `<C-g>` again to return to Live Grep.
+
 
 COMPLETION AND SNIPPETS                              *PithyVim-completion*
 
