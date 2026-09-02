@@ -98,7 +98,6 @@ describe("regressions", function()
   end)
 
   it("customizes Snacks inline rendering for formula editing", function()
-    --{{{> Qeuroal: 图片模块改为延迟加载后，显式启用公式再验证现有渲染覆写
     local util_plugin = package.loaded["pithyvim.plugins.util"]
     local snacks = _G.Snacks
     local placement = package.loaded["snacks.image.placement"]
@@ -199,11 +198,9 @@ describe("regressions", function()
       package.loaded["pithyvim.plugins.util"] = util_plugin
       vim.fn.mode = mode
     end)
-    --<}}}
   end)
 
   it("initializes and toggles Snacks image types independently", function()
-    --{{{> Qeuroal: 验证默认关闭不加载图片模块，并在第一次图片或公式 toggle 时加载
     local util_plugin = package.loaded["pithyvim.plugins.util"]
     local snacks = _G.Snacks
     local placement = package.loaded["snacks.image.placement"]
@@ -379,10 +376,8 @@ describe("regressions", function()
       vim.api.nvim_exec_autocmds = exec_autocmds
       vim.b.snacks_image_attached = attached
     end)
-    --<}}}
   end)
 
-  --{{{> Qeuroal: 为 Snacks 图片延迟加载补充 6 个独立测试，覆盖默认值、首次 toggle 与单次加载契约
   local function with_snacks_image_fixture(run)
     local saved = {
       snacks = _G.Snacks,
@@ -554,7 +549,6 @@ describe("regressions", function()
       assert.is_true(ctx.configured_opts().image.math.enabled)
     end)
   end)
-  --<}}}
 
   local function global_treesitter_opts(executable, result, installed)
     local executable_fn = vim.fn.executable

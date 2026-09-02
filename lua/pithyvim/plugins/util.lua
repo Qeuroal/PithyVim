@@ -123,9 +123,8 @@ return {
     "snacks.nvim",
     --{{{> Qeuroal: 控制 Snacks 图片与公式渲染；修正上一行误隐藏公式并暂停 Insert 模式重复渲染
     init = function()
-      --{{{> Qeuroal: 图片模块延迟后全局 Snacks 尚未创建，仅加载轻量核心用于注册 toggle
+      -- 图片模块延迟后全局 Snacks 尚未创建，仅加载轻量核心用于注册 toggle
       local snacks = Snacks or require("snacks")
-      --<}}}
       snacks.toggle({
         name = "Snacks Images",
         get = function()

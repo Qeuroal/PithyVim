@@ -77,7 +77,7 @@ describe("custom feature contracts", function()
       "<leader>le",
       "<leader>fy",
       "<leader>fY",
-      "<leader>fC",
+      "<leader>cE",
       "<leader>xw",
       "<leader>qw",
       "<leader>tz",

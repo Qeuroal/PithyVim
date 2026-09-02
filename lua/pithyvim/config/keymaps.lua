@@ -115,7 +115,26 @@ map("n", "<leader>fy", function() local path = vim.fn.expand("%:p") vim.fn.setre
 map("n", "<leader>fY", function() local path = vim.fn.expand("%:p:h") vim.fn.setreg("+", path) vim.notify('Copied directory: ' .. path) end, { desc = "Copy directory path" })
 
 -- 复制并打印最终 .editorconfig 规则
-map("n", "<leader>fC", function() vim.notify('Config rules:' .. vim.inspect(vim.b.editorconfig)) end, { desc = "Show editorconfig rules" })
+--{{{> Qeuroal: 逐级显示实际参与合并的 EditorConfig 文件，并在 root=true 时停止
+map("n", "<leader>cE", function()
+  local configs = {}
+  local candidates = vim.fs.find(".editorconfig", {
+    path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+    upward = true,
+    limit = math.huge,
+  })
+
+  for _, config in ipairs(candidates) do
+    configs[#configs + 1] = config
+    local lines = vim.fn.readfile(config)
+    if vim.iter(lines):any(function(line) return line:lower():match("^%s*root%s*[=:]%s*true%s*$") end) then
+      break
+    end
+  end
+
+  vim.notify("Config rules: " .. vim.inspect(vim.b.editorconfig) .. "\nEditorConfig files:\n- " .. table.concat(configs, "\n- "))
+end, { desc = "Show editorconfig rules" })
+--<}}}
 
 -- location list
 map("n", "<leader>xl", function()
@@ -266,5 +285,3 @@ map({"v"}, "gy", '"+y', { desc = "Yank to system clipboard" })
 map({"n"}, "gp", '"+p', { desc = "Paste from system clipboard" })
 map({"n"}, "gP", '"+P', { desc = "Paste from system clipboard" })
 --<}}}
-
-
