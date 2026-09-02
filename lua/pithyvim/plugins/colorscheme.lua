@@ -36,6 +36,9 @@ return {
     priority = 1000, -- Ensure it loads first
     name = "catppuccin",
     opts = {
+      --{{{> Qeuroal: 将 flavour 合并到 Lazy 最终 opts，避免主题加载时用另一组参数重复 setup 和编译
+      flavour = "macchiato", -- latte, frappe, macchiato, mocha
+      --<}}}
       custom_highlights = function(colors)
         return {
           WinSeparator = { fg = colors.blue, bg = "NONE" }, -- colors.sapphire, colors.overlay2
