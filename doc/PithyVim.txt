@@ -1,5 +1,5 @@
 *PithyVim.txt*                                                     PithyVim docs
-                                       For Neovim    Last change: 2026 August 21
+                                     For Neovim    Last change: 2026 September 3
 
 ==============================================================================
 Table of Contents                                  *PithyVim-table-of-contents*
@@ -10,7 +10,13 @@ Table of Contents                                  *PithyVim-table-of-contents*
   - File Structure                                    |PithyVim-file-structure|
   - Defaults                                                |PithyVim-defaults|
   - Keymaps                                                |PithyVim-keymaps|
-  - Extras                                                  |PithyVim-extras|
+  - Color Schemes                                    |PithyVim-colorschemes|
+  - Pickers and UI                                        |PithyVim-pickers|
+  - Completion and Snippets                            |PithyVim-completion|
+  - AI                                                          |PithyVim-ai|
+  - Markdown and Notebooks                              |PithyVim-markdown|
+  - TeX and Language Extras                                  |PithyVim-tex|
+  - Tree-sitter and LSP                              |PithyVim-treesitter|
   - Testing                                                |PithyVim-testing|
   - Configuration                                      |PithyVim-configuration|
 
@@ -128,11 +134,13 @@ also shown by `:LazyExtras` and WhichKey.
     <leader>le             Open LazyExtras
     <leader>fy             Copy the current file path
     <leader>fY             Copy the current directory path
-    <leader>fC             Show effective EditorConfig rules
+    <leader>cE             Show effective EditorConfig rules and files
     <leader>xw             Open the error Quickfix list on the right
     <leader>qw             Save and quit all windows
     <leader>tz             Toggle marker/expr foldmethod
     <leader>tc             Toggle system clipboard integration
+    <leader>ti             Toggle Snacks image rendering
+    <leader>tm             Toggle Snacks math rendering
     gy                     Yank to the system clipboard
     gp                     Paste from the system clipboard
     gP                     Paste before from the system clipboard
@@ -238,10 +246,15 @@ NES and shows a single warning instead of repeatedly reporting the same error.
 
 MARKDOWN AND NOTEBOOKS                              *PithyVim-markdown*
 
-The Markdown extra enables Snacks images and math rendering.  `force=false`
-keeps rendering dependent on terminal support.  When the cursor enters a
-multiline rendered formula, concealed lines are revealed so the full LaTeX
-source can be edited.
+Snacks image and math rendering are disabled by default.  Use `<leader>ti`
+and `<leader>tm` to toggle them independently.  Defaults can be overridden
+with `image.enabled` and `image.math.enabled` in the user's `.lazy.lua` opts.
+`force=false` keeps rendering dependent on terminal support.
+
+With math enabled, inline updates pause in Insert mode and refresh on
+InsertLeave.  When the cursor enters a multiline rendered formula, concealed
+lines are revealed so the full LaTeX source can be edited.  Image modules are
+loaded only when either renderer is enabled.
 
 The LaTeX Tree-sitter parser is requested only when the system `tree-sitter`
 CLI is version 0.26.1 or newer.  This avoids ABI and GLIBC failures on older
@@ -259,9 +272,10 @@ TEX AND LANGUAGE EXTRAS                                *PithyVim-tex*
 
 The TeX extra is recommended when `latexmk` is executable.  VimTeX uses Skim,
 supports forward/reverse synchronization, disables automatic viewer opening,
-and disables its built-in completion and insert mappings.  Math symbols,
-sections, ligatures, citations, accents, fractions, and conceal settings are
-configured for editing.
+and disables its built-in completion and insert mappings.  Sections,
+ligatures, citations, accents, and text styles remain concealed.  VimTeX math
+symbols, delimiters, fractions, superscripts, and subscripts are not concealed
+to avoid overlapping with Snacks math rendering.
 
 The Python extra is also recommended when `python` or `python3` is executable.
 All language extras expose a `recommended` condition and can be enabled with
@@ -288,10 +302,12 @@ Run the complete offline suite with:
 
 The suite checks plugin specs, language recommendations, parser duplication,
 renamed plugins, memoization, completion edge cases, runtime parser detection,
-Markdown multiline source reveal, Tree-sitter CLI version gates, and Jupyter
+Snacks image and math toggles, EditorConfig indentation inheritance, Markdown
+multiline source reveal, Tree-sitter CLI version gates, and Jupyter
 recommendation conditions.
 
-The current suite is expected to report 442 cases, 5 groups, and zero failures.
+The current suite is expected to report 450 cases and 5 groups, with zero
+failures.
 
 
 CONFIGURATION                                          *PithyVim-configuration*
