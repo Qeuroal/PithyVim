@@ -3,9 +3,34 @@
 本文按照 `lua/pithyvim/config/init.lua` 中的 `M.version` 版本节点整理。
 同一版本内按功能归类，合并提交和纯同步提交不单独列出。
 
-## 1.15.0
+## 1.16.0
 
 当前版本：`lua/pithyvim/config/init.lua:6`
+
+### Snacks 图片与公式渲染
+
+- 增加独立的 Snacks 图片和公式开关，分别使用 `<leader>ti` 和 `<leader>tm`。
+- 图片与公式默认关闭，并支持通过 `.lazy.lua` 的 `opts.image` 设置默认状态。
+- 默认关闭时延迟加载 Snacks 图片模块，直到首次开启图片或公式渲染。
+- Insert 模式编辑公式时暂停重复渲染，在离开 Insert 模式后统一刷新。
+- 修正公式范围额外包含下一行的问题，避免光标位于公式上一行时错误隐藏公式。
+- 保留多行公式源码展开，并关闭与 Snacks 重复的 VimTeX 数学 conceal。
+
+### 配置与启动性能
+
+- Catppuccin 统一使用最终 Lazy opts 执行 setup，避免重复配置和编译。
+- 缩进改为 `shiftwidth=0`、`softtabstop=-1`，统一继承 `tabstop`。
+- EditorConfig 使用 `tab_width`，避免覆盖 `shiftwidth` 和 `softtabstop`。
+- EditorConfig 查看快捷键改为 `<leader>cE`，并列出实际参与合并的配置文件。
+- 将 LaTeX parser 的 Tree-sitter CLI 版本检查移入核心 Tree-sitter 配置。
+
+### 文档与测试
+
+- 增加 `<leader>/` 的 ripgrep 与 FZF 兼容两阶段搜索说明。
+- 扩充 Snacks 渲染、缩进继承、EditorConfig 和启动配置的回归测试。
+- 测试覆盖达到 450 cases、5 groups，当前为零失败。
+
+## 1.15.0
 
 ### 核心配置与兼容性
 
