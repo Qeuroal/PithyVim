@@ -60,6 +60,8 @@ describe("custom feature contracts", function()
     end
     assert.is_not_nil(catppuccin)
     assert.are.equal("macchiato", catppuccin.opts.flavour)
+    contains("lua/pithyvim/config/init.lua", { 'return require("catppuccin").load()' })
+    contains("lua/pithyvim/plugins/colorscheme.lua", { "priority = 10000" })
   end)
 
   it("keeps custom utility helpers", function()
@@ -154,6 +156,30 @@ describe("custom feature contracts", function()
     contains("lua/pithyvim/plugins/extras/coding/blink.lua", { "['<C-j>']", "['<C-k>']", "['<C-y>']", "snippet_forward", "snippet_backward" })
     contains("lua/pithyvim/plugins/extras/coding/nvim-cmp.lua", { '["<C-j>"]', '["<C-k>"]', '["<C-n>"] = cmp.mapping.abort()', '["<C-l>"]' })
     contains("lua/pithyvim/plugins/extras/coding/luasnip.lua", { "snippets/from_vscode", "snippets/from_snipmate", "history = false", "exit_roots = true", "jumpable(-1)" })
+    contains("lua/pithyvim/plugins/extras/coding/blink.lua", {
+      "get_cwd = function(_)",
+      "return vim.fn.getcwd()",
+    })
+  end)
+
+  it("keeps TypeScript and linter compatibility contracts", function()
+    contains("lua/pithyvim/plugins/extras/lang/typescript/init.lua", {
+      'vim.g.pithyvim_ts_lsp == "tsgo"',
+      'vim.g.pithyvim_ts_lsp = "tsc"',
+      'extra = "lang.typescript.tsc"',
+    })
+    contains("lua/pithyvim/plugins/extras/lang/typescript/tsc.lua", {
+      "tsgo = { enabled = false }",
+      "tsc = {",
+      '["js/ts"] = {',
+    })
+    contains("lua/pithyvim/util/plugin.lua", {
+      '["pithyvim.plugins.extras.lang.typescript.tsgo"] = "pithyvim.plugins.extras.lang.typescript.tsc"',
+    })
+    contains("lua/pithyvim/plugins/linting.lua", {
+      "local function list_prepend(dst, src)",
+      "table.insert(dst, i, src[i])",
+    })
   end)
 
   it("keeps AI safety and provider contracts", function()

@@ -52,6 +52,34 @@ describe("regressions", function()
     assert.are.equal(0, bracket_calls("hello", 5, 1))
   end)
 
+  it("prepends custom linter arguments", function()
+    local linting = require("pithyvim.plugins.linting")[1]
+    local lint = package.loaded.lint
+    local create_autocmd = vim.api.nvim_create_autocmd
+    local create_augroup = vim.api.nvim_create_augroup
+    package.loaded.lint = {
+      linters = { selene = { args = { "--config", "default" } } },
+      linters_by_ft = {},
+    }
+    vim.api.nvim_create_autocmd = function() end
+    vim.api.nvim_create_augroup = function()
+      return 1
+    end
+
+    finally(function()
+      linting.config(nil, {
+        events = {},
+        linters_by_ft = {},
+        linters = { selene = { prepend_args = { "--quiet", "--foo" } } },
+      })
+      assert.same({ "--quiet", "--foo", "--config", "default" }, package.loaded.lint.linters.selene.args)
+    end, function()
+      package.loaded.lint = lint
+      vim.api.nvim_create_autocmd = create_autocmd
+      vim.api.nvim_create_augroup = create_augroup
+    end)
+  end)
+
   it("derives effective indentation widths from tabstop", function()
     local previous = vim.api.nvim_get_current_buf()
     local buf = vim.api.nvim_create_buf(false, true)

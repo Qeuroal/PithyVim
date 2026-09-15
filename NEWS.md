@@ -23,12 +23,17 @@
 - EditorConfig 使用 `tab_width`，避免覆盖 `shiftwidth` 和 `softtabstop`。
 - EditorConfig 查看快捷键改为 `<leader>cE`，并列出实际参与合并的配置文件。
 - 将 LaTeX parser 的 Tree-sitter CLI 版本检查移入核心 Tree-sitter 配置。
+- Blink path 补全改为从当前工作目录解析相对路径。
+- Jupyter extra 在 `.ipynb` 文件的 `BufReadCmd` 事件加载, 确保首次读取由 `ipynb.nvim` 处理。
+- TypeScript 从 `tsgo` 迁移到 `tsc`, 并兼容旧 extra 名称。
+- nvim-lint 的 `prepend_args` 现在插入到已有参数之前。
+- 无效的默认主题回退到 Catppuccin, 同时移除已废弃的 OneDarkPro 注册项。
 
 ### 文档与测试
 
 - 增加 `<leader>/` 的 ripgrep 与 FZF 兼容两阶段搜索说明。
 - 扩充 Snacks 渲染、缩进继承、EditorConfig 和启动配置的回归测试。
-- 测试覆盖达到 450 cases、5 groups，当前为零失败。
+- 增加 Blink cwd、Jupyter 首次读取、TypeScript 迁移、lint 参数顺序和主题回退的回归覆盖。
 
 ## 1.15.0
 
