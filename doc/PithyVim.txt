@@ -167,6 +167,8 @@ Catppuccin Macchiato.  Available registry entries are:
 
 Catppuccin customizes `WinSeparator` with a blue foreground and transparent
 background.  The theme loader setup is controlled by `PithyVim.config`.
+OneDarkPro is no longer registered.  If the configured default is missing,
+the loader warns and falls back to Catppuccin.
 
 
 PICKERS AND UI                                          *PithyVim-pickers*
@@ -223,6 +225,10 @@ Blink and nvim-cmp use `<C-j/k>` for candidate navigation.  Blink additionally
 uses `<C-l>` for documentation, `<C-y>` to accept, `<C-e>` to hide, and
 `<C-b/f>` to scroll documentation.  Tab and S-Tab move through snippets.
 
+Blink's path completion resolves relative paths from Neovim's current working
+directory.  This keeps completion stable when the current buffer belongs to a
+different project root.
+
 LuaSnip automatically loads snippets from:
 
     ~/.config/nvim/snippets/from_vscode
@@ -264,7 +270,9 @@ available through the configured renderers.
 The Jupyter extra is recommended for both an `ipynb` filetype and filenames
 ending in `.ipynb`.  It connects `ipynb.nvim` with Tree-sitter, LSP,
 render-markdown, and Snacks images.  Markdown rendering is attached to the
-`ipynb` filetype with `anti_conceal.enabled=false`.
+`ipynb` filetype with `anti_conceal.enabled=false`.  The extra loads on the
+`BufReadCmd` event for `*.ipynb`, before `ipynb.nvim` handles the first read,
+and does not load for ordinary filenames.
 
 
 TEX AND LANGUAGE EXTRAS                                *PithyVim-tex*
@@ -279,6 +287,16 @@ to avoid overlapping with Snacks math rendering.
 The Python extra is also recommended when `python` or `python3` is executable.
 All language extras expose a `recommended` condition and can be enabled with
 the LazyExtras UI.
+
+The TypeScript extra uses `vtsls` by default and supports `tsc` as the
+alternative TypeScript LSP.  The former `tsgo` setting is migrated to `tsc`,
+and the old `lang.typescript.tsgo` extra is mapped to
+`lang.typescript.tsc`.  The TypeScript `tsc` configuration uses the `js/ts`
+settings namespace.
+
+The nvim-lint integration applies `prepend_args` before a linter's existing
+arguments.  This changes argument order without changing the linter selection
+or condition checks.
 
 
 TREE-SITTER AND LSP                                  *PithyVim-treesitter*
@@ -305,8 +323,9 @@ Snacks image and math toggles, EditorConfig indentation inheritance, Markdown
 multiline source reveal, Tree-sitter CLI version gates, and Jupyter
 recommendation conditions.
 
-The current suite is expected to report 450 cases and 5 groups, with zero
-failures.
+The suite is split across feature-contract, regression, extra-validation, and
+Jupyter loading specs.  Run the command above to see the current case count;
+the count changes as new compatibility checks are added.
 
 
 CONFIGURATION                                          *PithyVim-configuration*
