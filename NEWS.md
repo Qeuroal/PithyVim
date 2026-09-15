@@ -5,8 +5,6 @@
 
 ## 1.16.0
 
-当前版本：`lua/pithyvim/config/init.lua:6`
-
 ### Snacks 图片与公式渲染
 
 - 增加独立的 Snacks 图片和公式开关，分别使用 `<leader>ti` 和 `<leader>tm`。

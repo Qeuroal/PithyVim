@@ -1,5 +1,5 @@
 *PithyVim.txt*                                                     PithyVim docs
-                                     For Neovim    Last change: 2026 September 3
+                                     For Neovim    Last change: 2026 September 15
 
 ==============================================================================
 Table of Contents                                  *PithyVim-table-of-contents*
