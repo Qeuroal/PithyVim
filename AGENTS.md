@@ -1,0 +1,1 @@
+../nuts/prompts/pithyvim/AGENTS.md

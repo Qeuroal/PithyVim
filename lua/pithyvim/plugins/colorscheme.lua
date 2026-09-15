@@ -1,0 +1,86 @@
+return {
+
+  -- tokyonight
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    opts = { style = "moon" },
+  },
+
+  -- everforest
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = true,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
+    config = function()
+      require("everforest").setup({
+        -- Your config here
+      })
+    end,
+  },
+
+  -- catppuccin
+  {
+    "catppuccin/nvim",
+    lazy = true,
+    priority = 10000, -- Ensure it loads first
+    name = "catppuccin",
+    opts = {
+      --{{{> Qeuroal: 将 flavour 合并到 Lazy 最终 opts，避免主题加载时用另一组参数重复 setup 和编译
+      flavour = "macchiato", -- latte, frappe, macchiato, mocha
+      --<}}}
+      custom_highlights = function(colors)
+        return {
+          WinSeparator = { fg = colors.blue, bg = "NONE" }, -- colors.sapphire, colors.overlay2
+        }
+      end,
+      lsp_styles = {
+        underlines = {
+          errors = { "undercurl" },
+          hints = { "undercurl" },
+          warnings = { "undercurl" },
+          information = { "undercurl" },
+        },
+      },
+      integrations = {
+        aerial = true,
+        alpha = true,
+        cmp = true,
+        dashboard = true,
+        flash = true,
+        fzf = true,
+        grug_far = true,
+        gitsigns = true,
+        headlines = true,
+        illuminate = true,
+        indent_blankline = { enabled = true },
+        leap = true,
+        lsp_trouble = true,
+        mason = true,
+        mini = true,
+        navic = { enabled = true, custom_bg = "lualine" },
+        neotest = true,
+        neotree = true,
+        noice = true,
+        notify = true,
+        snacks = true,
+        telescope = true,
+        treesitter_context = true,
+        which_key = true,
+      },
+    },
+    specs = {
+      {
+        "akinsho/bufferline.nvim",
+        optional = true,
+        opts = function(_, opts)
+          if (vim.g.colors_name or ""):find("catppuccin") then
+            opts.highlights = require("catppuccin.special.bufferline").get_theme()
+          end
+        end,
+      },
+    },
+  },
+}
