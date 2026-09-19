@@ -111,6 +111,18 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+--{{{> Qeuroal
+-- Scope C indentation to C/C++ instead of imposing it on other filetypes.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("c_indent"),
+  pattern = { "c", "cpp" },
+  callback = function(event)
+    vim.bo[event.buf].cindent = true
+    vim.b[event.buf].undo_ftplugin = (vim.b[event.buf].undo_ftplugin or "") .. " | setlocal cindent<"
+  end,
+})
+--<}}}
+
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
@@ -157,4 +169,3 @@ vim.api.nvim_create_user_command("SnakeToCamel", function(opts)
   end
 end, { range = true })
 --<}}}
-

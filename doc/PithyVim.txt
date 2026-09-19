@@ -1,5 +1,5 @@
 *PithyVim.txt*                                                     PithyVim docs
-                                     For Neovim    Last change: 2026 September 3
+                                     For Neovim    Last change: 2026 September 15
 
 ==============================================================================
 Table of Contents                                  *PithyVim-table-of-contents*
@@ -106,6 +106,10 @@ in the user's own `lua/plugins/` directory.
 DEFAULTS                                                *PithyVim-defaults*
 
 PithyVim defaults are defined in `lua/pithyvim/config/options.lua`.
+
+`cindent` defaults to off and is enabled locally for C/C++ buffers. Other
+filetypes no longer inherit C indentation rules from the global configuration.
+Language-specific `indentexpr` takes precedence; `autoindent` remains enabled.
 
 - Automatic formatting is disabled by default (`vim.g.autoformat = false`).
 - Diagnostics are disabled by default and can be toggled with `<leader>ud`.

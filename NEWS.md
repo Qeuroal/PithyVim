@@ -5,8 +5,6 @@
 
 ## 1.16.0
 
-当前版本：`lua/pithyvim/config/init.lua:6`
-
 ### Snacks 图片与公式渲染
 
 - 增加独立的 Snacks 图片和公式开关，分别使用 `<leader>ti` 和 `<leader>tm`。
@@ -18,6 +16,7 @@
 
 ### 配置与启动性能
 
+- `cindent` 从全局开启改为仅在 C/C++ 文件中开启, 其他文件类型不再默认套用 C 缩进规则.
 - Catppuccin 统一使用最终 Lazy opts 执行 setup，避免重复配置和编译。
 - 缩进改为 `shiftwidth=0`、`softtabstop=-1`，统一继承 `tabstop`。
 - EditorConfig 使用 `tab_width`，避免覆盖 `shiftwidth` 和 `softtabstop`。
