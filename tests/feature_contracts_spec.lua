@@ -46,7 +46,7 @@ describe("custom feature contracts", function()
   it("keeps the custom colorscheme registry", function()
     local colors = require("pithyvim.config.colorscheme")
     assert.are.equal("catppuccin", colors.default)
-    for _, name in ipairs({ "tokyonight", "everforest", "catppuccin" }) do
+    for _, name in ipairs({ "tokyonight", "catppuccin" }) do
       assert.is_table(colors.schemes[name])
     end
     assert.is_nil(colors.schemes.catppuccin.setup)
@@ -120,7 +120,6 @@ describe("custom feature contracts", function()
 
   it("keeps colorscheme plugin behavior", function()
     contains("lua/pithyvim/plugins/colorscheme.lua", {
-      "neanias/everforest-nvim",
       'flavour = "macchiato"',
       "custom_highlights = function(colors)",
       "WinSeparator = { fg = colors.blue, bg = \"NONE\" }",

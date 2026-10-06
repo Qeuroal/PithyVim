@@ -16,6 +16,7 @@
 
 ### 配置与启动性能
 
+- 移除 Everforest 插件声明和主题注册项, 保留 Catppuccin 和 TokyoNight. 默认主题仍为 Catppuccin Macchiato.
 - `cindent` 从全局开启改为仅在 C/C++ 文件中开启, 其他文件类型不再默认套用 C 缩进规则.
 - Catppuccin 统一使用最终 Lazy opts 执行 setup，避免重复配置和编译。
 - 缩进改为 `shiftwidth=0`、`softtabstop=-1`，统一继承 `tabstop`。
