@@ -46,9 +46,7 @@ describe("custom feature contracts", function()
   it("keeps the custom colorscheme registry", function()
     local colors = require("pithyvim.config.colorscheme")
     assert.are.equal("catppuccin", colors.default)
-    for _, name in ipairs({ "tokyonight", "catppuccin" }) do
-      assert.is_table(colors.schemes[name])
-    end
+    assert.is_table(colors.schemes.catppuccin)
     assert.is_nil(colors.schemes.catppuccin.setup)
 
     local catppuccin

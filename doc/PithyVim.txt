@@ -29,7 +29,7 @@ Markdown/Notebook support, and local test coverage.
 FEATURES                                                    *PithyVim-features*
 
 - Lazy-loaded plugin specifications with optional language and UI extras
-- Built-in Catppuccin and TokyoNight color schemes
+- Built-in Catppuccin color scheme
 - Snacks, Telescope, or FzfLua based picker workflows
 - Tree-sitter highlighting, folds, indentation, and parser compatibility checks
 - LSP, formatting, linting, DAP, completion, snippets, and AI integrations
@@ -54,16 +54,26 @@ REQUIREMENTS                                            *PithyVim-requirements*
 
 GETTING STARTED                                      *PithyVim-getting-started*
 
-Clone this repository as your Neovim configuration:
+PithyVim is a plugin distribution used by PithyVimart.  Its root `init.lua`
+only displays a warning and exits; it is not a standalone Neovim configuration.
+In your Neovim configuration, bootstrap lazy.nvim, then add PithyVim to its
+plugin specification list:
 
->sh
-    mv ~/.config/nvim ~/.config/nvim.bak
-    git clone https://github.com/Qeuroal/PithyVim ~/.config/nvim
-    nvim
+>lua
+    require("lazy").setup({
+      spec = {
+        { "Qeuroal/PithyVim", branch = "dev", import = "pithyvim.plugins" },
+        { import = "plugins" },
+      },
+    })
 <
 
-The repository's `init.lua` loads `pithyvim`.  Plugins are installed by
-lazy.nvim on first start.  To run the local test suite:
+Create `lua/plugins/` for your own plugin specifications, or omit its import
+if you do not use it.  Import `pithyvim.plugins` first, followed by any
+`pithyvim.plugins.extras.*` modules, then your own plugins.  PithyVim's plugin
+specification initializes the configuration; lazy.nvim installs the plugins.
+
+To run the local test suite from a development checkout:
 
 >sh
     make test
@@ -163,10 +173,9 @@ active pane and `<C-Space>` goes to the next pane.
 COLOR SCHEMES                                          *PithyVim-colorschemes*
 
 The registry is in `lua/pithyvim/config/colorscheme.lua`.  The default is
-Catppuccin Macchiato.  The built-in plugins and registry entries are:
+Catppuccin Macchiato.  The built-in plugin and registry entry are:
 
 - `catppuccin`
-- `tokyonight`
 
 Catppuccin customizes `WinSeparator` with a blue foreground and transparent
 background.  The theme loader setup is controlled by `PithyVim.config`.

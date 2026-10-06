@@ -3,6 +3,14 @@
 本文按照 `lua/pithyvim/config/init.lua` 中的 `M.version` 版本节点整理。
 同一版本内按功能归类，合并提交和纯同步提交不单独列出。
 
+## 2.0.1
+
+### 主题与文档
+
+- 移除 Everforest 和 TokyoNight 插件声明及主题注册项, 仅保留 Catppuccin. 默认主题仍为 Catppuccin Macchiato.
+- 修正帮助文档和 README 的安装说明, 通过 lazy.nvim 导入 PithyVim 插件, 不再将本仓库作为独立 Neovim 配置克隆.
+- 帮助文档统一使用英文, 保留命令, 快捷键和 help 标签.
+
 ## 1.16.0
 
 ### Snacks 图片与公式渲染
@@ -16,7 +24,6 @@
 
 ### 配置与启动性能
 
-- 移除 Everforest 插件声明和主题注册项, 保留 Catppuccin 和 TokyoNight. 默认主题仍为 Catppuccin Macchiato.
 - `cindent` 从全局开启改为仅在 C/C++ 文件中开启, 其他文件类型不再默认套用 C 缩进规则.
 - Catppuccin 统一使用最终 Lazy opts 执行 setup，避免重复配置和编译。
 - 缩进改为 `shiftwidth=0`、`softtabstop=-1`，统一继承 `tabstop`。
