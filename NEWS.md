@@ -3,6 +3,14 @@
 本文按照 `lua/pithyvim/config/init.lua` 中的 `M.version` 版本节点整理。
 同一版本内按功能归类，合并提交和纯同步提交不单独列出。
 
+## 2.0.1
+
+### 主题与文档
+
+- 移除 Everforest 和 TokyoNight 插件声明及主题注册项, 仅保留 Catppuccin. 默认主题仍为 Catppuccin Macchiato.
+- 修正帮助文档和 README 的安装说明, 通过 lazy.nvim 导入 PithyVim 插件, 不再将本仓库作为独立 Neovim 配置克隆.
+- 帮助文档统一使用英文, 保留命令, 快捷键和 help 标签.
+
 ## 1.16.0
 
 ### Snacks 图片与公式渲染
