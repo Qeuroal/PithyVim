@@ -287,6 +287,7 @@ map({"n"}, "gP", '"+P', { desc = "Paste from system clipboard" })
 --<}}}
 
 --{{{> Qeuroal
+-- Visual 模式: 使用 Search 高亮组选中文字的字面匹配, 高亮后返回 Normal 模式.
 map("x", "<leader>h", function()
   -- Visual marks still describe the previous selection while this callback runs.
   local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
@@ -299,6 +300,7 @@ map("x", "<leader>h", function()
   end
   vim.cmd.normal { vim.api.nvim_replace_termcodes("<Esc>", true, false, true), bang = true }
 end, { desc = "Highlight selection" })
+-- Normal 模式: 清除当前窗口的匹配高亮并隐藏搜索高亮, 保留搜索内容.
 map("n", "<leader>H", function()
   vim.fn.clearmatches()
   vim.cmd.nohlsearch()
