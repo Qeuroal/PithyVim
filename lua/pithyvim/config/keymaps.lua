@@ -285,3 +285,22 @@ map({"v"}, "gy", '"+y', { desc = "Yank to system clipboard" })
 map({"n"}, "gp", '"+p', { desc = "Paste from system clipboard" })
 map({"n"}, "gP", '"+P', { desc = "Paste from system clipboard" })
 --<}}}
+
+--{{{> Qeuroal
+map("x", "<leader>h", function()
+  -- Visual marks still describe the previous selection while this callback runs.
+  local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+  for i, line in ipairs(lines) do
+    lines[i] = vim.fn.escape(line, "\\")
+  end
+  local text = table.concat(lines, "\\n")
+  if text ~= "" then
+    vim.fn.matchadd("Search", "\\V" .. text)
+  end
+  vim.cmd.normal { vim.api.nvim_replace_termcodes("<Esc>", true, false, true), bang = true }
+end, { desc = "Highlight selection" })
+map("n", "<leader>H", function()
+  vim.fn.clearmatches()
+  vim.cmd.nohlsearch()
+end, { desc = "Clear highlights" })
+--<}}}
