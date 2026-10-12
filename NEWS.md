@@ -5,6 +5,11 @@
 
 ## 2.0.1
 
+### 快捷键
+
+- 增加 Visual 模式 `<leader>h` 字面文本高亮, 正确读取当前选区, 支持反向, 整行, 块选择及多字节字符, 高亮后返回 Normal 模式.
+- 增加 Normal 模式 `<leader>H`, 清除当前窗口的匹配高亮并隐藏搜索高亮, 保留搜索内容. 使用现有 `map` 注册, 开启 Harpoon2 extra 时优先保留其同名快捷键.
+
 ### 主题与文档
 
 - 移除 Everforest 和 TokyoNight 插件声明及主题注册项, 仅保留 Catppuccin. 默认主题仍为 Catppuccin Macchiato.

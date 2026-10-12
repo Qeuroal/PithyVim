@@ -1,5 +1,5 @@
 *PithyVim.txt*                                                     PithyVim docs
-                                     For Neovim    Last change: 2026 October 06
+                                     For Neovim    Last change: 2026 October 12
 
 ==============================================================================
 Table of Contents                                  *PithyVim-table-of-contents*
@@ -158,8 +158,20 @@ also shown by `:LazyExtras` and WhichKey.
     gy                     Yank to the system clipboard
     gp                     Paste from the system clipboard
     gP                     Paste before from the system clipboard
+    <leader>h              Highlight the selected text (Visual mode)
+    <leader>H              Clear matches and search highlighting (Normal mode)
     <leader>uS             Toggle Snacks smooth scrolling
     <leader>uu             Toggle UndoTree
+
+Visual `<leader>h` highlights literal occurrences of the selected text in the
+current window, then returns to Normal mode. Characterwise, linewise, and blockwise
+selections are supported; block rows are joined as consecutive lines.
+Matches accumulate. Normal `<leader>H` clears all match highlights in the current
+window and hides search highlighting, preserving the search pattern. Syntax and
+diagnostic highlighting are unaffected.
+When the Harpoon2 extra is enabled, its Normal `<leader>H` mapping takes precedence
+and adds the current file to Harpoon. Use `:call clearmatches()` and `:nohlsearch`
+to clear highlights in that case. Visual `<leader>h` remains available.
 
 Lowercase picker mappings generally use the current working directory or
 current buffer.  Uppercase variants generally use the project root or
