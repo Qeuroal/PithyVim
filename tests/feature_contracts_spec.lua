@@ -1,5 +1,74 @@
 ---@module "luassert"
 
+describe("TeX PDF viewers", function()
+  local function with_platform(platform, run)
+    local has = vim.fn.has
+    local saved = {}
+    for _, name in ipairs({
+      "vimtex_quickfix_mode",
+      "tex_conceal",
+      "tex_flavor",
+      "vimtex_view_method",
+      "vimtex_view_skim_sync",
+      "vimtex_view_skim_activate",
+      "vimtex_view_automatic",
+      "vimtex_complete_enabled",
+      "vimtex_imaps_enabled",
+      "vimtex_syntax_conceal",
+      "vimtex_quickfix_ignore_filters",
+    }) do
+      saved[name] = { value = vim.g[name] }
+    end
+
+    local ok, err = xpcall(function()
+      vim.fn.has = function(feature)
+        return feature == platform and 1 or 0
+      end
+      vim.g.vimtex_view_method = nil
+      vim.g.vimtex_view_skim_sync = nil
+      vim.g.vimtex_view_skim_activate = nil
+      for _, spec in ipairs(require("pithyvim.plugins.extras.lang.tex")) do
+        if spec[1] == "lervag/vimtex" then
+          spec.init()
+          run()
+          return
+        end
+      end
+      error("VimTeX spec not found")
+    end, debug.traceback)
+
+    vim.fn.has = has
+    for name, previous in pairs(saved) do
+      vim.g[name] = previous.value
+    end
+    if not ok then error(err) end
+  end
+
+  it("keeps Skim synchronization on macOS", function()
+    with_platform("mac", function()
+      assert.are.equal("skim", vim.g.vimtex_view_method)
+      assert.are.equal(1, vim.g.vimtex_view_skim_sync)
+      assert.are.equal(0, vim.g.vimtex_view_skim_activate)
+    end)
+  end)
+
+  it("uses Zathura without Skim options on Linux", function()
+    with_platform("linux", function()
+      assert.are.equal("zathura", vim.g.vimtex_view_method)
+      assert.is_nil(vim.g.vimtex_view_skim_sync)
+      assert.is_nil(vim.g.vimtex_view_skim_activate)
+    end)
+  end)
+
+  it("leaves the VimTeX viewer default on other platforms", function()
+    with_platform("win32", function()
+      assert.is_nil(vim.g.vimtex_view_method)
+      assert.is_nil(vim.g.vimtex_view_skim_sync)
+      assert.is_nil(vim.g.vimtex_view_skim_activate)
+    end)
+  end)
+end)
+
 local function read(path)
   local file = assert(io.open(path, "r"))
   local content = file:read("*a")
@@ -190,7 +259,7 @@ describe("custom feature contracts", function()
     contains("lua/pithyvim/plugins/extras/lang/markdown.lua", { "latex = { enabled = false }", "min_width = 45" })
     contains("lua/pithyvim/plugins/extras/lang/jupyter.lua", { 'filetype == "ipynb"', '%.ipynb$', 'event = { { event = "BufReadCmd", pattern = "*.ipynb" } }', 'ft = { "ipynb" }', "anti_conceal = { enabled = false }" })
     contains("lua/pithyvim/plugins/extras/lang/python.lua", { 'vim.fn.executable("python")', 'vim.fn.executable("python3")' })
-    contains("lua/pithyvim/plugins/extras/lang/tex.lua", { 'vim.fn.executable("latexmk")', 'vimtex_view_method = "skim"', "vimtex_complete_enabled = 0", "vimtex_imaps_enabled = 0", "vimtex_syntax_conceal", "greek = 0", "math_bounds = 0", "math_delimiters = 0", "math_fracs = 0", "math_super_sub = 0", "math_symbols = 0" })
+    contains("lua/pithyvim/plugins/extras/lang/tex.lua", { 'vim.fn.executable("latexmk")', "vimtex_complete_enabled = 0", "vimtex_imaps_enabled = 0", "vimtex_syntax_conceal", "greek = 0", "math_bounds = 0", "math_delimiters = 0", "math_fracs = 0", "math_super_sub = 0", "math_symbols = 0" })
   end)
 
   it("keeps Tree-sitter, LSP, and repository contracts", function()

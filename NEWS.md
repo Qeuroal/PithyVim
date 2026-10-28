@@ -5,6 +5,10 @@
 
 ## 2.0.1
 
+### LaTeX
+
+- TeX extra 按系统选择 PDF 查看器: macOS 使用 Skim, Linux 使用 Zathura 的 `zathura` 后端, 支持正反向同步. 补充 Arch Linux 的 PDF 后端和 `xdotool` 安装说明.
+
 ### 快捷键
 
 - 增加 Visual 模式 `<leader>h` 字面文本高亮, 正确读取当前选区, 支持反向, 整行, 块选择及多字节字符, 高亮后返回 Normal 模式.

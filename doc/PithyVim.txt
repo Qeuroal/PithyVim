@@ -35,7 +35,7 @@ FEATURES                                                    *PithyVim-features*
 - LSP, formatting, linting, DAP, completion, snippets, and AI integrations
 - Markdown images and math rendering, including multiline LaTeX source reveal
 - Jupyter Notebook facade for `ipynb` files
-- VimTeX with Skim synchronization support
+- VimTeX with Skim (macOS) and Zathura (Linux) synchronization support
 - Tmux pane navigation, alignment tools, ANSI rendering, and UndoTree
 - Offline mini.test regression and configuration-contract tests
 
@@ -48,7 +48,8 @@ REQUIREMENTS                                            *PithyVim-requirements*
 - A C compiler for nvim-treesitter
 - `rg` for source checks and grep pickers
 - `tree-sitter` CLI >= **0.26.1** for automatic LaTeX parser installation
-- `latexmk` and Skim **(optional, for TeX extras on macOS)**
+- `latexmk` and Skim (macOS) or Zathura with a PDF backend and `xdotool` (Linux)
+  **(optional, for TeX extras)**
 - A terminal with image support **(optional, for Snacks images and math)**
 
 
@@ -301,9 +302,15 @@ and does not load for ordinary filenames.
 
 TEX AND LANGUAGE EXTRAS                                *PithyVim-tex*
 
-The TeX extra is recommended when `latexmk` is executable.  VimTeX uses Skim,
-supports forward/reverse synchronization, disables automatic viewer opening,
-and disables its built-in completion and insert mappings.  Sections,
+The TeX extra is recommended when `latexmk` is executable.  VimTeX uses Skim
+on macOS and Zathura (`zathura`) on Linux, with forward/reverse synchronization
+support.  The Zathura backend uses `xdotool` to track X11 windows and help
+avoid duplicate viewer instances.  On Arch Linux, install the dependencies: >sh
+    sudo pacman -S zathura zathura-pdf-mupdf xdotool
+<
+After compiling, use `:VimtexView` or `<localleader>lv` to open the PDF and
+perform forward search.  Automatic viewer opening is disabled, as are
+VimTeX's built-in completion and insert mappings.  Sections,
 ligatures, citations, accents, and text styles remain concealed.  VimTeX math
 symbols, delimiters, fractions, superscripts, and subscripts are not concealed
 to avoid overlapping with Snacks math rendering.
