@@ -212,8 +212,9 @@ opt.linebreak = false
 --                                             -- (Note: 在 Pithyvim 中默认为 “^I!@*-+;:,./?”)
 
 -- -- shada
--- opt.shada = string.gsub(opt.shada._value, "'100", "'0")   -- 将 '100 设置为 '0, 以此保证 jumplist 不共享且不保存,
---                                                           -- 从而在每次打开 neovim 后, jumplist 都为空
+-- vim.o.shada = vim.o.shada:gsub("'%d+", "'0") -- '0 禁止保存新的 jumplist, 同时停止保存文件内标记和 changelist, 当前会话仍正常记录.
+                                                -- 已有 ShaDa 中的旧 jumps 仍可能恢复, 此设置不会清除旧记录.
+                                                -- 最近文件和光标位置恢复也会受影响, 命令历史, 搜索历史, 寄存器及独立保存的 undo 历史不受影响.
 
 --<}}}
 

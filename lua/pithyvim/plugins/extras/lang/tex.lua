@@ -31,9 +31,13 @@ return {
       vim.g.vimtex_quickfix_mode = 0 -- 编译出错时自动打开 quickfix, 0, 从不; 1, 出错时; 2, 总是
       vim.g.tex_conceal = 'abdmg'
       vim.g.tex_flavor = 'latex'
-      vim.g.vimtex_view_method = "skim"
-      vim.g.vimtex_view_skim_sync = 1
-      vim.g.vimtex_view_skim_activate = 0
+      if vim.fn.has("mac") == 1 then
+        vim.g.vimtex_view_method = "skim"
+        vim.g.vimtex_view_skim_sync = 1
+        vim.g.vimtex_view_skim_activate = 0
+      elseif vim.fn.has("linux") == 1 then
+        vim.g.vimtex_view_method = "zathura"
+      end
       vim.g.vimtex_view_automatic = 0
       vim.g.vimtex_complete_enabled = 0 -- 关闭内建补全
       vim.g.vimtex_imaps_enabled = 0 -- 禁用 VimTeX 的 insert-mode mappings, 防止与 UltiSnips / LuaSnip 冲突
