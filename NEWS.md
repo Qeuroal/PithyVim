@@ -11,6 +11,7 @@
 
 ### 快捷键
 
+- 增加 Normal 模式 `<leader>uj`, 清空所有标签页和窗口的 jumplist, 再通过 `:wshada!` 强制重写 ShaDa, 避免合并旧跳转记录, 成功后显示通知.
 - 增加 Visual 模式 `<leader>h` 字面文本高亮, 正确读取当前选区, 支持反向, 整行, 块选择及多字节字符, 高亮后返回 Normal 模式.
 - 增加 Normal 模式 `<leader>H`, 清除当前窗口的匹配高亮并隐藏搜索高亮, 保留搜索内容. 使用现有 `map` 注册, 开启 Harpoon2 extra 时优先保留其同名快捷键.
 

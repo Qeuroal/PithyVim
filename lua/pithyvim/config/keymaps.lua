@@ -60,6 +60,14 @@ map({ "i", "n", "s" }, "<esc>", function()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
+--{{{> Qeuroal
+map("n", "<leader>uj", function()
+  vim.cmd("tabdo windo clearjumps")
+  vim.cmd("wshada!")
+  vim.notify("Cleared all jumplists and overwrote ShaDa", vim.log.levels.INFO)
+end, { desc = "Clear Jumps and Overwrite ShaDa" })
+--<}}}
+
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
