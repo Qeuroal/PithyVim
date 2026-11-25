@@ -11,7 +11,7 @@
 
 ### 快捷键
 
-- Normal 模式 `<leader>ghp` 改为浮窗预览当前 hunk, 浮窗使用真实缓冲区, 长行可按窗口宽度折行; 原行内预览移到 `<leader>ghP`, 其旧行由 `virt_lines` 绘制, 受 Neovim 限制无法折行.
+- Normal 模式 `<leader>ghp` 改为在光标上方打开圆角浮窗预览当前 hunk, 长行可按窗口宽度折行. 原行内预览移到 `<leader>ghP`, 其旧行由 `virt_lines` 绘制, 受 Neovim 限制无法折行.
 - 增加 Normal 模式 `<leader>uj`, 清空所有标签页和窗口的 jumplist, 再通过 `:wshada!` 强制重写 ShaDa, 避免合并旧跳转记录, 成功后显示通知.
 - 增加 Visual 模式 `<leader>h` 字面文本高亮, 正确读取当前选区, 支持反向, 整行, 块选择及多字节字符, 高亮后返回 Normal 模式.
 - 增加 Normal 模式 `<leader>H`, 清除当前窗口的匹配高亮并隐藏搜索高亮, 保留搜索内容. 使用现有 `map` 注册, 开启 Harpoon2 extra 时优先保留其同名快捷键.

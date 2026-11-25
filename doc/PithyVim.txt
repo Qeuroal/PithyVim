@@ -184,10 +184,10 @@ When the Harpoon2 extra is enabled, its Normal `<leader>H` mapping takes precede
 and adds the current file to Harpoon. Use `:call clearmatches()` and `:nohlsearch`
 to clear highlights in that case. Visual `<leader>h` remains available.
 
-`<leader>ghp` previews the current hunk in a floating window, so long removed
-lines wrap to the window width.  `<leader>ghP` keeps the inline preview, whose
-removed lines are drawn as virtual lines and are truncated at the window edge
-even when `wrap` is enabled.
+`<leader>ghp` previews the current hunk in a rounded floating window anchored
+above the cursor. Long removed lines wrap to the window width.
+`<leader>ghP` keeps the inline preview, whose removed lines are drawn as virtual
+lines and are truncated at the window edge even when `wrap` is enabled.
 
 Lowercase picker mappings generally use the current working directory or
 current buffer.  Uppercase variants generally use the project root or

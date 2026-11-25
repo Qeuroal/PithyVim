@@ -192,6 +192,13 @@ return {
         topdelete = { text = "" },
         changedelete = { text = "▎" },
       },
+      --{{{> Qeuroal
+      preview_config = {
+        border = "rounded",
+        anchor = "SW",
+        row = 0,
+      },
+      --<}}}
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 

@@ -9,6 +9,35 @@ describe("regressions", function()
     end
   end
 
+  it("anchors the rounded Git preview above the cursor", function()
+    local preview
+    for _, spec in ipairs(require("pithyvim.plugins.editor")) do
+      if spec[1] == "lewis6991/gitsigns.nvim" then
+        preview = spec.opts.preview_config
+        break
+      end
+    end
+    assert.is_table(preview)
+
+    local buf = vim.api.nvim_create_buf(false, true)
+    local win
+    finally(function()
+      win = vim.api.nvim_open_win(buf, false, vim.tbl_extend("force", {
+        relative = "win",
+        row = 1,
+        col = 1,
+        width = 8,
+        height = 2,
+      }, preview))
+      local config = vim.api.nvim_win_get_config(win)
+      assert.are.equal("SW", config.anchor)
+      assert.are.equal(0, config.row)
+    end, function()
+      if win then vim.api.nvim_win_close(win, true) end
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end)
+  end)
+
   local function bracket_calls(line, column, kind)
     local cmp = package.loaded.cmp
     local feedkeys = vim.api.nvim_feedkeys
