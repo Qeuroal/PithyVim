@@ -10,7 +10,7 @@ vim.g.autoformat = false
 vim.g.snacks_animate = true
 
 -- PithyVim picker to use.
--- Can be one of: telescope, fzf
+-- Can be one of: telescope, fzf, snacks
 -- Leave it to "auto" to automatically use the picker
 -- enabled with `:LazyExtras`
 vim.g.pithyvim_picker = "auto"

@@ -131,11 +131,13 @@ return {
       "saghen/blink.cmp",
       optional = true,
       dependencies = { "fang2hou/blink-copilot" },
+      --{{{> Qeuroal
       opts = function(_, opts)
         opts.sources = opts.sources or {}
         opts.sources.default = opts.sources.default or {}
         if not vim.tbl_contains(opts.sources.default, "copilot") then
-          table.insert(opts.sources.default, 1, "copilot")
+          -- table.insert(opts.sources.default, "copilot") -- 将 Copilot 追加到列表末尾
+          table.insert(opts.sources.default, 1, "copilot") -- 将 Copilot 追加到列表开头
         end
         opts.sources.providers = opts.sources.providers or {}
         opts.sources.providers.copilot = vim.tbl_deep_extend("force", opts.sources.providers.copilot or {}, {
@@ -145,6 +147,7 @@ return {
           async = true,
         })
       end,
+      --<}}}
     },
   } or nil,
 }
