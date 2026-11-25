@@ -150,6 +150,8 @@ also shown by `:LazyExtras` and WhichKey.
     <leader>fy             Copy the current file path
     <leader>fY             Copy the current directory path
     <leader>cE             Show effective EditorConfig rules and files
+    <leader>ghp            Preview the current hunk in a floating window
+    <leader>ghP            Preview the current hunk inline
     <leader>xw             Open the error Quickfix list on the right
     <leader>qw             Save and quit all windows
     <leader>tz             Toggle marker/expr foldmethod
@@ -181,6 +183,11 @@ diagnostic highlighting are unaffected.
 When the Harpoon2 extra is enabled, its Normal `<leader>H` mapping takes precedence
 and adds the current file to Harpoon. Use `:call clearmatches()` and `:nohlsearch`
 to clear highlights in that case. Visual `<leader>h` remains available.
+
+`<leader>ghp` previews the current hunk in a floating window, so long removed
+lines wrap to the window width.  `<leader>ghP` keeps the inline preview, whose
+removed lines are drawn as virtual lines and are truncated at the window edge
+even when `wrap` is enabled.
 
 Lowercase picker mappings generally use the current working directory or
 current buffer.  Uppercase variants generally use the project root or
