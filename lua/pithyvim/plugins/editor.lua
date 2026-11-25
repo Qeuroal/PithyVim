@@ -192,6 +192,13 @@ return {
         topdelete = { text = "" },
         changedelete = { text = "▎" },
       },
+      --{{{> Qeuroal
+      preview_config = {
+        border = "rounded",
+        anchor = "SW",
+        row = 0,
+      },
+      --<}}}
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
@@ -221,7 +228,10 @@ return {
         map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
         map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
         map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-        map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
+        --{{{> Qeuroal
+        map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
+        map("n", "<leader>ghP", gs.preview_hunk_inline, "Preview Hunk Inline")
+        --<}}}
         map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
         map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
