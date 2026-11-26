@@ -150,6 +150,8 @@ also shown by `:LazyExtras` and WhichKey.
     <leader>fy             Copy the current file path
     <leader>fY             Copy the current directory path
     <leader>cE             Show effective EditorConfig rules and files
+    <leader>gg             Open Lazygit in the current working directory
+    <leader>gG             Open Lazygit in the Git root directory
     <leader>ghp            Preview the current hunk in a floating window
     <leader>ghP            Preview the current hunk inline
     <leader>xw             Open the error Quickfix list on the right
@@ -166,6 +168,8 @@ also shown by `:LazyExtras` and WhichKey.
     <leader>uS             Toggle Snacks smooth scrolling
     <leader>uu             Toggle UndoTree
     <leader>uj             Clear all jumplists and overwrite ShaDa
+
+`<leader>gg` and `<leader>gG` open Lazygit in a nearly full-screen floating window.
 
 Normal `<leader>uj` runs `:tabdo windo clearjumps` followed by `:wshada!`,
 then shows a notification after both commands succeed.
