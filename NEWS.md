@@ -9,6 +9,10 @@
 
 - TeX extra 按系统选择 PDF 查看器: macOS 使用 Skim, Linux 使用 Zathura 的 `zathura` 后端, 支持正反向同步. 补充 Arch Linux 的 PDF 后端和 `xdotool` 安装说明.
 
+### Markdown
+
+- 同时启用 Markdown 和 LuaSnip extra 时, `tsep` 和 `trow` 分别根据上一行生成单行表格分隔符和空白数据行. 空白行支持按 `<Tab>` 切换单元格.
+
 ### 快捷键
 
 - Normal 模式 `<leader>ghp` 改为在光标上方打开圆角浮窗预览当前 hunk, 长行可按窗口宽度折行. 原行内预览移到 `<leader>ghP`, 其旧行由 `virt_lines` 绘制, 受 Neovim 限制无法折行.
