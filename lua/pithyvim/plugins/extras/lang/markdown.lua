@@ -4,6 +4,30 @@ PithyVim.on_very_lazy(function()
   })
 end)
 
+--{{{> Qeuroal
+local function table_column_count()
+  local row = vim.api.nvim_win_get_cursor(0)[1] - 2
+  if row < 0 then return 0 end
+
+  local line = vim.trim(vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1])
+  local count, first, last = 0, nil, nil
+  for escapes, position in line:gmatch("(\\*)()|") do
+    if #escapes % 2 == 0 then
+      count = count + 1
+      first = first or position
+      last = position
+    end
+  end
+
+  if count == 0 then return 0 end
+  return count + 1 - (first == 1 and 1 or 0) - (last == #line and 1 or 0)
+end
+
+local function has_table_row()
+  return table_column_count() > 0
+end
+--<}}}
+
 return {
   recommended = function()
     return PithyVim.extras.wants({
@@ -11,6 +35,32 @@ return {
       root = "README.md",
     })
   end,
+  --{{{> Qeuroal
+  {
+    "L3MON4D3/LuaSnip",
+    optional = true,
+    opts = function()
+      local ls = require("luasnip")
+      local conditions = { condition = has_table_row, show_condition = has_table_row }
+
+      local row = ls.s({ trig = "trow", desc = "Insert a data row based on the row above" }, ls.d(1, function()
+        local columns = table_column_count()
+        local nodes = { ls.t("| ") }
+        for col = 1, columns do
+          nodes[#nodes + 1] = ls.i(col)
+          nodes[#nodes + 1] = ls.t(col == columns and " |" or " | ")
+        end
+        return ls.sn(nil, nodes)
+      end), conditions)
+
+      local separator = ls.s({ trig = "tsep", desc = "Insert a separator based on the row above" }, ls.f(function()
+        return "|" .. string.rep(" --- |", table_column_count())
+      end), conditions)
+
+      ls.add_snippets("markdown", { row, separator }, { key = "markdown-table-rows" })
+    end,
+  },
+  --<}}}
   {
     "stevearc/conform.nvim",
     optional = true,

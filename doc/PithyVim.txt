@@ -278,6 +278,11 @@ Snippet history is disabled and S-Tab only jumps when a backward jump is
 available.  Function and method completions avoid adding duplicate parentheses
 and safely handle end-of-line completion.
 
+With the Markdown and LuaSnip extras enabled, `tsep` inserts a Markdown
+table separator based on the row above. `trow` inserts an empty data row
+with the same number of columns as the row above. Use `<Tab>` to move
+between cells.
+
 
 AI                                                    *PithyVim-ai*
 
