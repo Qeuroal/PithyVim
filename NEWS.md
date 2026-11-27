@@ -9,6 +9,10 @@
 
 - TeX extra 按系统选择 PDF 查看器: macOS 使用 Skim, Linux 使用 Zathura 的 `zathura` 后端, 支持正反向同步. 补充 Arch Linux 的 PDF 后端和 `xdotool` 安装说明.
 
+### 缩进
+
+- C/C++ 的 `cindent` 由 Neovim 自带的文件类型缩进脚本启用.
+
 ### Markdown
 
 - 修复 Markdown lint 参数, 读取 Neovim 配置目录中的规则文件, 并通过标准输入检查当前缓冲区.

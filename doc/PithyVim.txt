@@ -118,9 +118,9 @@ DEFAULTS                                                *PithyVim-defaults*
 
 PithyVim defaults are defined in `lua/pithyvim/config/options.lua`.
 
-`cindent` defaults to off and is enabled locally for C/C++ buffers. Other
-filetypes no longer inherit C indentation rules from the global configuration.
-Language-specific `indentexpr` takes precedence; `autoindent` remains enabled.
+`cindent` defaults to off globally. Neovim's built-in indent scripts
+enable it locally for C and C++. Language-specific `indentexpr` takes
+precedence, and `autoindent` remains enabled.
 
 - Automatic formatting is disabled by default (`vim.g.autoformat = false`).
 - Diagnostics are disabled by default and can be toggled with `<leader>ud`.
