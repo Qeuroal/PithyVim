@@ -362,6 +362,7 @@ PithyVim uses nvim-treesitter's installed parser list to decide
 which languages in `ensure_installed` need installation. This lets
 nvim-treesitter provision its queries even when Neovim ships a parser for
 the same language. PithyVim can use Mason to install the Tree-sitter CLI.
+If Mason is already installing the CLI, concurrent requests wait for its result.
 
 Tree-sitter highlighting, indentation, and folding are enabled only when the
 language parser and query are available.  `<leader>cL` restarts the active LSP.

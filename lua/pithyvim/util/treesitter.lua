@@ -134,7 +134,23 @@ function M.ensure_treesitter_cli(cb)
   local mr = require("mason-registry")
   mr.refresh(function()
     local p = mr.get_package("tree-sitter-cli")
-    if not p:is_installed() then
+    --{{{> Qeuroal
+    -- Ref: https://github.com/LazyVim/LazyVim/pull/7280/changes/92decdb84cdb66f502a6bede1ca7c99ad99b791b#diff-4d996376f4af1870237d335f1e82ceb03d19af6ef0dd8ba8a1b4616547984304R135-R137%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E6%96%B9%E6%A1%88%E4%B8%8D%E5%8F%AF%E4%BB%A5%E5%90%97
+    -- On the first install, the build hook and plugin config can both request the CLI.
+    if p:is_installing() then
+      -- Remove the opposite listener so a later retry cannot notify this caller again.
+      local on_success, on_failed
+      on_success = vim.schedule_wrap(function()
+        p:off("install:failed", on_failed)
+        cb(true)
+      end)
+      on_failed = vim.schedule_wrap(function()
+        p:off("install:success", on_success)
+        cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
+      end)
+      p:once("install:success", on_success):once("install:failed", on_failed)
+    --<}}}
+    elseif not p:is_installed() then
       PithyVim.info("Installing `tree-sitter-cli` with `mason.nvim`...")
       p:install(
         nil,
