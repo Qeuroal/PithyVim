@@ -351,7 +351,9 @@ settings namespace.
 
 The nvim-lint integration applies `prepend_args` before a linter's existing
 arguments.  This changes argument order without changing the linter selection
-or condition checks.
+or condition checks.  The Markdown extra uses it to pass
+`config/markdown/.markdownlint.jsonc` from Neovim's config directory while
+preserving the standard-input argument for `markdownlint-cli2`.
 
 
 TREE-SITTER AND LSP                                  *PithyVim-treesitter*

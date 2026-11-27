@@ -118,7 +118,7 @@ return {
           --    https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
           --    https://github.com/LazyVim/LazyVim/discussions/4094
           -- NOTE: ~ will not be parsed as HOME directory
-          args = { "--config", vim.fn.stdpath("config") .. "/config/markdown/.markdownlint.jsonc", "--" },
+          prepend_args = { "--config", vim.fn.stdpath("config") .. "/config/markdown/.markdownlint.jsonc" },
         },
       },
       --<}}}

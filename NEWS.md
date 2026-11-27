@@ -11,6 +11,7 @@
 
 ### Markdown
 
+- 修复 Markdown lint 参数, 读取 Neovim 配置目录中的规则文件, 并通过标准输入检查当前缓冲区.
 - 同时启用 Markdown 和 LuaSnip extra 时, `tsep` 和 `trow` 分别根据上一行生成单行表格分隔符和空白数据行. 空白行支持按 `<Tab>` 切换单元格.
 
 ### 快捷键
