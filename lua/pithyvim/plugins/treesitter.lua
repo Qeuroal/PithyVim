@@ -88,10 +88,7 @@ return {
 
       -- install missing parsers
       local install = vim.tbl_filter(function(lang)
-        --{{{> Qeuroal
-        -- return not PithyVim.treesitter.have(lang)
-        return not PithyVim.treesitter.have_parser(lang)
-        --<}}}
+        return not PithyVim.treesitter.have(lang)
       end, opts.ensure_installed or {})
       if #install > 0 then
         PithyVim.treesitter.build(function()

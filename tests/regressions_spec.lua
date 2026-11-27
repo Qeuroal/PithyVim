@@ -135,24 +135,6 @@ describe("regressions", function()
     end)
   end)
 
-  it("detects parsers already available on the runtime path", function()
-    local root = vim.fs.joinpath(vim.fn.stdpath("cache"), "parser-regression")
-    local parser_dir = vim.fs.joinpath(root, "parser")
-    vim.fn.mkdir(parser_dir, "p")
-    local parser = vim.fs.joinpath(parser_dir, "pithyvim_test.so")
-    local file = assert(io.open(parser, "w"))
-    file:close()
-
-    vim.opt.runtimepath:prepend(root)
-    finally(function()
-      local treesitter = require("pithyvim.util.treesitter")
-      assert.is_true(treesitter.have_parser("pithyvim_test"))
-      assert.is_false(treesitter.have_parser("pithyvim_missing"))
-    end, function()
-      vim.opt.runtimepath:remove(root)
-    end)
-  end)
-
   it("customizes Snacks inline rendering for formula editing", function()
     local util_plugin = package.loaded["pithyvim.plugins.util"]
     local snacks = _G.Snacks

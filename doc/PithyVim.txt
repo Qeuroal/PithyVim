@@ -358,9 +358,10 @@ preserving the standard-input argument for `markdownlint-cli2`.
 
 TREE-SITTER AND LSP                                  *PithyVim-treesitter*
 
-Tree-sitter parser availability is checked directly on the runtimepath with
-`PithyVim.treesitter.have_parser()`.  Concurrent CLI installation requests
-share one Mason installation and notify all waiting callbacks.
+PithyVim uses nvim-treesitter's installed parser list to decide
+which languages in `ensure_installed` need installation. This lets
+nvim-treesitter provision its queries even when Neovim ships a parser for
+the same language. PithyVim can use Mason to install the Tree-sitter CLI.
 
 Tree-sitter highlighting, indentation, and folding are enabled only when the
 language parser and query are available.  `<leader>cL` restarts the active LSP.

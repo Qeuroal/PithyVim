@@ -263,8 +263,6 @@ describe("custom feature contracts", function()
   end)
 
   it("keeps Tree-sitter, LSP, and repository contracts", function()
-    contains("lua/pithyvim/util/treesitter.lua", { "function M.have_parser", "M._ts_cli_callbacks", 'p:is_installing()', 'install:success', 'install:failed' })
-    contains("lua/pithyvim/plugins/treesitter.lua", { "PithyVim.treesitter.have_parser(lang)" })
     contains("lua/pithyvim/plugins/lsp/init.lua", { '"<leader>cL"', 'vim.cmd("lsp restart")' })
     contains("lua/pithyvim/plugins/init.lua", { '"Qeuroal/PithyVim"', 'branch = "dev"' })
     contains("lua/pithyvim/plugins/extras/vscode.lua", { '"Qeuroal/PithyVim"' })
