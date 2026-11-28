@@ -210,7 +210,8 @@ Catppuccin Macchiato.  The built-in plugin and registry entry are:
 - `catppuccin`
 
 Catppuccin customizes `WinSeparator` with a blue foreground and transparent
-background.  The theme loader setup is controlled by `PithyVim.config`.
+background. Snacks formula previews use Catppuccin's `Special` foreground.
+The theme loader setup is controlled by `PithyVim.config`.
 If the configured default is missing from the registry, the loader warns
 and falls back to Catppuccin.
 

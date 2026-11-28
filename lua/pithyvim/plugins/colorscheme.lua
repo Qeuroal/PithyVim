@@ -12,6 +12,8 @@ return {
       custom_highlights = function(colors)
         return {
           WinSeparator = { fg = colors.blue, bg = "NONE" }, -- colors.sapphire, colors.overlay2
+          -- Snacks can capture the default theme's color before Catppuccin loads.
+          SnacksImageMath = { link = "Special" },
         }
       end,
       lsp_styles = {
