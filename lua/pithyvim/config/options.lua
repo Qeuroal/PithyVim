@@ -145,9 +145,9 @@ opt.smartindent = true              -- Insert indents automatically
 opt.smoothscroll = true
 opt.spelllang = { "en", "cjk" }     -- 设置拼写检查的语种, 其中: "cjk" 能够保证检查英文时, 不在中文下面设置下滑线
                                     -- 可通过快捷键 <leader>us 设置拼写检查开启/关闭
-opt.splitbelow = true               -- Put new windows below current
+-- opt.splitbelow = true               -- Put new windows below current
 opt.splitkeep = "screen"
-opt.splitright = true               -- Put new windows right of current
+-- opt.splitright = true               -- Put new windows right of current
 opt.statuscolumn = [[%!v:lua.PithyVim.statuscolumn()]]
 opt.autoindent = true               -- 设置自动缩进
 opt.cindent = false                 -- C/C++ 缩进仅在对应 FileType 中开启
