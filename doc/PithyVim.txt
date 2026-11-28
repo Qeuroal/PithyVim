@@ -301,7 +301,8 @@ NES and shows a single warning instead of repeatedly reporting the same error.
 MARKDOWN AND NOTEBOOKS                              *PithyVim-markdown*
 
 Snacks image and math rendering are disabled by default.  Use `<leader>ti`
-and `<leader>tm` to toggle them independently.  Defaults can be overridden
+and `<leader>tm` to toggle them independently. The switches refresh visible
+documents in the current tab, including other splits. Defaults can be overridden
 with `image.enabled` and `image.math.enabled` in the user's `.lazy.lua` opts.
 `force=false` keeps rendering dependent on terminal support.
 

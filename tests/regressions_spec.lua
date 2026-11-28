@@ -247,13 +247,9 @@ describe("regressions", function()
     local placement_preload = package.preload["snacks.image.placement"]
     local inline_preload = package.preload["snacks.image.inline"]
     local doc_preload = package.preload["snacks.image.doc"]
-    local exec_autocmds = vim.api.nvim_exec_autocmds
-    local attached = vim.b.snacks_image_attached
-
     local setup_calls = 0
     local clean_calls = 0
     local hover_close_calls = 0
-    local autocmd_calls = 0
     local config_calls = 0
     local configured_opts
     local toggles = {}
@@ -315,14 +311,12 @@ describe("regressions", function()
           }
         end,
         image = {
-          config = { enabled = false, math = { enabled = false } },
+          config = { enabled = false, math = { enabled = false }, doc = { enabled = false } },
           doc = Doc,
           setup = function() setup_calls = setup_calls + 1 end,
           placement = Placement,
         },
       }
-      vim.api.nvim_exec_autocmds = function() autocmd_calls = autocmd_calls + 1 end
-
       spec.init()
       local startup_opts = vim.deepcopy(spec.opts)
       assert.is_nil(Doc._pithyvim_state)
@@ -344,7 +338,6 @@ describe("regressions", function()
       assert.are.equal(Doc, package.loaded["snacks.image.doc"])
       assert.same({ images = true, math = false }, Doc._pithyvim_state)
       setup_calls = 0
-      autocmd_calls = 0
 
       for _, case in ipairs({
         { images = true, math = true },
@@ -373,21 +366,18 @@ describe("regressions", function()
       assert.is_true(images.get())
       assert.is_true(Snacks.image.config.enabled)
       assert.are.equal(1, setup_calls)
-      assert.are.equal(1, autocmd_calls)
 
       images.set(false)
       assert.is_false(images.get())
       assert.is_false(Snacks.image.config.enabled)
       assert.are.equal(1, clean_calls)
       assert.are.equal(1, hover_close_calls)
-      assert.are.equal(2, autocmd_calls)
 
       math.set(true)
       assert.is_true(math.get())
       assert.is_true(Snacks.image.config.math.enabled)
       assert.is_true(Snacks.image.config.enabled)
       assert.are.equal(2, setup_calls)
-      assert.are.equal(3, autocmd_calls)
 
       images.set(true)
       images.set(false)
@@ -401,7 +391,6 @@ describe("regressions", function()
       assert.are.equal(2, clean_calls)
       assert.is_false(Snacks.image.config.enabled)
       assert.are.equal(2, hover_close_calls)
-      assert.are.equal(6, autocmd_calls)
     end, function()
       _G.Snacks = snacks
       package.loaded["snacks.image.placement"] = placement
@@ -411,8 +400,6 @@ describe("regressions", function()
       package.preload["snacks.image.placement"] = placement_preload
       package.preload["snacks.image.inline"] = inline_preload
       package.preload["snacks.image.doc"] = doc_preload
-      vim.api.nvim_exec_autocmds = exec_autocmds
-      vim.b.snacks_image_attached = attached
     end)
   end)
 
@@ -476,7 +463,7 @@ describe("regressions", function()
         }
       end,
       image = {
-        config = { enabled = false, math = { enabled = false } },
+        config = { enabled = false, math = { enabled = false }, doc = { enabled = false } },
         setup = function() end,
       },
     }

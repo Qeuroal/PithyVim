@@ -12,12 +12,38 @@ end
 local snacks_image_state = { images = false, math = false }
 local snacks_image_modules
 
-local function refresh_snacks_images()
-  if vim.b.snacks_image_attached then
-    vim.api.nvim_exec_autocmds("BufWinEnter", { buffer = 0 })
-    vim.api.nvim_exec_autocmds("CursorMoved", { buffer = 0 })
-  else
-    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
+local function refresh_snacks_images(buf)
+  local image = Snacks.image
+  if not vim.b[buf].snacks_image_attached then
+    if image.config.enabled and image.config.doc.enabled then
+      local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+      if vim.tbl_contains(image.langs(), lang) then
+        image.doc.attach(buf)
+      end
+    end
+    return
+  end
+
+  -- Refresh only the Snacks handlers so other plugins do not see synthetic buffer events.
+  local inline_group = "snacks.image.inline." .. buf
+  if vim.fn.exists("#" .. inline_group .. "#BufWinEnter") == 1 then
+    vim.api.nvim_exec_autocmds({ "BufWinEnter", "CursorMoved" }, { group = inline_group, buffer = buf, modeline = false })
+  elseif buf == vim.api.nvim_get_current_buf() then
+    local float_group = "snacks.image.doc." .. buf
+    if vim.fn.exists("#" .. float_group .. "#CursorMoved") == 1 then
+      vim.api.nvim_exec_autocmds("CursorMoved", { group = float_group, buffer = buf, modeline = false })
+    end
+  end
+end
+
+local function refresh_visible_snacks_images()
+  local seen = {}
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if not seen[buf] then
+      seen[buf] = true
+      refresh_snacks_images(buf)
+    end
   end
 end
 
@@ -87,11 +113,20 @@ local function load_snacks_image_modules()
     end
   end
 
+  local group = vim.api.nvim_create_augroup("pithyvim_snacks_image", { clear = true })
   vim.api.nvim_create_autocmd("InsertLeave", {
-    group = vim.api.nvim_create_augroup("pithyvim_snacks_image_insert", { clear = true }),
-    callback = function()
-      if snacks_image_state.math then
-        refresh_snacks_images()
+    group = group,
+    callback = function(ev)
+      if snacks_image_state.math and vim.b[ev.buf].snacks_image_attached then
+        refresh_snacks_images(ev.buf)
+      end
+    end,
+  })
+  vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = group,
+    callback = function(ev)
+      if (snacks_image_state.images or snacks_image_state.math) and not vim.b[ev.buf].snacks_image_attached then
+        refresh_snacks_images(ev.buf)
       end
     end,
   })
@@ -107,12 +142,11 @@ local function set_snacks_image_type(kind, enabled)
   Snacks.image.config.enabled = snacks_image_state.images or snacks_image_state.math
   if Snacks.image.config.enabled then
     Snacks.image.setup()
-    refresh_snacks_images()
   else
     modules.placement.clean()
     modules.doc.hover_close()
-    refresh_snacks_images()
   end
+  refresh_visible_snacks_images()
 end
 --<}}}
 
