@@ -308,6 +308,7 @@ return {
     opts = {
       indent = { enabled = true },
       --{{{> Qeuroal
+      lazygit = { win = { width = 0.98, height = 0.95 } },
       input = {
         enabled = true,
         win = {

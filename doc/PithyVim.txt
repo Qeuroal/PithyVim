@@ -118,9 +118,9 @@ DEFAULTS                                                *PithyVim-defaults*
 
 PithyVim defaults are defined in `lua/pithyvim/config/options.lua`.
 
-`cindent` defaults to off and is enabled locally for C/C++ buffers. Other
-filetypes no longer inherit C indentation rules from the global configuration.
-Language-specific `indentexpr` takes precedence; `autoindent` remains enabled.
+`cindent` defaults to off globally. Neovim's built-in indent scripts
+enable it locally for C and C++. Language-specific `indentexpr` takes
+precedence, and `autoindent` remains enabled.
 
 - Automatic formatting is disabled by default (`vim.g.autoformat = false`).
 - Diagnostics are disabled by default and can be toggled with `<leader>ud`.
@@ -150,6 +150,8 @@ also shown by `:LazyExtras` and WhichKey.
     <leader>fy             Copy the current file path
     <leader>fY             Copy the current directory path
     <leader>cE             Show effective EditorConfig rules and files
+    <leader>gg             Open Lazygit in the current working directory
+    <leader>gG             Open Lazygit in the Git root directory
     <leader>ghp            Preview the current hunk in a floating window
     <leader>ghP            Preview the current hunk inline
     <leader>xw             Open the error Quickfix list on the right
@@ -166,6 +168,8 @@ also shown by `:LazyExtras` and WhichKey.
     <leader>uS             Toggle Snacks smooth scrolling
     <leader>uu             Toggle UndoTree
     <leader>uj             Clear all jumplists and overwrite ShaDa
+
+`<leader>gg` and `<leader>gG` open Lazygit in a nearly full-screen floating window.
 
 Normal `<leader>uj` runs `:tabdo windo clearjumps` followed by `:wshada!`,
 then shows a notification after both commands succeed.
@@ -347,14 +351,18 @@ settings namespace.
 
 The nvim-lint integration applies `prepend_args` before a linter's existing
 arguments.  This changes argument order without changing the linter selection
-or condition checks.
+or condition checks.  The Markdown extra uses it to pass
+`config/markdown/.markdownlint.jsonc` from Neovim's config directory while
+preserving the standard-input argument for `markdownlint-cli2`.
 
 
 TREE-SITTER AND LSP                                  *PithyVim-treesitter*
 
-Tree-sitter parser availability is checked directly on the runtimepath with
-`PithyVim.treesitter.have_parser()`.  Concurrent CLI installation requests
-share one Mason installation and notify all waiting callbacks.
+PithyVim uses nvim-treesitter's installed parser list to decide
+which languages in `ensure_installed` need installation. This lets
+nvim-treesitter provision its queries even when Neovim ships a parser for
+the same language. PithyVim can use Mason to install the Tree-sitter CLI.
+If Mason is already installing the CLI, concurrent requests wait for its result.
 
 Tree-sitter highlighting, indentation, and folding are enabled only when the
 language parser and query are available.  `<leader>cL` restarts the active LSP.

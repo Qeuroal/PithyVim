@@ -9,12 +9,18 @@
 
 - TeX extra 按系统选择 PDF 查看器: macOS 使用 Skim, Linux 使用 Zathura 的 `zathura` 后端, 支持正反向同步. 补充 Arch Linux 的 PDF 后端和 `xdotool` 安装说明.
 
+### 缩进
+
+- C/C++ 的 `cindent` 由 Neovim 自带的文件类型缩进脚本启用.
+
 ### Markdown
 
+- 修复 Markdown lint 参数, 读取 Neovim 配置目录中的规则文件, 并通过标准输入检查当前缓冲区.
 - 同时启用 Markdown 和 LuaSnip extra 时, `tsep` 和 `trow` 分别根据上一行生成单行表格分隔符和空白数据行. 空白行支持按 `<Tab>` 切换单元格.
 
 ### 快捷键
 
+- `<leader>gg` 和 `<leader>gG` 默认以 98% 宽、95% 高的浮窗打开 Lazygit.
 - Normal 模式 `<leader>ghp` 改为在光标上方打开圆角浮窗预览当前 hunk, 长行可按窗口宽度折行. 原行内预览移到 `<leader>ghP`, 其旧行由 `virt_lines` 绘制, 受 Neovim 限制无法折行.
 - 增加 Normal 模式 `<leader>uj`, 清空所有标签页和窗口的 jumplist, 再通过 `:wshada!` 强制重写 ShaDa, 避免合并旧跳转记录, 成功后显示通知.
 - 增加 Visual 模式 `<leader>h` 字面文本高亮, 正确读取当前选区, 支持反向, 整行, 块选择及多字节字符, 高亮后返回 Normal 模式.
